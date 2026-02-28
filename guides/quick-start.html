@@ -866,18 +866,51 @@ Q: &quot;[sample query]&quot; → [expected response]</div>
         </div>
         <div class="detail-body">
           <div class="hint-box" style="background:#8B5CF608;border-color:#8B5CF6">💡 <strong>Why this matters:</strong> Your data columns often have too many specific values that don't match how people actually talk. This instruction tells the agent to automatically group raw values into business-friendly categories.</div>
-          <div class="section-label">📋 Copy-Ready Instructions</div>
-          <div class="code-block">When user asks about Express or Standard shipping, apply the following consolidation:
+          <div class="section-label">📋 Copy-Ready Instructions — 4 Examples</div>
 
-- &quot;Same Day&quot;, &quot;First Class&quot; are mapped to &quot;Express&quot; Shipping
-- &quot;Standard Class&quot;, &quot;Second Class&quot; are mapped to &quot;Standard&quot; Shipping
+          <div style="font-weight:700;font-size:15px;margin:16px 0 6px;color:#8B5CF6">Example 1: Customer Segments</div>
+          <div class="code-block">When user asks about customer tiers or segments, apply the following consolidation:
 
-When user uses terms such as &quot;express&quot;, &quot;standard&quot;, &quot;express vs standard&quot;, &quot;shipping comparison&quot;, apply this mapping before generating any chart or insight.
+- &quot;Enterprise&quot;, &quot;Mid-Market&quot; are mapped to &quot;Strategic&quot; accounts
+- &quot;SMB&quot;, &quot;Startup&quot; are mapped to &quot;Growth&quot; accounts
+- &quot;Freelancer&quot;, &quot;Individual&quot; are mapped to &quot;Volume&quot; accounts
 
-Always use the consolidated group name in chart labels and insight text, not the raw column values.</div>
-          <button class="copy-btn" style="color:#8B5CF6;border-color:#8B5CF630;background:#8B5CF610" onclick="copyText(this,'uc-grouping')">📋 Copy Instructions</button>
+TRIGGERS: &quot;strategic vs growth&quot;, &quot;customer tier&quot;, &quot;account segment&quot;, &quot;customer type&quot;.
+Always use the consolidated group name in chart labels and insight text.</div>
+
+          <div style="font-weight:700;font-size:15px;margin:16px 0 6px;color:#8B5CF6">Example 2: Revenue Categories</div>
+          <div class="code-block">When user asks about product profitability tiers, apply the following consolidation:
+
+- Products where Margin % >= 40: &quot;High Margin&quot;
+- Products where Margin % >= 15 AND &lt; 40: &quot;Low Margin&quot;
+- Products where Margin % &lt; 15: &quot;Loss Leader&quot;
+
+TRIGGERS: &quot;margin tier&quot;, &quot;profitability category&quot;, &quot;high vs low margin&quot;.
+Always use the consolidated group name in chart labels.</div>
+
+          <div style="font-weight:700;font-size:15px;margin:16px 0 6px;color:#8B5CF6">Example 3: Employee Levels</div>
+          <div class="code-block">When user asks about employee levels or org tiers, apply the following consolidation:
+
+- &quot;VP&quot;, &quot;SVP&quot;, &quot;C-Suite&quot;, &quot;Director&quot; are mapped to &quot;Leadership&quot;
+- &quot;Manager&quot;, &quot;Sr. Manager&quot; are mapped to &quot;Management&quot;
+- &quot;Analyst&quot;, &quot;Sr. Analyst&quot;, &quot;Associate&quot;, &quot;Coordinator&quot; are mapped to &quot;Individual Contributor&quot;
+
+TRIGGERS: &quot;leadership vs IC&quot;, &quot;employee level&quot;, &quot;org tier&quot;, &quot;seniority&quot;.
+Always use the consolidated group name in chart labels.</div>
+
+          <div style="font-weight:700;font-size:15px;margin:16px 0 6px;color:#8B5CF6">Example 4: Region Consolidation</div>
+          <div class="code-block">When user asks about business regions, apply the following consolidation:
+
+- &quot;USA&quot;, &quot;Canada&quot;, &quot;Mexico&quot; are mapped to &quot;Americas&quot;
+- &quot;UK&quot;, &quot;Germany&quot;, &quot;France&quot;, &quot;Italy&quot;, &quot;Spain&quot; are mapped to &quot;EMEA&quot;
+- &quot;Japan&quot;, &quot;China&quot;, &quot;India&quot;, &quot;Australia&quot;, &quot;Singapore&quot; are mapped to &quot;APAC&quot;
+
+TRIGGERS: &quot;by region&quot;, &quot;Americas vs EMEA&quot;, &quot;regional breakdown&quot;.
+Always use the consolidated group name in chart labels.</div>
+
+          <button class="copy-btn" style="color:#8B5CF6;border-color:#8B5CF630;background:#8B5CF610" onclick="copyText(this,'uc-grouping')">📋 Copy All Examples</button>
           <div class="section-label">💬 Example Conversations</div>
-          <div class="example-card"><div class="q">Q: "Compare profit for Express vs Standard shipping"</div><div class="a">→ Agent maps Same Day + First Class → Express, Standard Class + Second Class → Standard. Shows Avg(Profit) per group as a Bar Chart.</div></div><div class="example-card"><div class="q">Q: "What percentage of orders use Express shipping?"</div><div class="a">→ Agent counts orders where Ship Mode IN (Same Day, First Class) as Express, everything else as Standard. Shows Pie Chart.</div></div><div class="example-card"><div class="q">Q: "Show average delivery time by shipping type"</div><div class="a">→ Agent applies the same grouping, computes Avg(Delivery_Days) per group. Bar Chart with insight.</div></div>
+          <div class="example-card"><div class="q">Q: "Revenue by customer tier"</div><div class="a">→ Agent maps Enterprise + Mid-Market → Strategic, SMB + Startup → Growth, Freelancer + Individual → Volume. Shows Revenue per tier as Bar Chart.</div></div><div class="example-card"><div class="q">Q: "Compare headcount for Leadership vs Individual Contributors"</div><div class="a">→ Agent maps VP/SVP/C-Suite/Director → Leadership, Analyst/Associate/Coordinator → IC. Shows headcount comparison.</div></div><div class="example-card"><div class="q">Q: "Revenue breakdown by region"</div><div class="a">→ Agent maps countries → Americas/EMEA/APAC. Shows Revenue per region as Bar Chart.</div></div><div class="example-card"><div class="q">Q: "High margin vs loss leader products"</div><div class="a">→ Agent classifies products by margin %, groups into tiers. Shows count and revenue per tier.</div></div>
           <div class="section-label">✅ Pro Tips</div>
           <div class="tips-grid"><div class="tip"><span class="dot">•</span> Map EVERY raw value — leave no gaps</div><div class="tip"><span class="dot">•</span> Each raw value goes to exactly one group</div><div class="tip"><span class="dot">•</span> List trigger words/synonyms</div><div class="tip"><span class="dot">•</span> Show group name in charts, not raw values</div></div>
         </div>
@@ -1348,7 +1381,7 @@ COPY_DATA['delimiter'] = "### INSTRUCTIONS ###\nSummarize the article.\nMax 100 
 COPY_DATA['constraint'] = "Write a product description.\nMax 50 words.\nMust include price and warranty.\nDo NOT mention competitors.\nTone: professional.";
 COPY_DATA['format'] = "Format as TABLE:\n| Metric | Q2 | Q3 | Change |\n\nCompare revenue, cost, and margin.";
 COPY_DATA['chain-prompt'] = "Step 1: Extract all metrics from this report.\nStep 2: For each metric, classify as leading or lagging.\nStep 3: Create a dashboard layout recommendation.";
-COPY_DATA['uc-grouping'] = "When user asks about Express or Standard shipping, apply the following consolidation:\n\n- \"Same Day\", \"First Class\" are mapped to \"Express\" Shipping\n- \"Standard Class\", \"Second Class\" are mapped to \"Standard\" Shipping\n\nWhen user uses terms such as \"express\", \"standard\", \"express vs standard\", \"shipping comparison\", apply this mapping before generating any chart or insight.\n\nAlways use the consolidated group name in chart labels and insight text, not the raw column values.";
+COPY_DATA['uc-grouping'] = "=== EXAMPLE 1: CUSTOMER SEGMENTS ===\nWhen user asks about customer tiers or segments, apply the following consolidation:\n\n- \"Enterprise\", \"Mid-Market\" are mapped to \"Strategic\" accounts\n- \"SMB\", \"Startup\" are mapped to \"Growth\" accounts\n- \"Freelancer\", \"Individual\" are mapped to \"Volume\" accounts\n\nTRIGGERS: \"strategic vs growth\", \"customer tier\", \"account segment\", \"customer type\".\nAlways use the consolidated group name in chart labels and insight text.\n\n=== EXAMPLE 2: REVENUE CATEGORIES ===\nWhen user asks about product profitability tiers, apply the following consolidation:\n\n- Products where Margin % >= 40: \"High Margin\"\n- Products where Margin % >= 15 AND < 40: \"Low Margin\"\n- Products where Margin % < 15: \"Loss Leader\"\n\nTRIGGERS: \"margin tier\", \"profitability category\", \"high vs low margin\".\nAlways use the consolidated group name in chart labels.\n\n=== EXAMPLE 3: EMPLOYEE LEVELS ===\nWhen user asks about employee levels or org tiers, apply the following consolidation:\n\n- \"VP\", \"SVP\", \"C-Suite\", \"Director\" are mapped to \"Leadership\"\n- \"Manager\", \"Sr. Manager\" are mapped to \"Management\"\n- \"Analyst\", \"Sr. Analyst\", \"Associate\", \"Coordinator\" are mapped to \"Individual Contributor\"\n\nTRIGGERS: \"leadership vs IC\", \"employee level\", \"org tier\", \"seniority\".\nAlways use the consolidated group name in chart labels.\n\n=== EXAMPLE 4: REGION CONSOLIDATION ===\nWhen user asks about business regions, apply the following consolidation:\n\n- \"USA\", \"Canada\", \"Mexico\" are mapped to \"Americas\"\n- \"UK\", \"Germany\", \"France\", \"Italy\", \"Spain\" are mapped to \"EMEA\"\n- \"Japan\", \"China\", \"India\", \"Australia\", \"Singapore\" are mapped to \"APAC\"\n\nTRIGGERS: \"by region\", \"Americas vs EMEA\", \"regional breakdown\".\nAlways use the consolidated group name in chart labels.";
 COPY_DATA['uc-hierarchy'] = "Enable hierarchical drill-down navigation:\n\nProduct: Product Category > Product Sub-Category > Product Name\nGeography: Region > Country > State > City\n\nDrill-Down Logic:\n- Drill is applied only when the current chart contains a column from this hierarchy.\n- If current chart shows Product Category, on \"Drill Down\" → show Product Sub-Category within selected category.\n- If current chart shows Product Name, inform: \"This is the most detailed product level.\"\n- If the column is not in any hierarchy, respond: \"Drill-down is not available for this attribute.\"";
 COPY_DATA['uc-default-metric'] = "When the user does not specify a metric and asks general questions, default to \"Revenue\" as the primary measure.\n\nApply this default when the user says:\n- \"Show performance across [dimension]\"\n- \"Compare [dimension A] vs [dimension B]\"\n- \"How are we doing [time period]?\"\n\nOnly override when the user explicitly names a different metric.";
 COPY_DATA['uc-default-filter'] = "Always apply the following filter on every query:\n\nCity = \"Toronto\"\n\nThis filter is mandatory. Do not remove unless user explicitly says \"remove the city filter\" or \"show all cities\".\n\nInclude in every response: \"Filtered to: Toronto\"";
