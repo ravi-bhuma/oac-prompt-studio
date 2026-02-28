@@ -1,898 +1,1447 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OAC AI Agent — Quick Start Guide</title>
-    <meta name="description" content="Get productive with OAC AI Agent Supplementary Instructions in 10 minutes. 5 high-impact patterns with copy-paste templates.">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,800;0,9..144,900;1,9..144,400&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg: #0a0e1a;
-            --surface: #111827;
-            --surface-2: #1a2235;
-            --border: #1e293b;
-            --border-accent: #334155;
-            --text: #e2e8f0;
-            --text-muted: #94a3b8;
-            --text-dim: #64748b;
-            --accent: #6366f1;
-            --accent-soft: rgba(99, 102, 241, 0.15);
-            --green: #10b981;
-            --green-soft: rgba(16, 185, 129, 0.12);
-            --amber: #f59e0b;
-            --amber-soft: rgba(245, 158, 11, 0.12);
-            --rose: #f43f5e;
-            --sky: #0ea5e9;
-            --sky-soft: rgba(14, 165, 233, 0.12);
-            --purple: #8b5cf6;
-            --radius: 12px;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'DM Sans', system-ui, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        .container {
-            max-width: 820px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        /* ─── HERO ─── */
-        .hero {
-            padding: 56px 0 40px;
-            text-align: center;
-            position: relative;
-        }
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -60px; left: 50%; transform: translateX(-50%);
-            width: 600px; height: 600px;
-            background: radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%);
-            pointer-events: none;
-        }
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 16px;
-            border-radius: 100px;
-            background: var(--green-soft);
-            border: 1px solid rgba(16,185,129,0.25);
-            color: var(--green);
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 0.03em;
-            margin-bottom: 20px;
-        }
-        .hero h1 {
-            font-family: 'Fraunces', serif;
-            font-size: clamp(28px, 5vw, 42px);
-            font-weight: 900;
-            line-height: 1.15;
-            letter-spacing: -0.02em;
-            background: linear-gradient(135deg, #fff 30%, #a5b4fc 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .hero-sub {
-            margin-top: 14px;
-            font-size: 15px;
-            color: var(--text-muted);
-            max-width: 560px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.7;
-        }
-        .hero-time {
-            margin-top: 20px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--amber);
-        }
-        .hero-time .clock {
-            width: 18px; height: 18px;
-            border: 2px solid currentColor;
-            border-radius: 50%;
-            position: relative;
-        }
-        .hero-time .clock::after {
-            content: '';
-            position: absolute;
-            top: 3px; left: 50%;
-            width: 1.5px; height: 5px;
-            background: currentColor;
-            transform-origin: bottom center;
-            transform: translateX(-50%) rotate(45deg);
-        }
-
-        /* ─── WHAT ARE SIs ─── */
-        .intro-card {
-            margin-top: 8px;
-            padding: 28px 32px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            position: relative;
-            overflow: hidden;
-        }
-        .intro-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent), var(--purple), var(--sky));
-        }
-        .intro-card h2 {
-            font-family: 'Fraunces', serif;
-            font-size: 18px;
-            font-weight: 800;
-            margin-bottom: 10px;
-        }
-        .intro-card p {
-            font-size: 14px;
-            color: var(--text-muted);
-            line-height: 1.75;
-        }
-        .intro-card .where-box {
-            margin-top: 16px;
-            padding: 14px 18px;
-            background: var(--accent-soft);
-            border: 1px solid rgba(99,102,241,0.2);
-            border-radius: 8px;
-            font-size: 13px;
-            color: #a5b4fc;
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-        }
-        .intro-card .where-box .icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
-
-        /* ─── STEP PROGRESS ─── */
-        .steps-header {
-            margin-top: 48px;
-            text-align: center;
-        }
-        .steps-header h2 {
-            font-family: 'Fraunces', serif;
-            font-size: 22px;
-            font-weight: 800;
-        }
-        .steps-header p {
-            font-size: 13px;
-            color: var(--text-dim);
-            margin-top: 6px;
-        }
-
-        /* ─── PATTERN CARDS ─── */
-        .pattern {
-            margin-top: 28px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            overflow: hidden;
-            transition: border-color 0.2s;
-        }
-        .pattern:hover { border-color: var(--border-accent); }
-
-        .pattern-header {
-            padding: 20px 24px;
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            cursor: pointer;
-            user-select: none;
-        }
-        .pattern-num {
-            width: 36px; height: 36px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'DM Mono', monospace;
-            font-size: 14px;
-            font-weight: 700;
-            flex-shrink: 0;
-        }
-        .pattern-header-text h3 {
-            font-size: 16px;
-            font-weight: 700;
-            line-height: 1.3;
-        }
-        .pattern-header-text .tagline {
-            font-size: 12.5px;
-            color: var(--text-muted);
-            margin-top: 2px;
-        }
-        .pattern-impact {
-            margin-left: auto;
-            font-size: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            padding: 4px 10px;
-            border-radius: 6px;
-            flex-shrink: 0;
-        }
-        .impact-high { background: rgba(16,185,129,0.15); color: var(--green); }
-        .impact-essential { background: rgba(245,158,11,0.15); color: var(--amber); }
-
-        .pattern-body {
-            padding: 0 24px 24px;
-        }
-        .pattern-why {
-            padding: 14px 18px;
-            background: var(--surface-2);
-            border-radius: 8px;
-            font-size: 13px;
-            color: var(--text-muted);
-            line-height: 1.7;
-            margin-bottom: 18px;
-            border-left: 3px solid;
-        }
-
-        /* Code block */
-        .code-label {
-            font-size: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 8px;
-        }
-        .code-block {
-            position: relative;
-            background: #060a14;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 18px 20px;
-            font-family: 'DM Mono', monospace;
-            font-size: 12.5px;
-            line-height: 1.75;
-            color: #c8d6e5;
-            white-space: pre-wrap;
-            overflow-x: auto;
-        }
-        .code-block .placeholder {
-            color: var(--amber);
-            font-style: italic;
-        }
-        .copy-btn {
-            position: absolute;
-            top: 10px; right: 10px;
-            padding: 5px 14px;
-            border-radius: 6px;
-            border: 1px solid var(--border-accent);
-            background: var(--surface);
-            color: var(--text-muted);
-            font-size: 11px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.15s;
-        }
-        .copy-btn:hover { background: var(--surface-2); color: var(--text); }
-        .copy-btn.copied { background: var(--green-soft); color: var(--green); border-color: rgba(16,185,129,0.3); }
-
-        /* Example conversation */
-        .example-section { margin-top: 18px; }
-        .example-label {
-            font-size: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--text-dim);
-            margin-bottom: 8px;
-        }
-        .convo {
-            background: var(--surface-2);
-            border-radius: 8px;
-            padding: 14px 18px;
-        }
-        .convo-line {
-            display: flex;
-            gap: 10px;
-            align-items: flex-start;
-        }
-        .convo-line + .convo-line { margin-top: 10px; }
-        .convo-role {
-            font-size: 9px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            padding: 2px 8px;
-            border-radius: 4px;
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-        .role-user { background: rgba(99,102,241,0.2); color: #a5b4fc; }
-        .role-agent { background: rgba(16,185,129,0.2); color: #6ee7b7; }
-        .convo-text { font-size: 13px; line-height: 1.6; }
-        .convo-text.user-text { font-weight: 600; }
-        .convo-text.agent-text { color: var(--text-muted); }
-
-        /* ─── COMBINE SECTION ─── */
-        .combine-section {
-            margin-top: 48px;
-            padding: 28px 32px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-        }
-        .combine-section h2 {
-            font-family: 'Fraunces', serif;
-            font-size: 18px;
-            font-weight: 800;
-            margin-bottom: 6px;
-        }
-        .combine-section > p {
-            font-size: 13px;
-            color: var(--text-muted);
-            margin-bottom: 18px;
-        }
-        .combined-code {
-            background: #060a14;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 20px;
-            font-family: 'DM Mono', monospace;
-            font-size: 12px;
-            line-height: 1.8;
-            color: #c8d6e5;
-            white-space: pre-wrap;
-            position: relative;
-            max-height: 420px;
-            overflow-y: auto;
-        }
-        .section-comment {
-            color: var(--text-dim);
-            font-style: italic;
-        }
-
-        /* ─── DEEP DIVE CTA ─── */
-        .deep-dive {
-            margin-top: 48px;
-            text-align: center;
-            padding: 40px 32px;
-            background: linear-gradient(135deg, rgba(99,102,241,0.08), rgba(139,92,246,0.06));
-            border: 1px solid rgba(99,102,241,0.2);
-            border-radius: var(--radius);
-        }
-        .deep-dive h2 {
-            font-family: 'Fraunces', serif;
-            font-size: 20px;
-            font-weight: 800;
-        }
-        .deep-dive p {
-            font-size: 13px;
-            color: var(--text-muted);
-            margin-top: 8px;
-            max-width: 480px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .deep-dive-stats {
-            margin-top: 20px;
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .stat-chip {
-            padding: 6px 14px;
-            border-radius: 8px;
-            font-size: 11px;
-            font-weight: 700;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            color: var(--text-muted);
-        }
-        .studio-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 24px;
-            padding: 12px 28px;
-            border-radius: 10px;
-            background: var(--accent);
-            color: #fff;
-            font-size: 14px;
-            font-weight: 700;
-            text-decoration: none;
-            transition: all 0.2s;
-            border: none;
-            cursor: pointer;
-        }
-        .studio-btn:hover { background: #5558e6; transform: translateY(-1px); }
-
-        /* ─── HOSTING ─── */
-        .hosting-section {
-            margin-top: 48px;
-            padding: 28px 32px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-        }
-        .hosting-section h2 {
-            font-family: 'Fraunces', serif;
-            font-size: 18px;
-            font-weight: 800;
-            margin-bottom: 6px;
-        }
-        .hosting-section > p {
-            font-size: 13px;
-            color: var(--text-muted);
-            margin-bottom: 18px;
-        }
-        .hosting-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
-        }
-        @media (min-width: 640px) {
-            .hosting-grid { grid-template-columns: 1fr 1fr; }
-        }
-        .host-card {
-            padding: 18px 20px;
-            background: var(--surface-2);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            transition: border-color 0.2s;
-        }
-        .host-card:hover { border-color: var(--border-accent); }
-        .host-card .host-name {
-            font-size: 14px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .host-card .host-name .rec {
-            font-size: 9px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            padding: 2px 7px;
-            border-radius: 4px;
-            background: rgba(16,185,129,0.15);
-            color: var(--green);
-        }
-        .host-card .host-desc {
-            font-size: 12.5px;
-            color: var(--text-muted);
-            margin-top: 6px;
-            line-height: 1.65;
-        }
-        .host-card .host-pros {
-            margin-top: 10px;
-            font-size: 12px;
-            color: var(--text-dim);
-        }
-        .host-card .host-pros span {
-            color: var(--green);
-            margin-right: 4px;
-        }
-
-        /* ─── FOOTER ─── */
-        footer {
-            margin-top: 48px;
-            padding: 24px 0;
-            text-align: center;
-            border-top: 1px solid var(--border);
-            font-size: 11px;
-            color: var(--text-dim);
-        }
-
-        /* ─── COLORS PER PATTERN ─── */
-        .p-indigo .pattern-num { background: var(--accent-soft); color: var(--accent); }
-        .p-indigo .code-label { color: var(--accent); }
-        .p-indigo .pattern-why { border-color: var(--accent); }
-
-        .p-green .pattern-num { background: var(--green-soft); color: var(--green); }
-        .p-green .code-label { color: var(--green); }
-        .p-green .pattern-why { border-color: var(--green); }
-
-        .p-sky .pattern-num { background: var(--sky-soft); color: var(--sky); }
-        .p-sky .code-label { color: var(--sky); }
-        .p-sky .pattern-why { border-color: var(--sky); }
-
-        .p-amber .pattern-num { background: var(--amber-soft); color: var(--amber); }
-        .p-amber .code-label { color: var(--amber); }
-        .p-amber .pattern-why { border-color: var(--amber); }
-
-        .p-purple .pattern-num { background: rgba(139,92,246,0.15); color: var(--purple); }
-        .p-purple .code-label { color: var(--purple); }
-        .p-purple .pattern-why { border-color: var(--purple); }
-
-        /* Animations */
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(16px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .fade-up { animation: fadeUp 0.5s ease-out both; }
-        .delay-1 { animation-delay: 0.1s; }
-        .delay-2 { animation-delay: 0.2s; }
-        .delay-3 { animation-delay: 0.3s; }
-        .delay-4 { animation-delay: 0.4s; }
-        .delay-5 { animation-delay: 0.5s; }
-
-        @media (max-width: 640px) {
-            .container { padding: 0 16px; }
-            .hero { padding: 40px 0 28px; }
-            .intro-card, .combine-section, .hosting-section, .deep-dive { padding: 20px; }
-            .pattern-body { padding: 0 18px 18px; }
-            .pattern-header { padding: 16px 18px; }
-            .pattern-impact { display: none; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OAC AI Agent — Quick Start Guide</title>
+<style>
+:root {
+  --bg: #FAFAFA; --bg2: #FFFFFF; --fg: #0F172A; --fg2: #475569; --fg3: #94A3B8;
+  --border: #E2E8F0; --muted: #F1F5F9; --primary: #6366F1; --primary-fg: #FFFFFF;
+  --green: #10B981; --green-bg: rgba(16,185,129,.12);
+  --radius: 12px; --shadow: 0 1px 3px rgba(0,0,0,.08);
+}
+.dark {
+  --bg: #0F172A; --bg2: #1E293B; --fg: #F1F5F9; --fg2: #94A3B8; --fg3: #64748B;
+  --border: #334155; --muted: #1E293B; --primary: #818CF8; --primary-fg: #0F172A;
+  --green: #34D399; --green-bg: rgba(16,185,129,.15);
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--fg); line-height: 1.6; }
+.container { max-width: 960px; margin: 0 auto; padding: 16px; }
+.nav { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; border-radius: var(--radius); background: var(--bg2); border: 1px solid var(--border); margin-bottom: 20px; flex-wrap: wrap; gap: 8px; }
+.nav-left { display: flex; align-items: center; gap: 16px; }
+.nav-brand { font-size: 14px; font-weight: 900; }
+.nav-sep { width: 1px; height: 16px; background: var(--border); }
+.nav-links { display: flex; gap: 4px; }
+.nav-link { padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 700; border: 1px solid var(--border); background: transparent; color: var(--fg2); cursor: pointer; text-decoration: none; }
+.nav-link.active { background: var(--primary); color: var(--primary-fg); border-color: var(--primary); }
+.nav-link:hover { background: var(--muted); color: var(--fg); }
+.nav-link.active:hover { background: var(--primary); color: var(--primary-fg); }
+.hero { text-align: center; padding: 32px 24px; border-radius: 16px; background: linear-gradient(135deg, #0F172A, #1E293B); color: white; margin-bottom: 24px; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 50%, rgba(16,185,129,.12), transparent 50%), radial-gradient(circle at 70% 50%, rgba(99,102,241,.1), transparent 50%); }
+.hero > * { position: relative; }
+.hero-badge { display: inline-flex; padding: 4px 12px; border-radius: 999px; font-size: 10px; font-weight: 700; background: rgba(16,185,129,.2); color: #6EE7B7; border: 1px solid rgba(16,185,129,.3); margin-bottom: 12px; }
+.hero h1 { font-size: 24px; font-weight: 900; }
+.hero p { font-size: 12px; color: #94A3B8; max-width: 480px; margin: 8px auto 0; }
+.section { display: none; }
+.section.active { display: block; }
+.section-title { font-size: 20px; font-weight: 900; margin-bottom: 4px; }
+.section-desc { font-size: 12px; color: var(--fg2); margin-bottom: 16px; }
+.back-btn { font-size: 12px; font-weight: 700; color: var(--primary); cursor: pointer; border: none; background: none; margin-bottom: 16px; padding: 0; }
+.back-btn:hover { text-decoration: underline; }
+.grid { display: grid; gap: 16px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 768px) { .grid-2, .grid-4 { grid-template-columns: 1fr; } }
+.card { background: var(--bg2); border-radius: var(--radius); border: 2px solid var(--border); padding: 20px; cursor: pointer; text-align: left; transition: border-color .2s; }
+.card:hover { border-color: color-mix(in srgb, var(--primary) 40%, transparent); }
+.card-icon { font-size: 28px; margin-bottom: 12px; }
+.card h3 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+.card p { font-size: 12px; color: var(--fg2); line-height: 1.5; }
+.card .tag { font-size: 12px; font-weight: 700; color: var(--primary); margin-top: 12px; }
+.info-box { background: var(--bg2); border-radius: var(--radius); border: 1px solid var(--border); padding: 20px; margin-bottom: 20px; }
+.info-box h3 { font-size: 14px; font-weight: 700; margin-bottom: 12px; }
+.info-box p { font-size: 12px; color: var(--fg2); line-height: 1.6; }
+.rtccoe-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 12px; }
+@media (max-width: 768px) { .rtccoe-grid { grid-template-columns: repeat(2, 1fr); } }
+.rtccoe-step { background: var(--muted); border-radius: 8px; padding: 10px; text-align: center; }
+.rtccoe-step .letter { font-size: 12px; font-weight: 900; color: #C74634; }
+.rtccoe-step .label { font-size: 11px; font-weight: 700; }
+.rtccoe-step .desc { font-size: 10px; color: var(--fg2); margin-top: 2px; }
+.rule-row { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 8px; }
+.rule-num { width: 24px; height: 24px; border-radius: 50%; background: var(--primary); color: var(--primary-fg); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 900; flex-shrink: 0; }
+.rule-text { font-size: 12px; }
+.rule-text strong { color: var(--fg); }
+.rule-text span { color: var(--fg2); }
+/* List panel */
+.list-layout { display: grid; grid-template-columns: 280px 1fr; gap: 16px; }
+@media (max-width: 768px) { .list-layout { grid-template-columns: 1fr; } }
+.list-sidebar { display: flex; flex-direction: column; gap: 6px; }
+.list-item { display: flex; align-items: center; gap: 10px; padding: 12px; border-radius: 8px; border: 1px solid var(--border); cursor: pointer; transition: all .2s; background: transparent; text-align: left; width: 100%; }
+.list-item:hover { border-color: color-mix(in srgb, var(--primary) 30%, transparent); }
+.list-item.active { border-color: var(--primary); background: color-mix(in srgb, var(--primary) 5%, transparent); }
+.list-item .icon { font-size: 18px; }
+.list-item .name { font-size: 12px; font-weight: 700; }
+.list-item .sub { font-size: 10px; color: var(--fg2); }
+.list-item .badge { font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 4px; margin-left: auto; flex-shrink: 0; }
+.detail-panel { background: var(--bg2); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; box-shadow: var(--shadow); }
+.detail-header { padding: 16px; color: white; display: flex; align-items: center; gap: 10px; }
+.detail-header .icon { font-size: 24px; }
+.detail-header h3 { font-size: 18px; font-weight: 900; }
+.detail-header .sub { font-size: 11px; opacity: .9; }
+.detail-body { padding: 16px; }
+.detail-body > * + * { margin-top: 12px; }
+.hint-box { border-radius: 8px; padding: 12px; font-size: 12px; line-height: 1.6; border-left: 4px solid; }
+.code-block { background: #1E293B; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow-x: auto; font-family: 'SF Mono', Consolas, monospace; font-size: 11px; white-space: pre-wrap; word-break: break-word; line-height: 1.7; }
+.copy-btn { width: 100%; padding: 8px; border-radius: 8px; font-size: 12px; font-weight: 700; border: 2px solid; cursor: pointer; background: transparent; transition: all .2s; }
+.copy-btn:hover { opacity: .8; }
+.copy-btn.copied { background: var(--green-bg) !important; }
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+@media (max-width: 768px) { .info-grid { grid-template-columns: 1fr; } }
+.info-cell { background: var(--muted); border-radius: 8px; padding: 10px; }
+.info-cell .label { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.info-cell .text { font-size: 11px; line-height: 1.5; color: var(--fg2); }
+.flow-bar { display: flex; align-items: center; flex-wrap: wrap; gap: 0; padding: 12px; background: var(--muted); border-radius: 8px; }
+.flow-step { padding: 4px 10px; border-radius: 6px; font-size: 10px; font-weight: 700; color: white; white-space: nowrap; }
+.flow-arrow { color: var(--fg3); font-weight: 700; margin: 0 4px; }
+.oac-box { border-radius: 8px; padding: 12px; border: 1px solid #C7463430; background: #C7463408; font-size: 11px; line-height: 1.5; }
+.example-card { background: var(--muted); border-radius: 8px; padding: 12px; }
+.example-card .q { font-size: 11px; font-weight: 700; margin-bottom: 4px; }
+.example-card .a { font-size: 11px; color: var(--fg2); }
+.tips-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+@media (max-width: 768px) { .tips-grid { grid-template-columns: 1fr; } }
+.tip { background: var(--muted); border-radius: 8px; padding: 8px; font-size: 11px; color: var(--fg2); display: flex; gap: 6px; align-items: flex-start; }
+.tip .dot { color: var(--primary); font-weight: 700; flex-shrink: 0; }
+.placeholder { background: var(--bg2); border-radius: var(--radius); border: 1px solid var(--border); padding: 48px; text-align: center; color: var(--fg2); }
+.placeholder .big { font-size: 28px; margin-bottom: 8px; }
+.placeholder .title { font-size: 14px; font-weight: 700; }
+.placeholder .sub { font-size: 12px; margin-top: 4px; }
+/* Template cards */
+.tmpl-header { padding: 12px; color: white; font-size: 14px; font-weight: 700; display: flex; align-items: center; justify-content: space-between; }
+.tmpl-header button { padding: 4px 12px; border-radius: 6px; font-size: 11px; font-weight: 700; background: rgba(255,255,255,.2); color: white; border: none; cursor: pointer; }
+.tmpl-header button:hover { background: rgba(255,255,255,.3); }
+.tmpl-footer { padding: 12px; background: var(--muted); font-size: 11px; color: var(--fg2); }
+.tmpl-detail { display: none; border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; margin-top: 16px; }
+.tmpl-detail.active { display: block; }
+/* Footer */
+.footer { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border); text-align: center; }
+.footer-card { display: inline-block; background: var(--bg2); border-radius: var(--radius); border: 1px solid var(--border); padding: 20px; max-width: 400px; }
+.footer-card h3 { font-size: 14px; font-weight: 700; margin: 4px 0; }
+.footer-card p { font-size: 12px; color: var(--fg2); margin-bottom: 12px; }
+.footer-link { display: inline-block; padding: 8px 20px; border-radius: 8px; font-size: 12px; font-weight: 700; background: var(--primary); color: var(--primary-fg); text-decoration: none; }
+.footer-link:hover { opacity: .9; }
+.footer-sub { font-size: 11px; color: var(--fg3); margin-top: 16px; }
+.section-label { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .5px; color: var(--fg2); margin-bottom: 6px; }
+</style>
 </head>
 <body>
-    <div class="container">
+<div class="container">
+  <!-- Nav -->
+  <div class="nav">
+    <div class="nav-left">
+      <span class="nav-brand">OAC AI Agent</span>
+      <div class="nav-sep"></div>
+      <div class="nav-links">
+        <button class="nav-link active" id="nav-qs">⚡ Quick Start</button>
+        <a class="nav-link" href="prompt-engineering-studio.html" target="_blank">🔬 Deep Dive Studio</a>
+      </div>
+    </div>
+    <div class="nav-links">
+      <button class="nav-link" onclick="document.documentElement.classList.toggle('dark');this.textContent=document.documentElement.classList.contains('dark')?'☀️ Light':'🌙 Dark'">🌙 Dark</button>
+    </div>
+  </div>
 
-        <!-- ═══ HERO ═══ -->
-        <section class="hero fade-up">
-            <div class="hero-badge">⚡ Quick Start Guide</div>
-            <h1>OAC AI Agent<br>Supplementary Instructions</h1>
-            <p class="hero-sub">
-                5 high-impact patterns to customize your AI Agent's behavior.
-                Copy, paste, customize — you're done.
-            </p>
-            <div class="hero-time">
-                <div class="clock"></div>
-                10 minutes to productive
-            </div>
-        </section>
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-badge">⚡ Quick Start Guide</div>
+    <h1>OAC AI Agent — Quick Start</h1>
+    <p>Write effective Supplementary Instructions for your AI Agent in 5 minutes. No experience needed.</p>
+  </div>
 
-        <!-- ═══ WHAT ARE SIs ═══ -->
-        <div class="intro-card fade-up delay-1">
-            <h2>What are Supplementary Instructions?</h2>
-            <p>
-                Supplementary Instructions (SIs) are plain-text rules you give to the OAC AI Agent
-                so it understands <em>your</em> business context. Instead of generic answers,
-                the agent learns your terminology, your KPIs, your fiscal calendar,
-                and how your team actually talks about data.
-            </p>
-            <div class="where-box">
-                <span class="icon">📍</span>
-                <span>
-                    <strong>Where to add them:</strong> In Oracle Analytics Cloud, go to your
-                    Workbook → AI Agent panel → Supplementary Instructions text box.
-                    Paste your instructions there and you're live.
-                </span>
-            </div>
-        </div>
-
-        <!-- ═══ 5 PATTERNS ═══ -->
-        <div class="steps-header fade-up delay-2">
-            <h2>5 Patterns That Cover 80% of Use Cases</h2>
-            <p>Start with #1. Add more as needed. Each one is independent and composable.</p>
-        </div>
-
-        <!-- PATTERN 1 -->
-        <div class="pattern p-indigo fade-up delay-2">
-            <div class="pattern-header" onclick="togglePattern(this)">
-                <div class="pattern-num">01</div>
-                <div class="pattern-header-text">
-                    <h3>🏷️ Attribute Grouping</h3>
-                    <div class="tagline">Map raw data values to the words your team actually uses</div>
-                </div>
-                <span class="pattern-impact impact-essential">Essential</span>
-            </div>
-            <div class="pattern-body">
-                <div class="pattern-why">
-                    Your columns often have values like "Standard Class" or "First Class" — but your team says "Express" and "Standard." This instruction bridges that gap automatically.
-                </div>
-                <div class="code-label">📋 Copy-Ready Template</div>
-                <div class="code-block">When users ask about <span class="placeholder">[your business term]</span>, apply this mapping:
-
-- "<span class="placeholder">[Raw Value 1]</span>", "<span class="placeholder">[Raw Value 2]</span>" → "<span class="placeholder">[Group Name A]</span>"
-- "<span class="placeholder">[Raw Value 3]</span>", "<span class="placeholder">[Raw Value 4]</span>" → "<span class="placeholder">[Group Name B]</span>"
-
-Always use the group name in chart labels, not the raw column values.<button class="copy-btn" onclick="copyBlock(event)">Copy</button></div>
-                <div class="example-section">
-                    <div class="example-label">💬 Example Conversation</div>
-                    <div class="convo">
-                        <div class="convo-line">
-                            <span class="convo-role role-user">User</span>
-                            <span class="convo-text user-text">"Compare profit for Express vs Standard shipping"</span>
-                        </div>
-                        <div class="convo-line">
-                            <span class="convo-role role-agent">Agent</span>
-                            <span class="convo-text agent-text">Maps Same Day + First Class → Express, Standard Class + Second Class → Standard. Shows Avg(Profit) per group as a bar chart.</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- PATTERN 2 -->
-        <div class="pattern p-green fade-up delay-3">
-            <div class="pattern-header" onclick="togglePattern(this)">
-                <div class="pattern-num">02</div>
-                <div class="pattern-header-text">
-                    <h3>📊 Default Metric</h3>
-                    <div class="tagline">Tell the agent which number matters most when questions are vague</div>
-                </div>
-                <span class="pattern-impact impact-essential">Essential</span>
-            </div>
-            <div class="pattern-body">
-                <div class="pattern-why">
-                    When someone asks "how are we doing?" — is that Revenue? Profit? Units? This instruction removes ambiguity by declaring your default measure.
-                </div>
-                <div class="code-label">📋 Copy-Ready Template</div>
-                <div class="code-block">When a user asks a question without specifying a metric (e.g., "how are sales?", "show me performance"), default to <span class="placeholder">[Your Primary Metric]</span> as the measure.
-
-If the user explicitly names a different metric, use that instead.
-
-For trend questions, default to monthly granularity unless specified otherwise.<button class="copy-btn" onclick="copyBlock(event)">Copy</button></div>
-                <div class="example-section">
-                    <div class="example-label">💬 Example Conversation</div>
-                    <div class="convo">
-                        <div class="convo-line">
-                            <span class="convo-role role-user">User</span>
-                            <span class="convo-text user-text">"How is the West region doing?"</span>
-                        </div>
-                        <div class="convo-line">
-                            <span class="convo-role role-agent">Agent</span>
-                            <span class="convo-text agent-text">Shows Revenue (the default metric) for the West region with a monthly trend line, since no specific metric was requested.</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- PATTERN 3 -->
-        <div class="pattern p-sky fade-up delay-3">
-            <div class="pattern-header" onclick="togglePattern(this)">
-                <div class="pattern-num">03</div>
-                <div class="pattern-header-text">
-                    <h3>🔒 Persistent Default Filter</h3>
-                    <div class="tagline">Auto-scope every query to the right time range or segment</div>
-                </div>
-                <span class="pattern-impact impact-high">High Impact</span>
-            </div>
-            <div class="pattern-body">
-                <div class="pattern-why">
-                    Most users want current data by default. Without this, the agent might pull all-time results when they really meant "this year." This saves everyone from typing "for 2025" every single time.
-                </div>
-                <div class="code-label">📋 Copy-Ready Template</div>
-                <div class="code-block">Unless the user specifies a time range, always filter to <span class="placeholder">[Current Year / Last 12 Months / Current Quarter]</span>.
-
-If the user says "all time" or "historical", remove the default filter.
-
-When the default filter is applied, mention the time scope in the insight text (e.g., "Showing results for 2025").<button class="copy-btn" onclick="copyBlock(event)">Copy</button></div>
-                <div class="example-section">
-                    <div class="example-label">💬 Example Conversation</div>
-                    <div class="convo">
-                        <div class="convo-line">
-                            <span class="convo-role role-user">User</span>
-                            <span class="convo-text user-text">"Show me top 10 customers by revenue"</span>
-                        </div>
-                        <div class="convo-line">
-                            <span class="convo-role role-agent">Agent</span>
-                            <span class="convo-text agent-text">Shows top 10 customers by Revenue for 2025 (default filter applied). Notes: "Showing results for 2025. Say 'all time' to see the full history."</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- PATTERN 4 -->
-        <div class="pattern p-amber fade-up delay-4">
-            <div class="pattern-header" onclick="togglePattern(this)">
-                <div class="pattern-num">04</div>
-                <div class="pattern-header-text">
-                    <h3>⚡ Report Shortcuts</h3>
-                    <div class="tagline">Let users summon complex analyses with simple phrases</div>
-                </div>
-                <span class="pattern-impact impact-high">High Impact</span>
-            </div>
-            <div class="pattern-body">
-                <div class="pattern-why">
-                    Your team runs the same 3-4 reports every week. Instead of re-describing them each time, give the agent shortcut phrases that trigger pre-defined analyses.
-                </div>
-                <div class="code-label">📋 Copy-Ready Template</div>
-                <div class="code-block">When user says "<span class="placeholder">[shortcut phrase]</span>", generate the following analysis:
-- Metric: <span class="placeholder">[Metric Name]</span>
-- Group by: <span class="placeholder">[Dimension]</span>
-- Filter: <span class="placeholder">[Any default filters]</span>
-- Chart type: <span class="placeholder">[Bar / Line / Table]</span>
-- Sort: <span class="placeholder">[Descending by metric]</span>
-
-When user says "<span class="placeholder">[another shortcut]</span>", generate:
-- Metric: <span class="placeholder">[...]</span>
-- Group by: <span class="placeholder">[...]</span><button class="copy-btn" onclick="copyBlock(event)">Copy</button></div>
-                <div class="example-section">
-                    <div class="example-label">💬 Example Conversation</div>
-                    <div class="convo">
-                        <div class="convo-line">
-                            <span class="convo-role role-user">User</span>
-                            <span class="convo-text user-text">"Show me the Monday scorecard"</span>
-                        </div>
-                        <div class="convo-line">
-                            <span class="convo-role role-agent">Agent</span>
-                            <span class="convo-text agent-text">Recognizes "Monday scorecard" as a shortcut. Generates Revenue, Order Count, and Avg Order Value by Region for the current month as a summary table.</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- PATTERN 5 -->
-        <div class="pattern p-purple fade-up delay-5">
-            <div class="pattern-header" onclick="togglePattern(this)">
-                <div class="pattern-num">05</div>
-                <div class="pattern-header-text">
-                    <h3>📅 Fiscal Calendar Mapping</h3>
-                    <div class="tagline">Align "Q1" and "this quarter" to your company's fiscal year</div>
-                </div>
-                <span class="pattern-impact impact-high">High Impact</span>
-            </div>
-            <div class="pattern-body">
-                <div class="pattern-why">
-                    If your fiscal year starts in July, then "Q1" means Jul-Sep — not Jan-Mar. Without this instruction, the agent uses calendar quarters and gives wrong answers.
-                </div>
-                <div class="code-label">📋 Copy-Ready Template</div>
-                <div class="code-block">Our fiscal year starts on <span class="placeholder">[Month 1, e.g., July 1]</span>.
-
-Fiscal quarter mapping:
-- Q1 = <span class="placeholder">[Jul – Sep]</span>
-- Q2 = <span class="placeholder">[Oct – Dec]</span>
-- Q3 = <span class="placeholder">[Jan – Mar]</span>
-- Q4 = <span class="placeholder">[Apr – Jun]</span>
-
-When user says "this quarter", "Q1", "last quarter", etc., always use the fiscal calendar above, not the standard calendar year.
-
-Label charts with "FY25 Q1" format.<button class="copy-btn" onclick="copyBlock(event)">Copy</button></div>
-                <div class="example-section">
-                    <div class="example-label">💬 Example Conversation</div>
-                    <div class="convo">
-                        <div class="convo-line">
-                            <span class="convo-role role-user">User</span>
-                            <span class="convo-text user-text">"Show me Q1 revenue"</span>
-                        </div>
-                        <div class="convo-line">
-                            <span class="convo-role role-agent">Agent</span>
-                            <span class="convo-text agent-text">Correctly interprets Q1 as Jul–Sep (fiscal). Shows Revenue for that period labeled as "FY25 Q1", not calendar Q1.</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ═══ COMBINE THEM ═══ -->
-        <div class="combine-section fade-up">
-            <h2>🧩 Putting It All Together</h2>
-            <p>Combine patterns into a single Supplementary Instructions block. Here's a real-world example:</p>
-            <div class="combined-code"><span class="section-comment"># ── Default Behavior ──</span>
-Default metric: Revenue
-Default time filter: Current fiscal year (FY25)
-When no time range is specified, filter to FY25.
-If user says "all time", remove the time filter.
-
-<span class="section-comment"># ── Fiscal Calendar ──</span>
-Fiscal year starts July 1.
-Q1 = Jul–Sep, Q2 = Oct–Dec, Q3 = Jan–Mar, Q4 = Apr–Jun.
-Label charts with "FY25 Q1" format.
-
-<span class="section-comment"># ── Shipping Groups ──</span>
-"Same Day", "First Class" → "Express"
-"Standard Class", "Second Class" → "Standard"
-Use group names in chart labels, not raw values.
-
-<span class="section-comment"># ── Report Shortcuts ──</span>
-"Monday scorecard" → Revenue, Orders, Avg Order Value by Region, current month, as table.
-"Pipeline review" → Open Deals by Stage and Owner, sorted by close date, as bar chart.
-<button class="copy-btn" onclick="copyBlock(event)">Copy</button></div>
-        </div>
-
-        <!-- ═══ GO DEEPER ═══ -->
-        <div class="deep-dive fade-up">
-            <h2>🚀 Ready to Go Deeper?</h2>
-            <p>
-                This Quick Start covers the top 5 patterns. The full Prompt Engineering Studio
-                has everything you need to become an expert.
-            </p>
-            <div class="deep-dive-stats">
-                <span class="stat-chip">📖 40 Techniques</span>
-                <span class="stat-chip">📐 6 Frameworks</span>
-                <span class="stat-chip">🎯 16 Use Cases</span>
-                <span class="stat-chip">📋 11 Templates</span>
-                <span class="stat-chip">🎁 6 Starter Kits</span>
-            </div>
-            <a href="prompt-engineering-studio.html" class="studio-btn" id="studioLink">
-                Open the Full Studio →
-            </a>
-            <p style="margin-top: 14px; font-size: 11px; color: var(--text-dim);">
-                Includes an interactive SI Builder, industry-specific templates, and advanced patterns
-                like multi-step analysis, ReAct drill-downs, and geo-intelligence.
-            </p>
-        </div>
-
-        <!-- ═══ HOSTING OPTIONS ═══ -->
-        <div class="hosting-section fade-up">
-            <h2>🌐 Hosting & Sharing Options</h2>
-            <p>Best ways to host these guides so users access them directly in a browser — no downloads needed.</p>
-            <div class="hosting-grid">
-                <div class="host-card">
-                    <div class="host-name">GitHub Pages <span class="rec">Free & Easy</span></div>
-                    <div class="host-desc">Push both HTML files to a GitHub repo, enable Pages in Settings. Instant public URL.</div>
-                    <div class="host-pros"><span>✓</span> Free · Custom domain · Version control · No login</div>
-                </div>
-                <div class="host-card">
-                    <div class="host-name">Oracle Cloud Object Storage <span class="rec">Recommended</span></div>
-                    <div class="host-desc">Upload to a public bucket with a Pre-Authenticated Request (PAR). Stays within Oracle ecosystem.</div>
-                    <div class="host-pros"><span>✓</span> Oracle-native · No login · Low cost · Custom domain via CDN</div>
-                </div>
-                <div class="host-card">
-                    <div class="host-name">Netlify / Vercel</div>
-                    <div class="host-desc">Drag-and-drop deploy. Free tier handles static sites. Auto-HTTPS, preview links.</div>
-                    <div class="host-pros"><span>✓</span> Free tier · Instant deploy · Preview URLs · No login</div>
-                </div>
-                <div class="host-card">
-                    <div class="host-name">Oracle APEX Static Files</div>
-                    <div class="host-desc">If you already use APEX, upload as static application files. Access via APEX URL.</div>
-                    <div class="host-pros"><span>✓</span> Oracle-native · Integrated auth optional · No extra cost</div>
-                </div>
-                <div class="host-card">
-                    <div class="host-name">Confluence / SharePoint</div>
-                    <div class="host-desc">Embed or attach in a wiki page if your org already uses these. Some JS may be restricted.</div>
-                    <div class="host-pros"><span>✓</span> Enterprise-ready · Existing access · Versioned</div>
-                </div>
-                <div class="host-card">
-                    <div class="host-name">Oracle Visual Builder (VBCS)</div>
-                    <div class="host-desc">Host as a VBCS app for richer interactivity and integration with OCI IAM if needed.</div>
-                    <div class="host-pros"><span>✓</span> Oracle-native · Auth integration · Custom domain</div>
-                </div>
-            </div>
-        </div>
-
+  <!-- ═══ HOME ═══ -->
+  <div class="section active" id="sec-home">
+    <div style="text-align:center;margin-bottom:24px">
+      <div style="display:inline-flex;padding:6px 16px;border-radius:999px;font-size:12px;font-weight:700;background:rgba(16,185,129,.15);color:#10B981;border:1px solid rgba(16,185,129,.3);margin-bottom:16px">⚡ 5-Minute Quick Start</div>
+      <h2 style="font-size:22px;font-weight:900;margin-bottom:8px">Write Your First OAC AI Agent Instructions</h2>
+      <p style="font-size:14px;color:var(--fg2);max-width:480px;margin:0 auto">Get your OAC AI Agent working in minutes. Pick a path below.</p>
+    </div>
+    <div class="grid grid-4">
+      <div class="card" onclick="showSection('templates')">
+        <div class="card-icon">📋</div>
+        <h3>Start from Template</h3>
+        <p>Pick an industry template, replace [brackets] with your details.</p>
+        <div class="tag">Fastest path →</div>
+      </div>
+      <div class="card" onclick="showSection('builder')">
+        <div class="card-icon">🏗️</div>
+        <h3>Build Step-by-Step</h3>
+        <p>Answer 6 simple questions. We generate your instructions automatically.</p>
+        <div class="tag">Most guided →</div>
+      </div>
+      <div class="card" onclick="showSection('usecases')">
+        <div class="card-icon">🎯</div>
+        <h3>Use Case Reference</h3>
+        <p>Browse 16 real-world OAC patterns with copy-ready instructions.</p>
+        <div class="tag">Best examples →</div>
+      </div>
+      <div class="card" onclick="showSection('techniques')">
+        <div class="card-icon">📖</div>
+        <h3>Learn the Basics</h3>
+        <p>Understand the 8 most impactful techniques. Takes 5 minutes.</p>
+        <div class="tag">Best foundation →</div>
+      </div>
     </div>
 
-    <footer>
-        <div class="container">
-            Oracle Analytics Cloud — AI Agent Quick Start Guide &nbsp;·&nbsp; CEAL Team
+    <!-- What is SI -->
+    <div class="info-box" style="margin-top:24px">
+      <h3>💡 What are Supplementary Instructions (SI)?</h3>
+      <p style="margin-bottom:12px">Supplementary Instructions tell your OAC AI Agent <strong>how to behave</strong>. Think of it as a job description — role, data knowledge, rules, and presentation format.</p>
+      <div class="rtccoe-grid">
+        <div class="rtccoe-step"><div class="letter">R</div><div class="label">Role</div><div class="desc">Define the agent's identity, expertise, …</div></div><div class="rtccoe-step"><div class="letter">T</div><div class="label">Task</div><div class="desc">What the agent should do when a query ar…</div></div><div class="rtccoe-step"><div class="letter">C</div><div class="label">Context</div><div class="desc">Domain knowledge: fiscal calendar, KPIs,…</div></div><div class="rtccoe-step"><div class="letter">C</div><div class="label">Constraints</div><div class="desc">Hard rules: defaults, mandatory filters,…</div></div><div class="rtccoe-step"><div class="letter">O</div><div class="label">Output</div><div class="desc">Chart selection rules, formatting, respo…</div></div><div class="rtccoe-step"><div class="letter">E</div><div class="label">Examples</div><div class="desc">2-3 query→response pairs showing expecte…</div></div>
+      </div>
+      <p style="margin-top:12px;font-size:11px;color:var(--fg3);font-style:italic">This is the <strong>R.T.C.C.O.E</strong> framework — built specifically for OAC by Oracle's CEAL team.</p>
+    </div>
+
+    <!-- 5 Rules -->
+    <div class="info-box">
+      <h3>✅ 5 Rules for Great Instructions</h3>
+      <div class="rule-row"><div class="rule-num">1</div><div class="rule-text"><strong>Be specific</strong> <span>— Don't say 'help with data.' Say 'help sales managers explore revenue.'</span></div></div><div class="rule-row"><div class="rule-num">2</div><div class="rule-text"><strong>Define your KPIs</strong> <span>— Write exact formulas: ATV = Sum(Revenue)/Count(Orders).</span></div></div><div class="rule-row"><div class="rule-num">3</div><div class="rule-text"><strong>Give 2-3 examples</strong> <span>— Show what a good answer looks like. Biggest quality improvement.</span></div></div><div class="rule-row"><div class="rule-num">4</div><div class="rule-text"><strong>Set boundaries</strong> <span>— Tell it what NOT to do: 'Never fabricate data.'</span></div></div><div class="rule-row"><div class="rule-num">5</div><div class="rule-text"><strong>Start simple, iterate</strong> <span>— Begin basic. Test it. Add rules as you find gaps.</span></div></div>
+    </div>
+  </div>
+
+  <!-- ═══ TECHNIQUES ═══ -->
+  <div class="section" id="sec-techniques">
+    <button class="back-btn" onclick="showSection('home')">← Back to Quick Start</button>
+    <div class="section-title">📖 Top 8 Techniques You Need</div>
+    <div class="section-desc">These cover 90% of what you'll need for OAC AI Agents.</div>
+    <div class="list-layout">
+      <div class="list-sidebar" id="tech-list">
+        <button class="list-item" data-target="tech-zero-shot" onclick="showDetail('tech','zero-shot')">
+          <span class="icon">💬</span>
+          <div><div class="name"><span class="badge" style="background:var(--muted);color:var(--fg3);margin-right:4px">1</span> Zero-Shot</div><div class="sub">Ask AI Directly — No Examples</div></div>
+          <span class="badge" style="background:#10B98118;color:#10B981">Beginner</span>
+        </button><button class="list-item" data-target="tech-few-shot" onclick="showDetail('tech','few-shot')">
+          <span class="icon">📚</span>
+          <div><div class="name"><span class="badge" style="background:var(--muted);color:var(--fg3);margin-right:4px">2</span> Few-Shot</div><div class="sub">2-5 Examples = Deep Pattern</div></div>
+          <span class="badge" style="background:#3B82F618;color:#3B82F6">Easy</span>
+        </button><button class="list-item" data-target="tech-persona" onclick="showDetail('tech','persona')">
+          <span class="icon">🎭</span>
+          <div><div class="name"><span class="badge" style="background:var(--muted);color:var(--fg3);margin-right:4px">3</span> Persona</div><div class="sub">Role + Behaviour + Tone = Character</div></div>
+          <span class="badge" style="background:#10B98118;color:#10B981">Beginner</span>
+        </button><button class="list-item" data-target="tech-context" onclick="showDetail('tech','context')">
+          <span class="icon">📎</span>
+          <div><div class="name"><span class="badge" style="background:var(--muted);color:var(--fg3);margin-right:4px">4</span> Context Injection</div><div class="sub">Give AI the Background It Needs</div></div>
+          <span class="badge" style="background:#3B82F618;color:#3B82F6">Easy</span>
+        </button><button class="list-item" data-target="tech-delimiter" onclick="showDetail('tech','delimiter')">
+          <span class="icon">🔲</span>
+          <div><div class="name"><span class="badge" style="background:var(--muted);color:var(--fg3);margin-right:4px">5</span> Delimiters &amp; Structure</div><div class="sub">Separate Sections with Markers</div></div>
+          <span class="badge" style="background:#10B98118;color:#10B981">Beginner</span>
+        </button><button class="list-item" data-target="tech-constraint" onclick="showDetail('tech','constraint')">
+          <span class="icon">🔒</span>
+          <div><div class="name"><span class="badge" style="background:var(--muted);color:var(--fg3);margin-right:4px">6</span> Constraints &amp; Boundaries</div><div class="sub">Set Hard Rules AI Cannot Break</div></div>
+          <span class="badge" style="background:#10B98118;color:#10B981">Beginner</span>
+        </button><button class="list-item" data-target="tech-format" onclick="showDetail('tech','format')">
+          <span class="icon">📋</span>
+          <div><div class="name"><span class="badge" style="background:var(--muted);color:var(--fg3);margin-right:4px">7</span> Format Control</div><div class="sub">Same Content, Pro Presentation</div></div>
+          <span class="badge" style="background:#10B98118;color:#10B981">Beginner</span>
+        </button><button class="list-item" data-target="tech-chain-prompt" onclick="showDetail('tech','chain-prompt')">
+          <span class="icon">⛓️</span>
+          <div><div class="name"><span class="badge" style="background:var(--muted);color:var(--fg3);margin-right:4px">8</span> Prompt Chaining</div><div class="sub">Break Complex into Sequential Steps</div></div>
+          <span class="badge" style="background:#3B82F618;color:#3B82F6">Easy</span>
+        </button>
+      </div>
+      <div id="tech-detail">
+        <div class="placeholder"><div class="big">👈</div><div class="title">Select a technique</div><div class="sub">Click any technique to see details</div></div>
+      </div>
+    </div>
+    <!-- Hidden detail panels -->
+    <template id="tmpl-tech-zero-shot">
+      <div class="detail-panel">
+        <div class="detail-header" style="background:linear-gradient(135deg,#6366F1,#6366F1bb)">
+          <span class="icon">💬</span>
+          <div><h3>Zero-Shot</h3><div class="sub">Ask AI Directly — No Examples</div></div>
         </div>
-    </footer>
+        <div class="detail-body">
+          <div class="hint-box" style="background:#6366F108;border-color:#6366F1">💡 <strong>Key Idea:</strong> Ask AI directly without any example. Fast but output varies. Good for learning, not ideal for production.</div>
+          <div class="flow-bar"><span class="flow-step" style="background:#6366F1bb">Question</span><span class="flow-arrow">→</span><span class="flow-step" style="background:#6366F1bb">AI Training Data</span><span class="flow-arrow">→</span><span class="flow-step" style="background:#6366F1">Answer</span></div>
+          <div class="info-grid">
+            <div class="info-cell"><div class="label" style="color:#6366F1">⚙️ How</div><div class="text">Direct question with no examples. AI uses training data.</div></div>
+            <div class="info-cell"><div class="label" style="color:#6366F1">🎯 Best For</div><div class="text">Quick help, exploring, simple tasks</div></div>
+          </div>
+          <div class="oac-box">☁️ <strong>OAC Application:</strong> For straightforward OAC queries where default behavior works.</div>
+          <div class="code-block">Explain machine learning in 3 simple sentences
+for a non-technical manager.</div>
+          <button class="copy-btn" style="color:#6366F1;border-color:#6366F130;background:#6366F110" onclick="copyText(this,'zero-shot')">📋 Copy Prompt Example</button>
+        </div>
+      </div>
+    </template>
+<template id="tmpl-tech-few-shot">
+      <div class="detail-panel">
+        <div class="detail-header" style="background:linear-gradient(135deg,#10B981,#10B981bb)">
+          <span class="icon">📚</span>
+          <div><h3>Few-Shot</h3><div class="sub">2-5 Examples = Deep Pattern</div></div>
+        </div>
+        <div class="detail-body">
+          <div class="hint-box" style="background:#10B98108;border-color:#10B981">💡 <strong>Key Idea:</strong> The industry standard for production AI. 2-5 examples is the sweet spot. AI learns format, decision boundaries, edge handling, and nuance.</div>
+          <div class="flow-bar"><span class="flow-step" style="background:#10B981bb">2-5 Examples</span><span class="flow-arrow">→</span><span class="flow-step" style="background:#10B981bb">Deep Pattern Recognition</span><span class="flow-arrow">→</span><span class="flow-step" style="background:#10B981">Consistent Output</span></div>
+          <div class="info-grid">
+            <div class="info-cell"><div class="label" style="color:#10B981">⚙️ How</div><div class="text">2-5 examples covering different scenarios. AI learns deep pattern.</div></div>
+            <div class="info-cell"><div class="label" style="color:#10B981">🎯 Best For</div><div class="text">Production classifiers, extractors, report generators</div></div>
+          </div>
+          <div class="oac-box">☁️ <strong>OAC Application:</strong> Provide 2-3 query→response pairs teaching the agent YOUR specific patterns — KPI formats, chart preferences, insight style.</div>
+          <div class="code-block">Classify sentiment:
+&quot;I love this phone!&quot; → Positive
+&quot;Terrible customer service&quot; → Negative
+&quot;The food was okay&quot; → Neutral
 
-    <script>
-        function copyBlock(e) {
-            e.stopPropagation();
-            const block = e.target.closest('.code-block, .combined-code');
-            const text = block.textContent.replace('Copy', '').replace('Copied!', '').trim();
-            navigator.clipboard.writeText(text).then(() => {
-                e.target.textContent = 'Copied!';
-                e.target.classList.add('copied');
-                setTimeout(() => {
-                    e.target.textContent = 'Copy';
-                    e.target.classList.remove('copied');
-                }, 2000);
-            });
-        }
+Now classify: &quot;The movie was absolutely stunning!&quot;</div>
+          <button class="copy-btn" style="color:#10B981;border-color:#10B98130;background:#10B98110" onclick="copyText(this,'few-shot')">📋 Copy Prompt Example</button>
+        </div>
+      </div>
+    </template>
+<template id="tmpl-tech-persona">
+      <div class="detail-panel">
+        <div class="detail-header" style="background:linear-gradient(135deg,#F59E0B,#F59E0Bbb)">
+          <span class="icon">🎭</span>
+          <div><h3>Persona</h3><div class="sub">Role + Behaviour + Tone = Character</div></div>
+        </div>
+        <div class="detail-body">
+          <div class="hint-box" style="background:#F59E0B08;border-color:#F59E0B">💡 <strong>Key Idea:</strong> Three layers: Role = job title. Persona = behavior. Tone = voice quality. Together they create a complete character.</div>
+          <div class="flow-bar"><span class="flow-step" style="background:#F59E0Bbb">Define Role</span><span class="flow-arrow">→</span><span class="flow-step" style="background:#F59E0Bbb">Set Behaviour</span><span class="flow-arrow">→</span><span class="flow-step" style="background:#F59E0Bbb">Apply Tone</span><span class="flow-arrow">→</span><span class="flow-step" style="background:#F59E0B">In-Character</span></div>
+          <div class="info-grid">
+            <div class="info-cell"><div class="label" style="color:#F59E0B">⚙️ How</div><div class="text">Assign AI a role, behavior, and tone. AI responds in-character.</div></div>
+            <div class="info-cell"><div class="label" style="color:#F59E0B">🎯 Best For</div><div class="text">Assistants, chatbots, domain experts</div></div>
+          </div>
+          <div class="oac-box">☁️ <strong>OAC Application:</strong> Define agent identity: 'You are a [Domain] Analytics Expert for [Team].'</div>
+          <div class="code-block">You are a Senior Finance Analytics Expert.
+Tone: professional but approachable.
 
-        // Simple scroll-based fade-in
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, { threshold: 0.1 });
+Explain why Q3 revenue dropped 12%.</div>
+          <button class="copy-btn" style="color:#F59E0B;border-color:#F59E0B30;background:#F59E0B10" onclick="copyText(this,'persona')">📋 Copy Prompt Example</button>
+        </div>
+      </div>
+    </template>
+<template id="tmpl-tech-context">
+      <div class="detail-panel">
+        <div class="detail-header" style="background:linear-gradient(135deg,#0891B2,#0891B2bb)">
+          <span class="icon">📎</span>
+          <div><h3>Context Injection</h3><div class="sub">Give AI the Background It Needs</div></div>
+        </div>
+        <div class="detail-body">
+          <div class="hint-box" style="background:#0891B208;border-color:#0891B2">💡 <strong>Key Idea:</strong> AI only knows training data. Context injection fills the gap — give it YOUR data, terminology, constraints. Foundation of RAG.</div>
+          <div class="flow-bar"><span class="flow-step" style="background:#0891B2bb">Inject Context</span><span class="flow-arrow">→</span><span class="flow-step" style="background:#0891B2bb">AI Understands</span><span class="flow-arrow">→</span><span class="flow-step" style="background:#0891B2">Grounded Response</span></div>
+          <div class="info-grid">
+            <div class="info-cell"><div class="label" style="color:#0891B2">⚙️ How</div><div class="text">Provide background info, constraints, domain knowledge AI needs.</div></div>
+            <div class="info-cell"><div class="label" style="color:#0891B2">🎯 Best For</div><div class="text">Domain-specific tasks, company data, personalized responses</div></div>
+          </div>
+          <div class="oac-box">☁️ <strong>OAC Application:</strong> The === CONTEXT === section injects fiscal calendar, KPI definitions, column mappings, hierarchy paths.</div>
+          <div class="code-block">Context: B2B SaaS company.
+Q3 Revenue: $4.2M (down 12% from Q2).
+Main issue: Enterprise deal slippage.
 
-        document.querySelectorAll('.pattern, .combine-section, .deep-dive, .hosting-section').forEach(el => {
-            observer.observe(el);
-        });
-    </script>
+Generate 3-point analysis.</div>
+          <button class="copy-btn" style="color:#0891B2;border-color:#0891B230;background:#0891B210" onclick="copyText(this,'context')">📋 Copy Prompt Example</button>
+        </div>
+      </div>
+    </template>
+<template id="tmpl-tech-delimiter">
+      <div class="detail-panel">
+        <div class="detail-header" style="background:linear-gradient(135deg,#64748B,#64748Bbb)">
+          <span class="icon">🔲</span>
+          <div><h3>Delimiters &amp; Structure</h3><div class="sub">Separate Sections with Markers</div></div>
+        </div>
+        <div class="detail-body">
+          <div class="hint-box" style="background:#64748B08;border-color:#64748B">💡 <strong>Key Idea:</strong> Without delimiters, AI may confuse instructions with data. Markers create clear boundaries. Critical for production systems.</div>
+          <div class="flow-bar"><span class="flow-step" style="background:#64748Bbb">Add Delimiters</span><span class="flow-arrow">→</span><span class="flow-step" style="background:#64748Bbb">Sections Separated</span><span class="flow-arrow">→</span><span class="flow-step" style="background:#64748B">AI Processes Each</span></div>
+          <div class="info-grid">
+            <div class="info-cell"><div class="label" style="color:#64748B">⚙️ How</div><div class="text">Use ===, ###, XML tags to separate prompt sections.</div></div>
+            <div class="info-cell"><div class="label" style="color:#64748B">🎯 Best For</div><div class="text">Complex prompts, multi-section instructions</div></div>
+          </div>
+          <div class="oac-box">☁️ <strong>OAC Application:</strong> SI uses === ROLE ===, === CONTEXT ===, === CONSTRAINTS === as delimiters.</div>
+          <div class="code-block">### INSTRUCTIONS ###
+Summarize the article.
+Max 100 words.
+
+### ARTICLE ###
+{text here}</div>
+          <button class="copy-btn" style="color:#64748B;border-color:#64748B30;background:#64748B10" onclick="copyText(this,'delimiter')">📋 Copy Prompt Example</button>
+        </div>
+      </div>
+    </template>
+<template id="tmpl-tech-constraint">
+      <div class="detail-panel">
+        <div class="detail-header" style="background:linear-gradient(135deg,#DC2626,#DC2626bb)">
+          <span class="icon">🔒</span>
+          <div><h3>Constraints &amp; Boundaries</h3><div class="sub">Set Hard Rules AI Cannot Break</div></div>
+        </div>
+        <div class="detail-body">
+          <div class="hint-box" style="background:#DC262608;border-color:#DC2626">💡 <strong>Key Idea:</strong> Without constraints, AI takes creative liberties. Constraints are guardrails — they ensure output stays within bounds.</div>
+          <div class="flow-bar"><span class="flow-step" style="background:#DC2626bb">Define Rules</span><span class="flow-arrow">→</span><span class="flow-step" style="background:#DC2626bb">AI Checks Each</span><span class="flow-arrow">→</span><span class="flow-step" style="background:#DC2626">Compliant Output</span></div>
+          <div class="info-grid">
+            <div class="info-cell"><div class="label" style="color:#DC2626">⚙️ How</div><div class="text">Set hard limits: max length, no topics, required elements.</div></div>
+            <div class="info-cell"><div class="label" style="color:#DC2626">🎯 Best For</div><div class="text">Brand compliance, legal, content policies</div></div>
+          </div>
+          <div class="oac-box">☁️ <strong>OAC Application:</strong> === CONSTRAINTS === section defines aggregation defaults, mandatory filters, column matching, scope boundaries.</div>
+          <div class="code-block">Write a product description.
+Max 50 words.
+Must include price and warranty.
+Do NOT mention competitors.
+Tone: professional.</div>
+          <button class="copy-btn" style="color:#DC2626;border-color:#DC262630;background:#DC262610" onclick="copyText(this,'constraint')">📋 Copy Prompt Example</button>
+        </div>
+      </div>
+    </template>
+<template id="tmpl-tech-format">
+      <div class="detail-panel">
+        <div class="detail-header" style="background:linear-gradient(135deg,#8B5CF6,#8B5CF6bb)">
+          <span class="icon">📋</span>
+          <div><h3>Format Control</h3><div class="sub">Same Content, Pro Presentation</div></div>
+        </div>
+        <div class="detail-body">
+          <div class="hint-box" style="background:#8B5CF608;border-color:#8B5CF6">💡 <strong>Key Idea:</strong> Same content looks completely different by format. Without format control, AI outputs random text.</div>
+          <div class="flow-bar"><span class="flow-step" style="background:#8B5CF6bb">Specify Format</span><span class="flow-arrow">→</span><span class="flow-step" style="background:#8B5CF6bb">AI Structures</span><span class="flow-arrow">→</span><span class="flow-step" style="background:#8B5CF6">Professional Result</span></div>
+          <div class="info-grid">
+            <div class="info-cell"><div class="label" style="color:#8B5CF6">⚙️ How</div><div class="text">Tell AI exactly what format: bullets, table, steps, JSON, checklist.</div></div>
+            <div class="info-cell"><div class="label" style="color:#8B5CF6">🎯 Best For</div><div class="text">Reports, presentations, APIs, docs</div></div>
+          </div>
+          <div class="oac-box">☁️ <strong>OAC Application:</strong> === OUTPUT === section: 'Include chart title. Show applied: metric + aggregation + filters.'</div>
+          <div class="code-block">Format as TABLE:
+| Metric | Q2 | Q3 | Change |
+
+Compare revenue, cost, and margin.</div>
+          <button class="copy-btn" style="color:#8B5CF6;border-color:#8B5CF630;background:#8B5CF610" onclick="copyText(this,'format')">📋 Copy Prompt Example</button>
+        </div>
+      </div>
+    </template>
+<template id="tmpl-tech-chain-prompt">
+      <div class="detail-panel">
+        <div class="detail-header" style="background:linear-gradient(135deg,#059669,#059669bb)">
+          <span class="icon">⛓️</span>
+          <div><h3>Prompt Chaining</h3><div class="sub">Break Complex into Sequential Steps</div></div>
+        </div>
+        <div class="detail-body">
+          <div class="hint-box" style="background:#05966908;border-color:#059669">💡 <strong>Key Idea:</strong> Complex tasks need decomposition. Each link in the chain handles one aspect perfectly.</div>
+          <div class="flow-bar"><span class="flow-step" style="background:#059669bb">Step 1 Output</span><span class="flow-arrow">→</span><span class="flow-step" style="background:#059669bb">Feed to Step 2</span><span class="flow-arrow">→</span><span class="flow-step" style="background:#059669bb">Step 2 Output</span><span class="flow-arrow">→</span><span class="flow-step" style="background:#059669bb">Feed to Step 3</span><span class="flow-arrow">→</span><span class="flow-step" style="background:#059669">Final</span></div>
+          <div class="info-grid">
+            <div class="info-cell"><div class="label" style="color:#059669">⚙️ How</div><div class="text">Break complex tasks into a chain. Output of step N feeds into step N+1.</div></div>
+            <div class="info-cell"><div class="label" style="color:#059669">🎯 Best For</div><div class="text">Multi-stage pipelines, complex workflows</div></div>
+          </div>
+          <div class="oac-box">☁️ <strong>OAC Application:</strong> Chain SI sections: ROLE defines who → CONTEXT provides data → CONSTRAINTS set rules → OUTPUT formats response.</div>
+          <div class="code-block">Step 1: Extract all metrics from this report.
+Step 2: For each metric, classify as leading or lagging.
+Step 3: Create a dashboard layout recommendation.</div>
+          <button class="copy-btn" style="color:#059669;border-color:#05966930;background:#05966910" onclick="copyText(this,'chain-prompt')">📋 Copy Prompt Example</button>
+        </div>
+      </div>
+    </template>
+  </div>
+
+  <!-- ═══ TEMPLATES ═══ -->
+  <div class="section" id="sec-templates">
+    <button class="back-btn" onclick="showSection('home')">← Back to Quick Start</button>
+    <div class="section-title">📋 Pick a Template</div>
+    <div class="section-desc">Choose the closest match. Replace <code style="background:var(--muted);padding:2px 4px;border-radius:4px">[brackets]</code> with your specifics.</div>
+    <div class="grid grid-2" id="tmpl-grid">
+      <div class="card" onclick="toggleTemplate('sales')">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+          <span style="font-size:24px">💰</span>
+          <div><div style="font-size:14px;font-weight:700">Sales Operations Agent</div><div style="font-size:10px;color:var(--fg3)">~2,900 characters</div></div>
+        </div>
+        <p style="font-size:11px;color:var(--fg2)">Track revenue, orders, customer performance. KPIs: ATV, Sales/SqFt. Product hierarchy drill-down.</p>
+      </div><div class="card" onclick="toggleTemplate('healthcare')">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+          <span style="font-size:24px">🏥</span>
+          <div><div style="font-size:14px;font-weight:700">Healthcare Analytics Agent</div><div style="font-size:10px;color:var(--fg3)">~2,700 characters</div></div>
+        </div>
+        <p style="font-size:11px;color:var(--fg2)">Patient outcomes, readmission rates, department utilization. DRG groupings.</p>
+      </div><div class="card" onclick="toggleTemplate('supply')">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+          <span style="font-size:24px">🏭</span>
+          <div><div style="font-size:14px;font-weight:700">Supply Chain Agent</div><div style="font-size:10px;color:var(--fg3)">~2,500 characters</div></div>
+        </div>
+        <p style="font-size:11px;color:var(--fg2)">Inventory, lead times, supplier performance, fulfillment rates.</p>
+      </div><div class="card" onclick="toggleTemplate('finance')">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+          <span style="font-size:24px">🏦</span>
+          <div><div style="font-size:14px;font-weight:700">Finance &amp; Banking Agent</div><div style="font-size:10px;color:var(--fg3)">~3,100 characters</div></div>
+        </div>
+        <p style="font-size:11px;color:var(--fg2)">P&amp;L analysis, portfolio performance, risk metrics, compliance reporting.</p>
+      </div><div class="card" onclick="toggleTemplate('hr')">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+          <span style="font-size:24px">👥</span>
+          <div><div style="font-size:14px;font-weight:700">HR &amp; People Analytics Agent</div><div style="font-size:10px;color:var(--fg3)">~3,000 characters</div></div>
+        </div>
+        <p style="font-size:11px;color:var(--fg2)">Attrition, headcount, compensation, hiring pipeline, diversity metrics.</p>
+      </div><div class="card" onclick="toggleTemplate('marketing')">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+          <span style="font-size:24px">📣</span>
+          <div><div style="font-size:14px;font-weight:700">Marketing &amp; CRM Agent</div><div style="font-size:10px;color:var(--fg3)">~3,000 characters</div></div>
+        </div>
+        <p style="font-size:11px;color:var(--fg2)">Campaign ROI, customer segmentation, funnel analysis, lead scoring.</p>
+      </div><div class="card" onclick="toggleTemplate('itops')">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+          <span style="font-size:24px">🖥️</span>
+          <div><div style="font-size:14px;font-weight:700">IT Operations Agent</div><div style="font-size:10px;color:var(--fg3)">~2,800 characters</div></div>
+        </div>
+        <p style="font-size:11px;color:var(--fg2)">Incident resolution, SLA compliance, ticket volume, system uptime.</p>
+      </div><div class="card" onclick="toggleTemplate('education')">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+          <span style="font-size:24px">🎓</span>
+          <div><div style="font-size:14px;font-weight:700">Education Agent</div><div style="font-size:10px;color:var(--fg3)">~2,800 characters</div></div>
+        </div>
+        <p style="font-size:11px;color:var(--fg2)">Enrollment, retention, GPA distribution, course performance.</p>
+      </div><div class="card" onclick="toggleTemplate('realestate')">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+          <span style="font-size:24px">🏢</span>
+          <div><div style="font-size:14px;font-weight:700">Real Estate Agent</div><div style="font-size:10px;color:var(--fg3)">~2,700 characters</div></div>
+        </div>
+        <p style="font-size:11px;color:var(--fg2)">Occupancy rates, lease management, property valuations.</p>
+      </div><div class="card" onclick="toggleTemplate('retail')">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+          <span style="font-size:24px">🛒</span>
+          <div><div style="font-size:14px;font-weight:700">Retail &amp; E-Commerce Agent</div><div style="font-size:10px;color:var(--fg3)">~3,000 characters</div></div>
+        </div>
+        <p style="font-size:11px;color:var(--fg2)">Basket analysis, conversion rates, inventory turns, customer lifetime value.</p>
+      </div><div class="card" onclick="toggleTemplate('blank')">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+          <span style="font-size:24px">📝</span>
+          <div><div style="font-size:14px;font-weight:700">Blank RTCCOE Template</div><div style="font-size:10px;color:var(--fg3)">~1,800 characters</div></div>
+        </div>
+        <p style="font-size:11px;color:var(--fg2)">Universal fill-in template. Replace [brackets] with your specifics.</p>
+      </div>
+    </div>
+    <div class="tmpl-detail" id="tmpl-sales">
+      <div class="tmpl-header" style="background:#059669">
+        <span>💰 Sales Operations Agent</span>
+        <button onclick="event.stopPropagation();copyText(this,'tmpl-sales')">📋 Copy</button>
+      </div>
+      <div class="code-block" style="border-radius:0">=== ROLE ===
+You are a Sales Operations analytics expert for [Company].
+You help regional sales managers explore order performance using the &quot;[Dataset]&quot; dataset.
+When uncertain, say so rather than guess.
+
+=== TASK ===
+Answer questions with accurate charts, tables, and insights. Follow all rules below.
+
+=== CONTEXT ===
+--- FISCAL CALENDAR ---
+FY = [Start] 1 to [End] 31. Columns: &quot;[FY Col]&quot;, &quot;[FQ Col]&quot;.
+&quot;this quarter&quot; -&gt; &quot;Fiscal Quarter Offset&quot;=0; &quot;last quarter&quot; -&gt; -1
+
+--- KPI: Average Transaction Value ---
+ATV = Sum(Sales_Revenue)/Sum(Transactions). TRIGGERS: ATV, avg transaction value.
+
+--- HIERARCHY: Product ---
+Path: Product Category &gt; Sub-Category &gt; Product Name.
+
+=== CONSTRAINTS ===
+Default metric: &quot;Sales&quot;. Ranking: Top/Bottom 5. Aggregation: Sales=Sum, Shipping Rate=Avg.
+
+=== OUTPUT ===
+Categories -&gt; Table. Trends -&gt; Area. Geo -&gt; Map.
+
+=== EXAMPLES ===
+Q: &quot;Revenue this quarter&quot; → Filter FQ Offset=0, Sum(Sales), Table
+Q: &quot;Top customers&quot; → Top 5 by Sales desc, Bar Chart</div>
+      <div class="tmpl-footer">💡 <strong>Next step:</strong> Paste into your OAC AI Agent's Supplementary Instructions field and replace all <code>[brackets]</code>.</div>
+    </div><div class="tmpl-detail" id="tmpl-healthcare">
+      <div class="tmpl-header" style="background:#6366F1">
+        <span>🏥 Healthcare Analytics Agent</span>
+        <button onclick="event.stopPropagation();copyText(this,'tmpl-healthcare')">📋 Copy</button>
+      </div>
+      <div class="code-block" style="border-radius:0">=== ROLE ===
+You are a Healthcare Analytics expert for [Hospital].
+Help clinical leaders explore patient outcomes using the &quot;[Dataset]&quot; dataset.
+
+=== CONTEXT ===
+--- KPI: Readmission Rate ---
+Readmission Rate = Sum(Readmissions)/Sum(Discharges) * 100. TRIGGERS: readmission, readmit.
+--- KPI: ALOS ---
+ALOS = Sum(Patient_Days)/Sum(Discharges). TRIGGERS: ALOS, length of stay.
+--- HIERARCHY: Department ---
+Path: Service Line &gt; Department &gt; Provider.
+
+=== CONSTRAINTS ===
+Default metric: &quot;Discharges&quot;. Never fabricate patient data. Only answer about healthcare.
+
+=== OUTPUT ===
+Categories -&gt; Table. Trends -&gt; Line.
+
+=== EXAMPLES ===
+Q: &quot;Readmission rate by department&quot; → Sum(Readmissions)/Sum(Discharges)*100, Bar</div>
+      <div class="tmpl-footer">💡 <strong>Next step:</strong> Paste into your OAC AI Agent's Supplementary Instructions field and replace all <code>[brackets]</code>.</div>
+    </div><div class="tmpl-detail" id="tmpl-supply">
+      <div class="tmpl-header" style="background:#D97706">
+        <span>🏭 Supply Chain Agent</span>
+        <button onclick="event.stopPropagation();copyText(this,'tmpl-supply')">📋 Copy</button>
+      </div>
+      <div class="code-block" style="border-radius:0">=== ROLE ===
+You are a Supply Chain analytics expert for [Company].
+Help operations managers explore inventory and procurement.
+
+=== CONTEXT ===
+--- KPI: Fill Rate ---
+Fill Rate = Sum(Units_Shipped)/Sum(Units_Ordered) * 100. TRIGGERS: fill rate, fulfillment.
+--- KPI: On-Time Delivery ---
+OTD = Sum(On_Time)/Sum(Total_Deliveries) * 100. TRIGGERS: OTD, on-time.
+--- HIERARCHY: Location ---
+Path: Region &gt; Warehouse &gt; Bin Location.
+
+=== CONSTRAINTS ===
+Default metric: &quot;Units_Shipped&quot;. Ranking: Top/Bottom 10.
+
+=== OUTPUT ===
+Categories -&gt; Bar. Trends -&gt; Line.
+
+=== EXAMPLES ===
+Q: &quot;Fill rate by warehouse&quot; → Sum(Shipped)/Sum(Ordered)*100 by Warehouse, Bar</div>
+      <div class="tmpl-footer">💡 <strong>Next step:</strong> Paste into your OAC AI Agent's Supplementary Instructions field and replace all <code>[brackets]</code>.</div>
+    </div><div class="tmpl-detail" id="tmpl-finance">
+      <div class="tmpl-header" style="background:#1E40AF">
+        <span>🏦 Finance &amp; Banking Agent</span>
+        <button onclick="event.stopPropagation();copyText(this,'tmpl-finance')">📋 Copy</button>
+      </div>
+      <div class="code-block" style="border-radius:0">=== ROLE ===
+You are a Finance &amp; Banking analytics expert for [Company].
+Help finance managers explore P&amp;L performance and risk metrics.
+
+=== CONTEXT ===
+--- KPI: Gross Margin % ---
+Gross Margin % = (Sum(Revenue) - Sum(COGS)) / Sum(Revenue) * 100. TRIGGERS: margin, GM%.
+--- KPI: ROE ---
+ROE = Sum(Net_Income) / Avg(Shareholders_Equity) * 100. TRIGGERS: ROE, return on equity.
+--- HIERARCHY: Cost Center ---
+Path: Division &gt; Department &gt; Cost Center.
+
+=== CONSTRAINTS ===
+Default metric: &quot;Revenue&quot;. Never provide investment advice. Currency with 2 decimals.
+
+=== OUTPUT ===
+P&amp;L -&gt; Waterfall. Trends -&gt; Line. Categories -&gt; Table.
+
+=== EXAMPLES ===
+Q: &quot;P&amp;L this quarter&quot; → Filter FQ Offset=0, Income vs Expense, Waterfall
+Q: &quot;Gross margin trend&quot; → (Rev-COGS)/Rev*100, Line</div>
+      <div class="tmpl-footer">💡 <strong>Next step:</strong> Paste into your OAC AI Agent's Supplementary Instructions field and replace all <code>[brackets]</code>.</div>
+    </div><div class="tmpl-detail" id="tmpl-hr">
+      <div class="tmpl-header" style="background:#7C3AED">
+        <span>👥 HR &amp; People Analytics Agent</span>
+        <button onclick="event.stopPropagation();copyText(this,'tmpl-hr')">📋 Copy</button>
+      </div>
+      <div class="code-block" style="border-radius:0">=== ROLE ===
+You are an HR &amp; People Analytics expert for [Company].
+Help HR leaders explore workforce metrics and talent trends.
+
+=== CONTEXT ===
+--- KPI: Attrition Rate ---
+Attrition = Sum(Separations) / Avg(Headcount) * 100. TRIGGERS: attrition, turnover.
+--- KPI: Time-to-Fill ---
+TTF = Avg(Date_Filled - Date_Opened) in days. TRIGGERS: TTF, hiring speed.
+--- HIERARCHY: Organization ---
+Path: Business Unit &gt; Department &gt; Team &gt; Manager.
+
+=== CONSTRAINTS ===
+Default metric: &quot;Headcount&quot;. Never expose individual employee data. Min aggregate: 5 employees.
+
+=== OUTPUT ===
+Demographics -&gt; Stacked Bar. Trends -&gt; Line.
+
+=== EXAMPLES ===
+Q: &quot;Attrition by department&quot; → Sum(Separations)/Avg(Headcount)*100, Bar</div>
+      <div class="tmpl-footer">💡 <strong>Next step:</strong> Paste into your OAC AI Agent's Supplementary Instructions field and replace all <code>[brackets]</code>.</div>
+    </div><div class="tmpl-detail" id="tmpl-marketing">
+      <div class="tmpl-header" style="background:#DB2777">
+        <span>📣 Marketing &amp; CRM Agent</span>
+        <button onclick="event.stopPropagation();copyText(this,'tmpl-marketing')">📋 Copy</button>
+      </div>
+      <div class="code-block" style="border-radius:0">=== ROLE ===
+You are a Marketing &amp; CRM analytics expert for [Company].
+Help marketing teams explore campaign performance and customer acquisition.
+
+=== CONTEXT ===
+--- KPI: CAC ---
+CAC = Sum(Marketing_Spend) / Sum(New_Customers). TRIGGERS: CAC, acquisition cost.
+--- KPI: Campaign ROI ---
+ROI = (Sum(Revenue) - Sum(Cost)) / Sum(Cost) * 100. TRIGGERS: ROI, ROAS.
+--- HIERARCHY: Channel ---
+Path: Channel Group &gt; Channel &gt; Campaign &gt; Ad Set.
+
+=== CONSTRAINTS ===
+Default metric: &quot;Leads&quot;. Never expose individual customer PII.
+
+=== OUTPUT ===
+Funnel -&gt; Stacked Bar. Trends -&gt; Line.
+
+=== EXAMPLES ===
+Q: &quot;Campaign ROI by channel&quot; → (Revenue-Cost)/Cost*100, Bar</div>
+      <div class="tmpl-footer">💡 <strong>Next step:</strong> Paste into your OAC AI Agent's Supplementary Instructions field and replace all <code>[brackets]</code>.</div>
+    </div><div class="tmpl-detail" id="tmpl-itops">
+      <div class="tmpl-header" style="background:#0F766E">
+        <span>🖥️ IT Operations Agent</span>
+        <button onclick="event.stopPropagation();copyText(this,'tmpl-itops')">📋 Copy</button>
+      </div>
+      <div class="code-block" style="border-radius:0">=== ROLE ===
+You are an IT Operations analytics expert for [Company].
+Help IT managers explore incident trends and SLA performance.
+
+=== CONTEXT ===
+--- KPI: MTTR ---
+MTTR = Avg(Resolved_Date - Created_Date) in hours. TRIGGERS: MTTR, resolution time.
+--- KPI: SLA Compliance ---
+SLA % = Sum(Resolved_Within_SLA) / Sum(Total_Tickets) * 100. TRIGGERS: SLA, compliance.
+--- HIERARCHY: Service ---
+Path: Service Category &gt; Service &gt; CI.
+
+=== CONSTRAINTS ===
+Default metric: &quot;Ticket_Count&quot;. Ranking: Top/Bottom 10.
+
+=== EXAMPLES ===
+Q: &quot;MTTR by service category&quot; → Avg(Resolved-Created) hours, Bar</div>
+      <div class="tmpl-footer">💡 <strong>Next step:</strong> Paste into your OAC AI Agent's Supplementary Instructions field and replace all <code>[brackets]</code>.</div>
+    </div><div class="tmpl-detail" id="tmpl-education">
+      <div class="tmpl-header" style="background:#4F46E5">
+        <span>🎓 Education Agent</span>
+        <button onclick="event.stopPropagation();copyText(this,'tmpl-education')">📋 Copy</button>
+      </div>
+      <div class="code-block" style="border-radius:0">=== ROLE ===
+You are an Education Analytics expert for [Institution].
+Help academic leaders explore enrollment and student success.
+
+=== CONTEXT ===
+--- KPI: Retention Rate ---
+Retention = Sum(Returned) / Sum(Enrolled) * 100. TRIGGERS: retention, persistence.
+--- KPI: Avg GPA ---
+Avg GPA weighted by Credit_Hours. TRIGGERS: GPA, grades.
+--- HIERARCHY: Academic ---
+Path: College &gt; Department &gt; Program &gt; Course.
+
+=== CONSTRAINTS ===
+Default metric: &quot;Enrollment&quot;. Never expose individual student data. Min aggregate: 10 (FERPA).
+
+=== EXAMPLES ===
+Q: &quot;Retention by college&quot; → Sum(Returned)/Sum(Enrolled)*100, Bar</div>
+      <div class="tmpl-footer">💡 <strong>Next step:</strong> Paste into your OAC AI Agent's Supplementary Instructions field and replace all <code>[brackets]</code>.</div>
+    </div><div class="tmpl-detail" id="tmpl-realestate">
+      <div class="tmpl-header" style="background:#92400E">
+        <span>🏢 Real Estate Agent</span>
+        <button onclick="event.stopPropagation();copyText(this,'tmpl-realestate')">📋 Copy</button>
+      </div>
+      <div class="code-block" style="border-radius:0">=== ROLE ===
+You are a Real Estate Analytics expert for [Company].
+Help property managers explore occupancy and lease performance.
+
+=== CONTEXT ===
+--- KPI: Occupancy Rate ---
+Occupancy = Sum(Occupied) / Sum(Total_Units) * 100. TRIGGERS: occupancy, vacancy.
+--- KPI: NOI ---
+NOI = Sum(Rental_Income) - Sum(Operating_Expenses). TRIGGERS: NOI, net income.
+--- HIERARCHY: Property ---
+Path: Portfolio &gt; Property &gt; Building &gt; Unit.
+
+=== CONSTRAINTS ===
+Default metric: &quot;Gross_Rental_Income&quot;. Currency with 2 decimals.
+
+=== EXAMPLES ===
+Q: &quot;Occupancy by property&quot; → Occupied/Total*100, Bar</div>
+      <div class="tmpl-footer">💡 <strong>Next step:</strong> Paste into your OAC AI Agent's Supplementary Instructions field and replace all <code>[brackets]</code>.</div>
+    </div><div class="tmpl-detail" id="tmpl-retail">
+      <div class="tmpl-header" style="background:#BE185D">
+        <span>🛒 Retail &amp; E-Commerce Agent</span>
+        <button onclick="event.stopPropagation();copyText(this,'tmpl-retail')">📋 Copy</button>
+      </div>
+      <div class="code-block" style="border-radius:0">=== ROLE ===
+You are a Retail Analytics expert for [Company].
+Help merchandising teams explore sales and customer behavior.
+
+=== CONTEXT ===
+--- KPI: Basket Size ---
+ABS = Sum(Revenue) / Sum(Transactions). TRIGGERS: basket size, AOV.
+--- KPI: Conversion Rate ---
+CVR = Sum(Transactions) / Sum(Visits) * 100. TRIGGERS: conversion, CVR.
+--- HIERARCHY: Product ---
+Path: Department &gt; Category &gt; Sub-Category &gt; SKU.
+
+=== CONSTRAINTS ===
+Default metric: &quot;Revenue&quot;. Ranking: Top/Bottom 10.
+
+=== EXAMPLES ===
+Q: &quot;Basket size by channel&quot; → Sum(Revenue)/Sum(Transactions), Bar</div>
+      <div class="tmpl-footer">💡 <strong>Next step:</strong> Paste into your OAC AI Agent's Supplementary Instructions field and replace all <code>[brackets]</code>.</div>
+    </div><div class="tmpl-detail" id="tmpl-blank">
+      <div class="tmpl-header" style="background:#374151">
+        <span>📝 Blank RTCCOE Template</span>
+        <button onclick="event.stopPropagation();copyText(this,'tmpl-blank')">📋 Copy</button>
+      </div>
+      <div class="code-block" style="border-radius:0">=== ROLE ===
+You are a [Domain] analytics expert for [Company].
+You help [audience] explore [topic] using the &quot;[Dataset]&quot; dataset.
+When uncertain, say so rather than guess.
+
+=== TASK ===
+Answer questions with accurate charts, tables, and insights.
+Do not invent data values or column names.
+
+=== CONTEXT ===
+--- FISCAL CALENDAR ---
+FY = [Start] to [End]. Columns: &quot;[FY Col]&quot;, &quot;[FQ Col]&quot;.
+&quot;this quarter&quot; -&gt; &quot;FQ Offset&quot;=0; &quot;last quarter&quot; -&gt; -1
+
+--- KPI: [Name] ---
+Formula: [formula]. TRIGGERS: [keywords].
+
+--- HIERARCHY: [Name] ---
+Path: [Level 1] &gt; [Level 2] &gt; [Level 3].
+
+=== CONSTRAINTS ===
+Default metric: &quot;[metric]&quot;. Ranking: Top/Bottom [N].
+Match exact column names.
+
+=== OUTPUT ===
+Categories -&gt; [Chart]. Trends -&gt; [Chart]. Geo -&gt; Map.
+
+=== EXAMPLES ===
+Q: &quot;[sample query]&quot; → [expected response]</div>
+      <div class="tmpl-footer">💡 <strong>Next step:</strong> Paste into your OAC AI Agent's Supplementary Instructions field and replace all <code>[brackets]</code>.</div>
+    </div>
+  </div>
+
+  <!-- ═══ USE CASES ═══ -->
+  <div class="section" id="sec-usecases">
+    <button class="back-btn" onclick="showSection('home')">← Back to Quick Start</button>
+    <div class="section-title">🎯 OAC Use Case Reference</div>
+    <div class="section-desc">16 patterns that solve the most common OAC AI Agent scenarios. Each includes copy-ready instructions.</div>
+    <div class="list-layout">
+      <div class="list-sidebar" id="uc-list">
+        <button class="list-item" data-target="uc-uc-grouping" onclick="showDetail('uc','uc-grouping')">
+          <span class="icon">🏷️</span>
+          <div><div class="name"><span class="badge" style="background:var(--muted);color:var(--fg3);margin-right:4px">1</span> Attribute Grouping</div><div class="sub">Behavior</div></div>
+        </button><button class="list-item" data-target="uc-uc-hierarchy" onclick="showDetail('uc','uc-hierarchy')">
+          <span class="icon">🔍</span>
+          <div><div class="name"><span class="badge" style="background:var(--muted);color:var(--fg3);margin-right:4px">2</span> Hierarchies &amp; Drill-Down</div><div class="sub">Behavior</div></div>
+        </button><button class="list-item" data-target="uc-uc-default-metric" onclick="showDetail('uc','uc-default-metric')">
+          <span class="icon">📊</span>
+          <div><div class="name"><span class="badge" style="background:var(--muted);color:var(--fg3);margin-right:4px">3</span> Default Metric</div><div class="sub">Behavior</div></div>
+        </button><button class="list-item" data-target="uc-uc-default-filter" onclick="showDetail('uc','uc-default-filter')">
+          <span class="icon">🔒</span>
+          <div><div class="name"><span class="badge" style="background:var(--muted);color:var(--fg3);margin-right:4px">4</span> Persistent Default Filter</div><div class="sub">Behavior</div></div>
+        </button><button class="list-item" data-target="uc-uc-chart-types" onclick="showDetail('uc','uc-chart-types')">
+          <span class="icon">📈</span>
+          <div><div class="name"><span class="badge" style="background:var(--muted);color:var(--fg3);margin-right:4px">5</span> Default Visualization Types</div><div class="sub">Behavior</div></div>
+        </button><button class="list-item" data-target="uc-uc-topn" onclick="showDetail('uc','uc-topn')">
+          <span class="icon">🏆</span>
+          <div><div class="name"><span class="badge" style="background:var(--muted);color:var(--fg3);margin-right:4px">6</span> Top N / Bottom N Ranking</div><div class="sub">Behavior</div></div>
+        </button><button class="list-item" data-target="uc-uc-aggregation" onclick="showDetail('uc','uc-aggregation')">
+          <span class="icon">📐</span>
+          <div><div class="name"><span class="badge" style="background:var(--muted);color:var(--fg3);margin-right:4px">7</span> Aggregation Rules</div><div class="sub">Behavior</div></div>
+        </button><button class="list-item" data-target="uc-uc-formulas" onclick="showDetail('uc','uc-formulas')">
+          <span class="icon">🧮</span>
+          <div><div class="name"><span class="badge" style="background:var(--muted);color:var(--fg3);margin-right:4px">8</span> Custom Formulas &amp; KPIs</div><div class="sub">Calculations</div></div>
+        </button><button class="list-item" data-target="uc-uc-bucket" onclick="showDetail('uc','uc-bucket')">
+          <span class="icon">🎯</span>
+          <div><div class="name"><span class="badge" style="background:var(--muted);color:var(--fg3);margin-right:4px">9</span> CASE / Bucket Segmentation</div><div class="sub">Calculations</div></div>
+        </button><button class="list-item" data-target="uc-uc-multistep" onclick="showDetail('uc','uc-multistep')">
+          <span class="icon">🔗</span>
+          <div><div class="name"><span class="badge" style="background:var(--muted);color:var(--fg3);margin-right:4px">10</span> Multi-Step Analysis</div><div class="sub">Calculations</div></div>
+        </button><button class="list-item" data-target="uc-uc-fiscal" onclick="showDetail('uc','uc-fiscal')">
+          <span class="icon">📅</span>
+          <div><div class="name"><span class="badge" style="background:var(--muted);color:var(--fg3);margin-right:4px">11</span> Fiscal Calendar Mapping</div><div class="sub">Time</div></div>
+        </button><button class="list-item" data-target="uc-uc-periodcomp" onclick="showDetail('uc','uc-periodcomp')">
+          <span class="icon">📊</span>
+          <div><div class="name"><span class="badge" style="background:var(--muted);color:var(--fg3);margin-right:4px">12</span> Period-over-Period Comparison</div><div class="sub">Time</div></div>
+        </button><button class="list-item" data-target="uc-uc-shortcuts" onclick="showDetail('uc','uc-shortcuts')">
+          <span class="icon">⚡</span>
+          <div><div class="name"><span class="badge" style="background:var(--muted);color:var(--fg3);margin-right:4px">13</span> Report Shortcuts</div><div class="sub">Shortcuts</div></div>
+        </button><button class="list-item" data-target="uc-uc-drillreact" onclick="showDetail('uc','uc-drillreact')">
+          <span class="icon">🕵️</span>
+          <div><div class="name"><span class="badge" style="background:var(--muted);color:var(--fg3);margin-right:4px">14</span> Drill-Down with ReAct</div><div class="sub">Shortcuts</div></div>
+        </button><button class="list-item" data-target="uc-uc-geodistance" onclick="showDetail('uc','uc-geodistance')">
+          <span class="icon">🗺️</span>
+          <div><div class="name"><span class="badge" style="background:var(--muted);color:var(--fg3);margin-right:4px">15</span> Geo Distance &amp; Map Intelligence</div><div class="sub">Geographic</div></div>
+        </button><button class="list-item" data-target="uc-uc-geoviz" onclick="showDetail('uc','uc-geoviz')">
+          <span class="icon">🌍</span>
+          <div><div class="name"><span class="badge" style="background:var(--muted);color:var(--fg3);margin-right:4px">16</span> Location-Based Visualization</div><div class="sub">Geographic</div></div>
+        </button>
+      </div>
+      <div id="uc-detail">
+        <div class="placeholder"><div class="big">👈</div><div class="title">Select a use case</div><div class="sub">Click any pattern to see details</div></div>
+      </div>
+    </div>
+    <template id="tmpl-uc-uc-grouping">
+      <div class="detail-panel">
+        <div class="detail-header" style="background:linear-gradient(135deg,#8B5CF6,#8B5CF6bb)">
+          <span class="icon">🏷️</span>
+          <div><h3>Attribute Grouping</h3><div class="sub">Behavior • Use Case #1</div></div>
+        </div>
+        <div class="detail-body">
+          <div class="hint-box" style="background:#8B5CF608;border-color:#8B5CF6">💡 <strong>Why this matters:</strong> Your data columns often have too many specific values that don't match how people actually talk. This instruction tells the agent to automatically group raw values into business-friendly categories.</div>
+          <div class="section-label">📋 Copy-Ready Instructions</div>
+          <div class="code-block">When user asks about Express or Standard shipping, apply the following consolidation:
+
+- &quot;Same Day&quot;, &quot;First Class&quot; are mapped to &quot;Express&quot; Shipping
+- &quot;Standard Class&quot;, &quot;Second Class&quot; are mapped to &quot;Standard&quot; Shipping
+
+When user uses terms such as &quot;express&quot;, &quot;standard&quot;, &quot;express vs standard&quot;, &quot;shipping comparison&quot;, apply this mapping before generating any chart or insight.
+
+Always use the consolidated group name in chart labels and insight text, not the raw column values.</div>
+          <button class="copy-btn" style="color:#8B5CF6;border-color:#8B5CF630;background:#8B5CF610" onclick="copyText(this,'uc-grouping')">📋 Copy Instructions</button>
+          <div class="section-label">💬 Example Conversations</div>
+          <div class="example-card"><div class="q">Q: "Compare profit for Express vs Standard shipping"</div><div class="a">→ Agent maps Same Day + First Class → Express, Standard Class + Second Class → Standard. Shows Avg(Profit) per group as a Bar Chart.</div></div><div class="example-card"><div class="q">Q: "What percentage of orders use Express shipping?"</div><div class="a">→ Agent counts orders where Ship Mode IN (Same Day, First Class) as Express, everything else as Standard. Shows Pie Chart.</div></div><div class="example-card"><div class="q">Q: "Show average delivery time by shipping type"</div><div class="a">→ Agent applies the same grouping, computes Avg(Delivery_Days) per group. Bar Chart with insight.</div></div>
+          <div class="section-label">✅ Pro Tips</div>
+          <div class="tips-grid"><div class="tip"><span class="dot">•</span> Map EVERY raw value — leave no gaps</div><div class="tip"><span class="dot">•</span> Each raw value goes to exactly one group</div><div class="tip"><span class="dot">•</span> List trigger words/synonyms</div><div class="tip"><span class="dot">•</span> Show group name in charts, not raw values</div></div>
+        </div>
+      </div>
+    </template>
+<template id="tmpl-uc-uc-hierarchy">
+      <div class="detail-panel">
+        <div class="detail-header" style="background:linear-gradient(135deg,#D97706,#D97706bb)">
+          <span class="icon">🔍</span>
+          <div><h3>Hierarchies &amp; Drill-Down</h3><div class="sub">Behavior • Use Case #2</div></div>
+        </div>
+        <div class="detail-body">
+          <div class="hint-box" style="background:#D9770608;border-color:#D97706">💡 <strong>Why this matters:</strong> Business analysis works in layers — you start with the big picture and drill into details. This instruction sets up parent → child relationships for smooth navigation.</div>
+          <div class="section-label">📋 Copy-Ready Instructions</div>
+          <div class="code-block">Enable hierarchical drill-down navigation:
+
+Product: Product Category &gt; Product Sub-Category &gt; Product Name
+Geography: Region &gt; Country &gt; State &gt; City
+
+Drill-Down Logic:
+- Drill is applied only when the current chart contains a column from this hierarchy.
+- If current chart shows Product Category, on &quot;Drill Down&quot; → show Product Sub-Category within selected category.
+- If current chart shows Product Name, inform: &quot;This is the most detailed product level.&quot;
+- If the column is not in any hierarchy, respond: &quot;Drill-down is not available for this attribute.&quot;</div>
+          <button class="copy-btn" style="color:#D97706;border-color:#D9770630;background:#D9770610" onclick="copyText(this,'uc-hierarchy')">📋 Copy Instructions</button>
+          <div class="section-label">💬 Example Conversations</div>
+          <div class="example-card"><div class="q">Q: "Show Revenue by Product Category → then &quot;Drill Down&quot; on Technology"</div><div class="a">→ First chart: Revenue by Product Category. User drills into Technology → Agent shows Revenue by Sub-Category (Phones, Copiers, etc.).</div></div><div class="example-card"><div class="q">Q: "Revenue by Region → Drill Down → Drill Down → Drill Down"</div><div class="a">→ Step 1: Region. Step 2: Drill into West → Country. Step 3: Drill into USA → State. Step 4: Drill into California → City.</div></div><div class="example-card"><div class="q">Q: "Drill down on Discount column"</div><div class="a">→ Agent responds: &quot;Drill-down is not available for Discount.&quot;</div></div>
+          <div class="section-label">✅ Pro Tips</div>
+          <div class="tips-grid"><div class="tip"><span class="dot">•</span> Define complete path from broadest to most granular</div><div class="tip"><span class="dot">•</span> Include stop message at lowest level</div><div class="tip"><span class="dot">•</span> Handle non-hierarchical columns gracefully</div><div class="tip"><span class="dot">•</span> Keep metric and filters intact when drilling</div></div>
+        </div>
+      </div>
+    </template>
+<template id="tmpl-uc-uc-default-metric">
+      <div class="detail-panel">
+        <div class="detail-header" style="background:linear-gradient(135deg,#3B82F6,#3B82F6bb)">
+          <span class="icon">📊</span>
+          <div><h3>Default Metric</h3><div class="sub">Behavior • Use Case #3</div></div>
+        </div>
+        <div class="detail-body">
+          <div class="hint-box" style="background:#3B82F608;border-color:#3B82F6">💡 <strong>Why this matters:</strong> Users often ask vague questions without specifying which number to look at. This instruction says: when in doubt, use Revenue.</div>
+          <div class="section-label">📋 Copy-Ready Instructions</div>
+          <div class="code-block">When the user does not specify a metric and asks general questions, default to &quot;Revenue&quot; as the primary measure.
+
+Apply this default when the user says:
+- &quot;Show performance across [dimension]&quot;
+- &quot;Compare [dimension A] vs [dimension B]&quot;
+- &quot;How are we doing [time period]?&quot;
+
+Only override when the user explicitly names a different metric.</div>
+          <button class="copy-btn" style="color:#3B82F6;border-color:#3B82F630;background:#3B82F610" onclick="copyText(this,'uc-default-metric')">📋 Copy Instructions</button>
+          <div class="section-label">💬 Example Conversations</div>
+          <div class="example-card"><div class="q">Q: "How are we doing this quarter?"</div><div class="a">→ No metric specified → defaults to Revenue. Shows total Revenue for current fiscal quarter with trend.</div></div><div class="example-card"><div class="q">Q: "Compare East vs West"</div><div class="a">→ No metric specified → defaults to Revenue. Shows Revenue for East vs West as Bar Chart.</div></div><div class="example-card"><div class="q">Q: "Show profit by region"</div><div class="a">→ User explicitly said &quot;profit&quot; → uses Profit instead of Revenue.</div></div>
+          <div class="section-label">✅ Pro Tips</div>
+          <div class="tips-grid"><div class="tip"><span class="dot">•</span> Pick the metric your team cares about most</div><div class="tip"><span class="dot">•</span> Always tell the user which metric you used</div><div class="tip"><span class="dot">•</span> If user says a specific metric, use that instead</div><div class="tip"><span class="dot">•</span> Consider different defaults for different contexts</div></div>
+        </div>
+      </div>
+    </template>
+<template id="tmpl-uc-uc-default-filter">
+      <div class="detail-panel">
+        <div class="detail-header" style="background:linear-gradient(135deg,#059669,#059669bb)">
+          <span class="icon">🔒</span>
+          <div><h3>Persistent Default Filter</h3><div class="sub">Behavior • Use Case #4</div></div>
+        </div>
+        <div class="detail-body">
+          <div class="hint-box" style="background:#05966908;border-color:#059669">💡 <strong>Why this matters:</strong> Sometimes an AI Agent is built specifically for one team or region. This instruction locks in a mandatory filter that applies to every query automatically.</div>
+          <div class="section-label">📋 Copy-Ready Instructions</div>
+          <div class="code-block">Always apply the following filter on every query:
+
+City = &quot;Toronto&quot;
+
+This filter is mandatory. Do not remove unless user explicitly says &quot;remove the city filter&quot; or &quot;show all cities&quot;.
+
+Include in every response: &quot;Filtered to: Toronto&quot;</div>
+          <button class="copy-btn" style="color:#059669;border-color:#05966930;background:#05966910" onclick="copyText(this,'uc-default-filter')">📋 Copy Instructions</button>
+          <div class="section-label">💬 Example Conversations</div>
+          <div class="example-card"><div class="q">Q: "Show me Revenue by Product Category"</div><div class="a">→ Agent auto-applies City=&quot;Toronto&quot; filter. Shows Revenue by Product Category for Toronto only.</div></div><div class="example-card"><div class="q">Q: "What about Vancouver?"</div><div class="a">→ Agent temporarily replaces Toronto with Vancouver for this query. Next query reverts.</div></div><div class="example-card"><div class="q">Q: "Remove the city filter and show all cities"</div><div class="a">→ User explicitly asked to remove. Agent removes filter, shows all cities.</div></div>
+          <div class="section-label">✅ Pro Tips</div>
+          <div class="tips-grid"><div class="tip"><span class="dot">•</span> Always state the filter in the response</div><div class="tip"><span class="dot">•</span> Define exact words that remove/override</div><div class="tip"><span class="dot">•</span> Temporary overrides should revert</div><div class="tip"><span class="dot">•</span> Works for any column: Region, Department, Year, etc.</div></div>
+        </div>
+      </div>
+    </template>
+<template id="tmpl-uc-uc-chart-types">
+      <div class="detail-panel">
+        <div class="detail-header" style="background:linear-gradient(135deg,#EC4899,#EC4899bb)">
+          <span class="icon">📈</span>
+          <div><h3>Default Visualization Types</h3><div class="sub">Behavior • Use Case #5</div></div>
+        </div>
+        <div class="detail-body">
+          <div class="hint-box" style="background:#EC489908;border-color:#EC4899">💡 <strong>Why this matters:</strong> Without rules, the agent might show a pie chart when a bar chart is better. This instruction creates automatic chart selection rules.</div>
+          <div class="section-label">📋 Copy-Ready Instructions</div>
+          <div class="code-block">Apply the following default chart rules:
+
+- Comparison (&quot;compare&quot;, &quot;vs&quot;, &quot;across&quot;) → Horizontal Bar Chart
+- Time-based dimension (Date, Month, Quarter, Year) → Line Chart
+- Geographic attributes (City, State, Country) → Map
+- Ranking (Top N / Bottom N) → Table with sorted values
+- Distribution or segmentation → Stacked Bar or Pie Chart
+
+Only override if user explicitly requests a different chart type.</div>
+          <button class="copy-btn" style="color:#EC4899;border-color:#EC489930;background:#EC489910" onclick="copyText(this,'uc-chart-types')">📋 Copy Instructions</button>
+          <div class="section-label">💬 Example Conversations</div>
+          <div class="example-card"><div class="q">Q: "Compare Revenue across Product Categories"</div><div class="a">→ Detects &quot;across&quot; + categorical → Horizontal Bar Chart.</div></div><div class="example-card"><div class="q">Q: "Show me monthly sales for 2025"</div><div class="a">→ Detects time dimension → Line Chart.</div></div><div class="example-card"><div class="q">Q: "Revenue by City — show as pie chart"</div><div class="a">→ Would default to Map, but user said &quot;pie chart&quot; → overrides.</div></div>
+          <div class="section-label">✅ Pro Tips</div>
+          <div class="tips-grid"><div class="tip"><span class="dot">•</span> Cover all common patterns: comparison, time, geo, ranking</div><div class="tip"><span class="dot">•</span> Let users override with explicit requests</div><div class="tip"><span class="dot">•</span> Add rules for mixed queries</div><div class="tip"><span class="dot">•</span> Consider Combo charts for two metrics</div></div>
+        </div>
+      </div>
+    </template>
+<template id="tmpl-uc-uc-topn">
+      <div class="detail-panel">
+        <div class="detail-header" style="background:linear-gradient(135deg,#6366F1,#6366F1bb)">
+          <span class="icon">🏆</span>
+          <div><h3>Top N / Bottom N Ranking</h3><div class="sub">Behavior • Use Case #6</div></div>
+        </div>
+        <div class="detail-body">
+          <div class="hint-box" style="background:#6366F108;border-color:#6366F1">💡 <strong>Why this matters:</strong> This instruction standardizes ranking behavior: default metric (Revenue), default count (5), and maps words like &quot;best&quot; to descending sort.</div>
+          <div class="section-label">📋 Copy-Ready Instructions</div>
+          <div class="code-block">When user asks for &quot;Best&quot;, &quot;Highest&quot;, &quot;Top performing&quot;:
+  → Rank by Revenue descending
+
+When user asks for &quot;Bottom&quot;, &quot;Least&quot;, &quot;Worst&quot;:
+  → Rank by Revenue ascending
+
+Default metric: Revenue. Default count: 5.
+Keyword mapping:
+- TOP: best, highest, most, leading, top, largest
+- BOTTOM: worst, least, lowest, bottom, smallest</div>
+          <button class="copy-btn" style="color:#6366F1;border-color:#6366F130;background:#6366F110" onclick="copyText(this,'uc-topn')">📋 Copy Instructions</button>
+          <div class="section-label">💬 Example Conversations</div>
+          <div class="example-card"><div class="q">Q: "Show me the best products"</div><div class="a">→ Top 5 Products by Revenue descending as Bar Chart.</div></div><div class="example-card"><div class="q">Q: "Bottom 3 cities by profit"</div><div class="a">→ 3 cities with lowest Profit, sorted ascending.</div></div><div class="example-card"><div class="q">Q: "Which customers are our largest?"</div><div class="a">→ Top 5 Customers by Revenue descending.</div></div>
+          <div class="section-label">✅ Pro Tips</div>
+          <div class="tips-grid"><div class="tip"><span class="dot">•</span> Set sensible default N (5 or 10)</div><div class="tip"><span class="dot">•</span> Map ALL synonym words</div><div class="tip"><span class="dot">•</span> Always state the metric and N</div><div class="tip"><span class="dot">•</span> top = descending, bottom = ascending</div></div>
+        </div>
+      </div>
+    </template>
+<template id="tmpl-uc-uc-aggregation">
+      <div class="detail-panel">
+        <div class="detail-header" style="background:linear-gradient(135deg,#374151,#374151bb)">
+          <span class="icon">📐</span>
+          <div><h3>Aggregation Rules</h3><div class="sub">Behavior • Use Case #7</div></div>
+        </div>
+        <div class="detail-body">
+          <div class="hint-box" style="background:#37415108;border-color:#374151">💡 <strong>Why this matters:</strong> When the agent shows &quot;Discount by Region&quot;, should it Sum or Average? Wrong aggregation = silently wrong numbers.</div>
+          <div class="section-label">📋 Copy-Ready Instructions</div>
+          <div class="code-block">Default aggregation rules:
+
+- Revenue: Sum(Revenue)
+- Profit: Sum(Profit)
+- Quantity: Sum(Quantity)
+- Discount: Average(Discount)
+- Order Count: Count Distinct(Order_ID)
+
+For unlisted numeric fields, default to Sum.
+User keywords (&quot;average&quot;, &quot;count&quot;, &quot;sum&quot;) override defaults.</div>
+          <button class="copy-btn" style="color:#374151;border-color:#37415130;background:#37415110" onclick="copyText(this,'uc-aggregation')">📋 Copy Instructions</button>
+          <div class="section-label">💬 Example Conversations</div>
+          <div class="example-card"><div class="q">Q: "Discount by Product Category"</div><div class="a">→ Uses Avg(Discount) — NOT Sum. Shows average discount rate per category.</div></div><div class="example-card"><div class="q">Q: "How many orders per region?"</div><div class="a">→ Count Distinct(Order_ID) per region.</div></div><div class="example-card"><div class="q">Q: "Average revenue by customer segment"</div><div class="a">→ User said &quot;Average&quot; → overrides default Sum. Uses Avg(Revenue).</div></div>
+          <div class="section-label">✅ Pro Tips</div>
+          <div class="tips-grid"><div class="tip"><span class="dot">•</span> List EVERY numeric column with correct aggregation</div><div class="tip"><span class="dot">•</span> Sum is the fallback for unlisted columns</div><div class="tip"><span class="dot">•</span> Let user keywords override defaults</div><div class="tip"><span class="dot">•</span> Wrong aggregation = silently wrong numbers</div></div>
+        </div>
+      </div>
+    </template>
+<template id="tmpl-uc-uc-formulas">
+      <div class="detail-panel">
+        <div class="detail-header" style="background:linear-gradient(135deg,#C74634,#C74634bb)">
+          <span class="icon">🧮</span>
+          <div><h3>Custom Formulas &amp; KPIs</h3><div class="sub">Calculations • Use Case #8</div></div>
+        </div>
+        <div class="detail-body">
+          <div class="hint-box" style="background:#C7463408;border-color:#C74634">💡 <strong>Why this matters:</strong> Your most important metrics often must be calculated. This instruction gives the agent the exact formula for each custom KPI.</div>
+          <div class="section-label">📋 Copy-Ready Instructions</div>
+          <div class="code-block">Custom KPI formulas:
+
+KPI: Average Transaction Value (ATV)
+  Formula: Sum(Sales_Revenue) / Count Distinct(Order_ID)
+  TRIGGERS: ATV, average transaction value
+
+KPI: Profit Margin %
+  Formula: (Sum(Profit) / Sum(Revenue)) * 100
+  TRIGGERS: margin, profit margin
+
+For all KPIs:
+- If denominator is zero, return &quot;N/A&quot;
+- Round to 2 decimal places</div>
+          <button class="copy-btn" style="color:#C74634;border-color:#C7463430;background:#C7463410" onclick="copyText(this,'uc-formulas')">📋 Copy Instructions</button>
+          <div class="section-label">💬 Example Conversations</div>
+          <div class="example-card"><div class="q">Q: "What is our profit margin by region?"</div><div class="a">→ (Sum(Profit) / Sum(Revenue)) × 100 per region. Bar Chart with % labels.</div></div><div class="example-card"><div class="q">Q: "Show ATV per Customer Segment"</div><div class="a">→ Sum(Sales_Revenue) / Count Distinct(Order_ID) per segment.</div></div><div class="example-card"><div class="q">Q: "ROI for Technology — zero cost warning"</div><div class="a">→ Finds zero denominator → returns &quot;N/A&quot; for those rows.</div></div>
+          <div class="section-label">✅ Pro Tips</div>
+          <div class="tips-grid"><div class="tip"><span class="dot">•</span> Use EXACT column names from your dataset</div><div class="tip"><span class="dot">•</span> Handle division by zero — return N/A</div><div class="tip"><span class="dot">•</span> Round to 2 decimal places</div><div class="tip"><span class="dot">•</span> List ALL trigger words</div></div>
+        </div>
+      </div>
+    </template>
+<template id="tmpl-uc-uc-bucket">
+      <div class="detail-panel">
+        <div class="detail-header" style="background:linear-gradient(135deg,#9333EA,#9333EAbb)">
+          <span class="icon">🎯</span>
+          <div><h3>CASE / Bucket Segmentation</h3><div class="sub">Calculations • Use Case #9</div></div>
+        </div>
+        <div class="detail-body">
+          <div class="hint-box" style="background:#9333EA08;border-color:#9333EA">💡 <strong>Why this matters:</strong> People think in categories — &quot;high value&quot;, &quot;underperforming&quot;. This instruction converts raw numbers into meaningful tiers.</div>
+          <div class="section-label">📋 Copy-Ready Instructions</div>
+          <div class="code-block">Segmentation tiers when user says &quot;classify&quot;, &quot;categorize&quot;, &quot;tier&quot;, or &quot;segment&quot;:
+
+SALES TIERS:
+  Sales &lt; 100: &quot;Low&quot;
+  Sales &gt;= 100 AND &lt; 500: &quot;Medium&quot;
+  Sales &gt;= 500 AND &lt; 1000: &quot;Good&quot;
+  Sales &gt;= 1000 AND &lt; 5000: &quot;Very Good&quot;
+  Sales &gt;= 5000: &quot;Best&quot;
+
+Always use non-overlapping ranges.
+If a value matches no range, label it &quot;Unclassified&quot;.</div>
+          <button class="copy-btn" style="color:#9333EA;border-color:#9333EA30;background:#9333EA10" onclick="copyText(this,'uc-bucket')">📋 Copy Instructions</button>
+          <div class="section-label">💬 Example Conversations</div>
+          <div class="example-card"><div class="q">Q: "Classify our products by sales performance"</div><div class="a">→ Applies tiers, groups by tier, shows count + total Sales per tier.</div></div><div class="example-card"><div class="q">Q: "Segment customers by size"</div><div class="a">→ Applies revenue tiers. Pie Chart with counts.</div></div><div class="example-card"><div class="q">Q: "What tier is $999 in sales?"</div><div class="a">→ $999 → &gt;= 500 AND &lt; 1000 → &quot;Good&quot; tier.</div></div>
+          <div class="section-label">✅ Pro Tips</div>
+          <div class="tips-grid"><div class="tip"><span class="dot">•</span> Use non-overlapping ranges (&gt;= and &lt;)</div><div class="tip"><span class="dot">•</span> Cover ALL possible values including 0</div><div class="tip"><span class="dot">•</span> Add Unclassified catch-all</div><div class="tip"><span class="dot">•</span> Trigger words: classify, categorize, tier, segment</div></div>
+        </div>
+      </div>
+    </template>
+<template id="tmpl-uc-uc-multistep">
+      <div class="detail-panel">
+        <div class="detail-header" style="background:linear-gradient(135deg,#0369A1,#0369A1bb)">
+          <span class="icon">🔗</span>
+          <div><h3>Multi-Step Analysis</h3><div class="sub">Calculations • Use Case #10</div></div>
+        </div>
+        <div class="detail-body">
+          <div class="hint-box" style="background:#0369A108;border-color:#0369A1">💡 <strong>Why this matters:</strong> Complex questions require multiple steps. This instruction teaches the agent to break questions into ordered steps.</div>
+          <div class="section-label">📋 Copy-Ready Instructions</div>
+          <div class="code-block">For comparative analysis, follow these steps:
+  1. Identify the comparison dimension
+  2. Calculate metric for EACH group
+  3. Compute derived metric (growth rate, variance)
+  4. Apply threshold/flag if specified
+  5. Sort to highlight best/worst
+  6. Present with chart + threshold line
+
+Flagging: &quot;flag&quot;, &quot;highlight&quot;, &quot;alert&quot; triggers threshold comparison.
+Show ⚠️ for below target, ✅ for on/above.</div>
+          <button class="copy-btn" style="color:#0369A1;border-color:#0369A130;background:#0369A110" onclick="copyText(this,'uc-multistep')">📋 Copy Instructions</button>
+          <div class="section-label">💬 Example Conversations</div>
+          <div class="example-card"><div class="q">Q: "Compare revenue growth across regions, flag below 5%"</div><div class="a">→ Calculates growth %. Flags West ⚠️ and South ⚠️ (below 5%). Bar chart with threshold line.</div></div><div class="example-card"><div class="q">Q: "Which categories had profit decline?"</div><div class="a">→ Computes change %. Flags negatives. Sort by change.</div></div><div class="example-card"><div class="q">Q: "Show top regions by margin improvement"</div><div class="a">→ Calculates margin improvement per region. Sorts descending.</div></div>
+          <div class="section-label">✅ Pro Tips</div>
+          <div class="tips-grid"><div class="tip"><span class="dot">•</span> Chain-of-Thought helps multi-step logic</div><div class="tip"><span class="dot">•</span> Define what 'flag' means</div><div class="tip"><span class="dot">•</span> Specify comparison baseline</div><div class="tip"><span class="dot">•</span> Show threshold lines on charts</div></div>
+        </div>
+      </div>
+    </template>
+<template id="tmpl-uc-uc-fiscal">
+      <div class="detail-panel">
+        <div class="detail-header" style="background:linear-gradient(135deg,#0D9488,#0D9488bb)">
+          <span class="icon">📅</span>
+          <div><h3>Fiscal Calendar Mapping</h3><div class="sub">Time • Use Case #11</div></div>
+        </div>
+        <div class="detail-body">
+          <div class="hint-box" style="background:#0D948808;border-color:#0D9488">💡 <strong>Why this matters:</strong> Most companies don't use Jan-Dec as their fiscal year. If the agent uses calendar logic, time-based queries return wrong data.</div>
+          <div class="section-label">📋 Copy-Ready Instructions</div>
+          <div class="code-block">Fiscal Calendar: FY runs from Jun 1 to May 31.
+
+Quarters: Q1=Jun-Aug, Q2=Sep-Nov, Q3=Dec-Feb, Q4=Mar-May.
+
+Column names: &quot;Fiscal Year&quot;, &quot;Fiscal Quarter&quot;.
+Format: &quot;FY 2026&quot;, &quot;FY2026 Q2&quot;.
+
+Time Mappings:
+- &quot;current/this quarter&quot; → current FQ value
+- &quot;previous/last quarter&quot; → one quarter back
+- &quot;this year&quot; → current FY value
+
+If ambiguous, ASK the user.</div>
+          <button class="copy-btn" style="color:#0D9488;border-color:#0D948830;background:#0D948810" onclick="copyText(this,'uc-fiscal')">📋 Copy Instructions</button>
+          <div class="section-label">💬 Example Conversations</div>
+          <div class="example-card"><div class="q">Q: "Show revenue for this quarter (asked in Feb 2026)"</div><div class="a">→ February → Q3 (Dec-Feb). Filter: &quot;FY2026 Q3&quot;. Shows Dec 2025 through Feb 2026.</div></div><div class="example-card"><div class="q">Q: "How did we do last year?"</div><div class="a">→ &quot;Last year&quot; → FY 2025 (Jun 2024 - May 2025).</div></div><div class="example-card"><div class="q">Q: "Revenue for October"</div><div class="a">→ October → Q2 (Sep-Nov). If year not specified, agent asks.</div></div>
+          <div class="section-label">✅ Pro Tips</div>
+          <div class="tips-grid"><div class="tip"><span class="dot">•</span> Column names must match EXACTLY</div><div class="tip"><span class="dot">•</span> Provide format examples with spacing</div><div class="tip"><span class="dot">•</span> Map every time phrase</div><div class="tip"><span class="dot">•</span> When in doubt, ASK the user</div></div>
+        </div>
+      </div>
+    </template>
+<template id="tmpl-uc-uc-periodcomp">
+      <div class="detail-panel">
+        <div class="detail-header" style="background:linear-gradient(135deg,#0891B2,#0891B2bb)">
+          <span class="icon">📊</span>
+          <div><h3>Period-over-Period Comparison</h3><div class="sub">Time • Use Case #12</div></div>
+        </div>
+        <div class="detail-body">
+          <div class="hint-box" style="background:#0891B208;border-color:#0891B2">💡 <strong>Why this matters:</strong> &quot;How did we do compared to last quarter?&quot; requires time expressions mapped to offset column values and comparison formulas.</div>
+          <div class="section-label">📋 Copy-Ready Instructions</div>
+          <div class="code-block">TIME EXPRESSION MAPPINGS:
+  &quot;this quarter&quot; → FQ Offset = 0
+  &quot;last quarter&quot; → FQ Offset = -1
+  &quot;last 4 quarters&quot; → FQ Offset IN (-3, -2, -1, 0)
+  &quot;YTD&quot; → All quarters in current FY up to current FQ
+
+Comparison formulas:
+  QoQ % = (Current - Previous) / Previous × 100
+  YoY % = (Current Year - Previous Year) / Previous Year × 100
+
+Sort time results chronologically.</div>
+          <button class="copy-btn" style="color:#0891B2;border-color:#0891B230;background:#0891B210" onclick="copyText(this,'uc-periodcomp')">📋 Copy Instructions</button>
+          <div class="section-label">💬 Example Conversations</div>
+          <div class="example-card"><div class="q">Q: "Revenue trending last 4 quarters?"</div><div class="a">→ FQ Offset IN (-3,-2,-1,0). Line Chart, chronological, with QoQ % change.</div></div><div class="example-card"><div class="q">Q: "QoQ profit change"</div><div class="a">→ Current vs last quarter. QoQ Change = +13.6%.</div></div><div class="example-card"><div class="q">Q: "YTD revenue vs last year"</div><div class="a">→ Compares FY Offset 0 YTD vs FY Offset -1 YTD.</div></div>
+          <div class="section-label">✅ Pro Tips</div>
+          <div class="tips-grid"><div class="tip"><span class="dot">•</span> Use offset columns, never hardcode dates</div><div class="tip"><span class="dot">•</span> Map every time phrase</div><div class="tip"><span class="dot">•</span> Sort chronologically</div><div class="tip"><span class="dot">•</span> Combo charts work great for amounts + percentages</div></div>
+        </div>
+      </div>
+    </template>
+<template id="tmpl-uc-uc-shortcuts">
+      <div class="detail-panel">
+        <div class="detail-header" style="background:linear-gradient(135deg,#F59E0B,#F59E0Bbb)">
+          <span class="icon">⚡</span>
+          <div><h3>Report Shortcuts</h3><div class="sub">Shortcuts • Use Case #13</div></div>
+        </div>
+        <div class="detail-body">
+          <div class="hint-box" style="background:#F59E0B08;border-color:#F59E0B">💡 <strong>Why this matters:</strong> Pre-define exactly what common reports contain so the same report comes out the same way every time.</div>
+          <div class="section-label">📋 Copy-Ready Instructions</div>
+          <div class="code-block">When user says &quot;Monthly Summary&quot; or &quot;Performance Overview&quot;:
+
+Generate Table with:
+- Filter: Current Quarter (FQ Offset = 0)
+- Metrics: Revenue (Sum), Orders (Count Distinct), Shipping Cost (Sum), Margin %
+- Group by: Product Category
+- Sort: Revenue desc
+
+When user says &quot;Trend Report&quot;:
+- Revenue + Profit dual-axis Line Chart
+- Last 4 quarters (FQ Offset IN -3,-2,-1,0)</div>
+          <button class="copy-btn" style="color:#F59E0B;border-color:#F59E0B30;background:#F59E0B10" onclick="copyText(this,'uc-shortcuts')">📋 Copy Instructions</button>
+          <div class="section-label">💬 Example Conversations</div>
+          <div class="example-card"><div class="q">Q: "Monthly Summary"</div><div class="a">→ Instant Table with all metrics, filtered to current quarter.</div></div><div class="example-card"><div class="q">Q: "Give me the Trend Report"</div><div class="a">→ Dual-axis Line Chart: Revenue + Profit by quarter.</div></div><div class="example-card"><div class="q">Q: "Performance Overview for Furniture"</div><div class="a">→ Monthly Summary template + Product Category = &quot;Furniture&quot; filter.</div></div>
+          <div class="section-label">✅ Pro Tips</div>
+          <div class="tips-grid"><div class="tip"><span class="dot">•</span> Map multiple phrases to same shortcut</div><div class="tip"><span class="dot">•</span> Define EVERY detail: metrics, filters, chart, sort</div><div class="tip"><span class="dot">•</span> Keep each shortcut focused</div><div class="tip"><span class="dot">•</span> Document available shortcuts for users</div></div>
+        </div>
+      </div>
+    </template>
+<template id="tmpl-uc-uc-drillreact">
+      <div class="detail-panel">
+        <div class="detail-header" style="background:linear-gradient(135deg,#B45309,#B45309bb)">
+          <span class="icon">🕵️</span>
+          <div><h3>Drill-Down with ReAct</h3><div class="sub">Shortcuts • Use Case #14</div></div>
+        </div>
+        <div class="detail-body">
+          <div class="hint-box" style="background:#B4530908;border-color:#B45309">💡 <strong>Why this matters:</strong> When someone says &quot;Revenue dropped — why?&quot;, the agent investigates step by step using the ReAct pattern.</div>
+          <div class="section-label">📋 Copy-Ready Instructions</div>
+          <div class="code-block">When user reports an anomaly or asks &quot;why&quot;:
+
+Apply ReAct drill-down:
+  REASON: What anomaly needs investigation?
+  ACT: Query at current hierarchy level.
+  OBSERVE: Which dimension is the outlier?
+  REASON: Should we drill deeper?
+  ACT: Drill one level into the outlier.
+  REPEAT until root cause found.
+  PRESENT: Summary + supporting chart.</div>
+          <button class="copy-btn" style="color:#B45309;border-color:#B4530930;background:#B4530910" onclick="copyText(this,'uc-drillreact')">📋 Copy Instructions</button>
+          <div class="section-label">💬 Example Conversations</div>
+          <div class="example-card"><div class="q">Q: "Revenue dropped in West — why?"</div><div class="a">→ Drills Region → Country → State → City. Finds Los Angeles (-50%). Presents root cause.</div></div><div class="example-card"><div class="q">Q: "Profit is declining — investigate"</div><div class="a">→ Drills Category → Sub-Category. Finds Machines -60%.</div></div><div class="example-card"><div class="q">Q: "Why did orders spike?"</div><div class="a">→ Drills Region → Segment. Finds Consumer in East +80%.</div></div>
+          <div class="section-label">✅ Pro Tips</div>
+          <div class="tips-grid"><div class="tip"><span class="dot">•</span> ReAct = Reason → Act → Observe → Repeat</div><div class="tip"><span class="dot">•</span> Never skip hierarchy levels</div><div class="tip"><span class="dot">•</span> Compare current vs previous at each level</div><div class="tip"><span class="dot">•</span> End with clear root-cause summary</div></div>
+        </div>
+      </div>
+    </template>
+<template id="tmpl-uc-uc-geodistance">
+      <div class="detail-panel">
+        <div class="detail-header" style="background:linear-gradient(135deg,#1E40AF,#1E40AFbb)">
+          <span class="icon">🗺️</span>
+          <div><h3>Geo Distance &amp; Map Intelligence</h3><div class="sub">Geographic • Use Case #15</div></div>
+        </div>
+        <div class="detail-body">
+          <div class="hint-box" style="background:#1E40AF08;border-color:#1E40AF">💡 <strong>Why this matters:</strong> Location-aware questions require computing distances using latitude/longitude with the Haversine formula.</div>
+          <div class="section-label">📋 Copy-Ready Instructions</div>
+          <div class="code-block">Use LATITUDE and LONGITUDE columns for distance calculations.
+
+When asked &quot;within X miles of &lt;location&gt;&quot;:
+1. Compute Haversine distance from each record to the location.
+2. Keep records where Distance &lt;= X miles.
+3. Default radius for &quot;near&quot; or &quot;close to&quot;: 50 miles.
+4. Sort by distance ascending.
+5. Default chart: Map.</div>
+          <button class="copy-btn" style="color:#1E40AF;border-color:#1E40AF30;background:#1E40AF10" onclick="copyText(this,'uc-geodistance')">📋 Copy Instructions</button>
+          <div class="section-label">💬 Example Conversations</div>
+          <div class="example-card"><div class="q">Q: "Stores within 10 miles of downtown Chicago"</div><div class="a">→ Computes distance from each store to Chicago. Filters ≤ 10 miles. Map view.</div></div><div class="example-card"><div class="q">Q: "Customers near Los Angeles"</div><div class="a">→ &quot;Near&quot; → default 50 miles. Filters and shows on Map.</div></div><div class="example-card"><div class="q">Q: "How far is Warehouse A from B?"</div><div class="a">→ Computes Haversine distance between two points.</div></div>
+          <div class="section-label">✅ Pro Tips</div>
+          <div class="tips-grid"><div class="tip"><span class="dot">•</span> Ensure lat/lng columns exist</div><div class="tip"><span class="dot">•</span> Use Haversine formula for Earth's curvature</div><div class="tip"><span class="dot">•</span> 'Near' without number = 50 miles</div><div class="tip"><span class="dot">•</span> Always show results on Map</div></div>
+        </div>
+      </div>
+    </template>
+<template id="tmpl-uc-uc-geoviz">
+      <div class="detail-panel">
+        <div class="detail-header" style="background:linear-gradient(135deg,#047857,#047857bb)">
+          <span class="icon">🌍</span>
+          <div><h3>Location-Based Visualization</h3><div class="sub">Geographic • Use Case #16</div></div>
+        </div>
+        <div class="detail-body">
+          <div class="hint-box" style="background:#04785708;border-color:#047857">💡 <strong>Why this matters:</strong> Geographic data is almost always better on a map than a bar chart. This instruction auto-detects geo columns.</div>
+          <div class="section-label">📋 Copy-Ready Instructions</div>
+          <div class="code-block">Geographic columns: City, State, Country, Region, LATITUDE, LONGITUDE.
+
+When query involves ANY geographic column:
+- Default chart: Map
+- Use lat/lng for pin placement, column names for auto-geocoding
+- Label with geographic name and metric value
+
+When combined with non-geo dimension:
+- Use color coding or bubble size on Map</div>
+          <button class="copy-btn" style="color:#047857;border-color:#04785730;background:#04785710" onclick="copyText(this,'uc-geoviz')">📋 Copy Instructions</button>
+          <div class="section-label">💬 Example Conversations</div>
+          <div class="example-card"><div class="q">Q: "Revenue by City"</div><div class="a">→ Detects City = geographic. Map with bubble size = Revenue.</div></div><div class="example-card"><div class="q">Q: "Revenue by City by Product Category"</div><div class="a">→ Map with COLOR = Category, SIZE = Revenue.</div></div><div class="example-card"><div class="q">Q: "Profit by state — on map"</div><div class="a">→ States with color intensity = Profit levels.</div></div>
+          <div class="section-label">✅ Pro Tips</div>
+          <div class="tips-grid"><div class="tip"><span class="dot">•</span> Auto-detect geographic column names</div><div class="tip"><span class="dot">•</span> Use lat/lng for precise pins</div><div class="tip"><span class="dot">•</span> Multi-dimension: color = category, size = metric</div><div class="tip"><span class="dot">•</span> Always note location count</div></div>
+        </div>
+      </div>
+    </template>
+  </div>
+
+  <!-- ═══ BUILDER ═══ -->
+  <div class="section" id="sec-builder">
+    <button class="back-btn" onclick="showSection('home')">← Back to Quick Start</button>
+    <div class="section-title">🏗️ Build Your Instructions</div>
+    <div class="section-desc">Fill in each section below. Copy the combined result at the bottom.</div>
+    <div id="builder-fields">
+      <div class="info-box">
+        <h3>🎭 Role <span style="font-size:11px;color:var(--fg3);font-weight:400">— Who is the agent? What domain?</span></h3>
+        <textarea id="bf-0" placeholder="e.g., Sales Analytics Expert for Acme Corp" oninput="updatePreview()" style="width:100%;min-height:72px;padding:12px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--fg);font-size:12px;resize:vertical;outline:none;margin-top:8px;font-family:inherit"></textarea>
+      </div><div class="info-box">
+        <h3>📋 Task <span style="font-size:11px;color:var(--fg3);font-weight:400">— What should the agent do?</span></h3>
+        <textarea id="bf-1" placeholder="e.g., Answer questions with charts, tables, and insights" oninput="updatePreview()" style="width:100%;min-height:72px;padding:12px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--fg);font-size:12px;resize:vertical;outline:none;margin-top:8px;font-family:inherit"></textarea>
+      </div><div class="info-box">
+        <h3>📎 Context <span style="font-size:11px;color:var(--fg3);font-weight:400">— KPIs, fiscal calendar, hierarchies</span></h3>
+        <textarea id="bf-2" placeholder="e.g., FY = Jan 1 to Dec 31. Revenue = Sum(Sales_Amount)" oninput="updatePreview()" style="width:100%;min-height:72px;padding:12px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--fg);font-size:12px;resize:vertical;outline:none;margin-top:8px;font-family:inherit"></textarea>
+      </div><div class="info-box">
+        <h3>🔒 Constraints <span style="font-size:11px;color:var(--fg3);font-weight:400">— Hard rules the agent must follow</span></h3>
+        <textarea id="bf-3" placeholder="e.g., Default metric: Revenue. Never fabricate data." oninput="updatePreview()" style="width:100%;min-height:72px;padding:12px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--fg);font-size:12px;resize:vertical;outline:none;margin-top:8px;font-family:inherit"></textarea>
+      </div><div class="info-box">
+        <h3>📐 Output <span style="font-size:11px;color:var(--fg3);font-weight:400">— How should responses look?</span></h3>
+        <textarea id="bf-4" placeholder="e.g., Categories → Bar. Trends → Line. Include chart title." oninput="updatePreview()" style="width:100%;min-height:72px;padding:12px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--fg);font-size:12px;resize:vertical;outline:none;margin-top:8px;font-family:inherit"></textarea>
+      </div><div class="info-box">
+        <h3>💡 Examples <span style="font-size:11px;color:var(--fg3);font-weight:400">— 2-3 query→response pairs</span></h3>
+        <textarea id="bf-5" placeholder="e.g., Q: &quot;Top products&quot; → Top 5 by Revenue, Bar Chart" oninput="updatePreview()" style="width:100%;min-height:72px;padding:12px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--fg);font-size:12px;resize:vertical;outline:none;margin-top:8px;font-family:inherit"></textarea>
+      </div>
+    </div>
+    <div class="info-box" style="margin-top:16px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+        <h3>📄 Live Preview</h3>
+        <button class="copy-btn" style="width:auto;padding:4px 12px;color:var(--primary);border-color:var(--primary);background:transparent" onclick="copyText(this,'builder-si')" id="builder-copy-btn">📋 Copy SI</button>
+      </div>
+      <div class="code-block" id="builder-preview" style="max-height:320px;overflow:auto">Fill in the fields above to generate your Supplementary Instructions...</div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-card">
+      <div style="font-size:18px">🔬</div>
+      <h3>Want to go deeper?</h3>
+      <p>Explore all 40 techniques, 6 frameworks, 16 use cases, and the complete decision tree.</p>
+      <a class="footer-link" href="prompt-engineering-studio.html" target="_blank">Open Full Studio →</a>
+    </div>
+    <div class="footer-sub">Oracle Analytics Cloud — AI Agent Quick Start Guide | V2 R.T.C.C.O.E</div>
+  </div>
+</div>
+
+<script>
+// ═══ DATA for copy ═══
+const COPY_DATA = {};
+COPY_DATA['zero-shot'] = "Explain machine learning in 3 simple sentences\nfor a non-technical manager.";
+COPY_DATA['few-shot'] = "Classify sentiment:\n\"I love this phone!\" → Positive\n\"Terrible customer service\" → Negative\n\"The food was okay\" → Neutral\n\nNow classify: \"The movie was absolutely stunning!\"";
+COPY_DATA['persona'] = "You are a Senior Finance Analytics Expert.\nTone: professional but approachable.\n\nExplain why Q3 revenue dropped 12%.";
+COPY_DATA['context'] = "Context: B2B SaaS company.\nQ3 Revenue: $4.2M (down 12% from Q2).\nMain issue: Enterprise deal slippage.\n\nGenerate 3-point analysis.";
+COPY_DATA['delimiter'] = "### INSTRUCTIONS ###\nSummarize the article.\nMax 100 words.\n\n### ARTICLE ###\n{text here}";
+COPY_DATA['constraint'] = "Write a product description.\nMax 50 words.\nMust include price and warranty.\nDo NOT mention competitors.\nTone: professional.";
+COPY_DATA['format'] = "Format as TABLE:\n| Metric | Q2 | Q3 | Change |\n\nCompare revenue, cost, and margin.";
+COPY_DATA['chain-prompt'] = "Step 1: Extract all metrics from this report.\nStep 2: For each metric, classify as leading or lagging.\nStep 3: Create a dashboard layout recommendation.";
+COPY_DATA['uc-grouping'] = "When user asks about Express or Standard shipping, apply the following consolidation:\n\n- \"Same Day\", \"First Class\" are mapped to \"Express\" Shipping\n- \"Standard Class\", \"Second Class\" are mapped to \"Standard\" Shipping\n\nWhen user uses terms such as \"express\", \"standard\", \"express vs standard\", \"shipping comparison\", apply this mapping before generating any chart or insight.\n\nAlways use the consolidated group name in chart labels and insight text, not the raw column values.";
+COPY_DATA['uc-hierarchy'] = "Enable hierarchical drill-down navigation:\n\nProduct: Product Category > Product Sub-Category > Product Name\nGeography: Region > Country > State > City\n\nDrill-Down Logic:\n- Drill is applied only when the current chart contains a column from this hierarchy.\n- If current chart shows Product Category, on \"Drill Down\" → show Product Sub-Category within selected category.\n- If current chart shows Product Name, inform: \"This is the most detailed product level.\"\n- If the column is not in any hierarchy, respond: \"Drill-down is not available for this attribute.\"";
+COPY_DATA['uc-default-metric'] = "When the user does not specify a metric and asks general questions, default to \"Revenue\" as the primary measure.\n\nApply this default when the user says:\n- \"Show performance across [dimension]\"\n- \"Compare [dimension A] vs [dimension B]\"\n- \"How are we doing [time period]?\"\n\nOnly override when the user explicitly names a different metric.";
+COPY_DATA['uc-default-filter'] = "Always apply the following filter on every query:\n\nCity = \"Toronto\"\n\nThis filter is mandatory. Do not remove unless user explicitly says \"remove the city filter\" or \"show all cities\".\n\nInclude in every response: \"Filtered to: Toronto\"";
+COPY_DATA['uc-chart-types'] = "Apply the following default chart rules:\n\n- Comparison (\"compare\", \"vs\", \"across\") → Horizontal Bar Chart\n- Time-based dimension (Date, Month, Quarter, Year) → Line Chart\n- Geographic attributes (City, State, Country) → Map\n- Ranking (Top N / Bottom N) → Table with sorted values\n- Distribution or segmentation → Stacked Bar or Pie Chart\n\nOnly override if user explicitly requests a different chart type.";
+COPY_DATA['uc-topn'] = "When user asks for \"Best\", \"Highest\", \"Top performing\":\n  → Rank by Revenue descending\n\nWhen user asks for \"Bottom\", \"Least\", \"Worst\":\n  → Rank by Revenue ascending\n\nDefault metric: Revenue. Default count: 5.\nKeyword mapping:\n- TOP: best, highest, most, leading, top, largest\n- BOTTOM: worst, least, lowest, bottom, smallest";
+COPY_DATA['uc-aggregation'] = "Default aggregation rules:\n\n- Revenue: Sum(Revenue)\n- Profit: Sum(Profit)\n- Quantity: Sum(Quantity)\n- Discount: Average(Discount)\n- Order Count: Count Distinct(Order_ID)\n\nFor unlisted numeric fields, default to Sum.\nUser keywords (\"average\", \"count\", \"sum\") override defaults.";
+COPY_DATA['uc-formulas'] = "Custom KPI formulas:\n\nKPI: Average Transaction Value (ATV)\n  Formula: Sum(Sales_Revenue) / Count Distinct(Order_ID)\n  TRIGGERS: ATV, average transaction value\n\nKPI: Profit Margin %\n  Formula: (Sum(Profit) / Sum(Revenue)) * 100\n  TRIGGERS: margin, profit margin\n\nFor all KPIs:\n- If denominator is zero, return \"N/A\"\n- Round to 2 decimal places";
+COPY_DATA['uc-bucket'] = "Segmentation tiers when user says \"classify\", \"categorize\", \"tier\", or \"segment\":\n\nSALES TIERS:\n  Sales < 100: \"Low\"\n  Sales >= 100 AND < 500: \"Medium\"\n  Sales >= 500 AND < 1000: \"Good\"\n  Sales >= 1000 AND < 5000: \"Very Good\"\n  Sales >= 5000: \"Best\"\n\nAlways use non-overlapping ranges.\nIf a value matches no range, label it \"Unclassified\".";
+COPY_DATA['uc-multistep'] = "For comparative analysis, follow these steps:\n  1. Identify the comparison dimension\n  2. Calculate metric for EACH group\n  3. Compute derived metric (growth rate, variance)\n  4. Apply threshold/flag if specified\n  5. Sort to highlight best/worst\n  6. Present with chart + threshold line\n\nFlagging: \"flag\", \"highlight\", \"alert\" triggers threshold comparison.\nShow ⚠️ for below target, ✅ for on/above.";
+COPY_DATA['uc-fiscal'] = "Fiscal Calendar: FY runs from Jun 1 to May 31.\n\nQuarters: Q1=Jun-Aug, Q2=Sep-Nov, Q3=Dec-Feb, Q4=Mar-May.\n\nColumn names: \"Fiscal Year\", \"Fiscal Quarter\".\nFormat: \"FY 2026\", \"FY2026 Q2\".\n\nTime Mappings:\n- \"current/this quarter\" → current FQ value\n- \"previous/last quarter\" → one quarter back\n- \"this year\" → current FY value\n\nIf ambiguous, ASK the user.";
+COPY_DATA['uc-periodcomp'] = "TIME EXPRESSION MAPPINGS:\n  \"this quarter\" → FQ Offset = 0\n  \"last quarter\" → FQ Offset = -1\n  \"last 4 quarters\" → FQ Offset IN (-3, -2, -1, 0)\n  \"YTD\" → All quarters in current FY up to current FQ\n\nComparison formulas:\n  QoQ % = (Current - Previous) / Previous × 100\n  YoY % = (Current Year - Previous Year) / Previous Year × 100\n\nSort time results chronologically.";
+COPY_DATA['uc-shortcuts'] = "When user says \"Monthly Summary\" or \"Performance Overview\":\n\nGenerate Table with:\n- Filter: Current Quarter (FQ Offset = 0)\n- Metrics: Revenue (Sum), Orders (Count Distinct), Shipping Cost (Sum), Margin %\n- Group by: Product Category\n- Sort: Revenue desc\n\nWhen user says \"Trend Report\":\n- Revenue + Profit dual-axis Line Chart\n- Last 4 quarters (FQ Offset IN -3,-2,-1,0)";
+COPY_DATA['uc-drillreact'] = "When user reports an anomaly or asks \"why\":\n\nApply ReAct drill-down:\n  REASON: What anomaly needs investigation?\n  ACT: Query at current hierarchy level.\n  OBSERVE: Which dimension is the outlier?\n  REASON: Should we drill deeper?\n  ACT: Drill one level into the outlier.\n  REPEAT until root cause found.\n  PRESENT: Summary + supporting chart.";
+COPY_DATA['uc-geodistance'] = "Use LATITUDE and LONGITUDE columns for distance calculations.\n\nWhen asked \"within X miles of <location>\":\n1. Compute Haversine distance from each record to the location.\n2. Keep records where Distance <= X miles.\n3. Default radius for \"near\" or \"close to\": 50 miles.\n4. Sort by distance ascending.\n5. Default chart: Map.";
+COPY_DATA['uc-geoviz'] = "Geographic columns: City, State, Country, Region, LATITUDE, LONGITUDE.\n\nWhen query involves ANY geographic column:\n- Default chart: Map\n- Use lat/lng for pin placement, column names for auto-geocoding\n- Label with geographic name and metric value\n\nWhen combined with non-geo dimension:\n- Use color coding or bubble size on Map";
+COPY_DATA['tmpl-sales'] = "=== ROLE ===\nYou are a Sales Operations analytics expert for [Company].\nYou help regional sales managers explore order performance using the \"[Dataset]\" dataset.\nWhen uncertain, say so rather than guess.\n\n=== TASK ===\nAnswer questions with accurate charts, tables, and insights. Follow all rules below.\n\n=== CONTEXT ===\n--- FISCAL CALENDAR ---\nFY = [Start] 1 to [End] 31. Columns: \"[FY Col]\", \"[FQ Col]\".\n\"this quarter\" -> \"Fiscal Quarter Offset\"=0; \"last quarter\" -> -1\n\n--- KPI: Average Transaction Value ---\nATV = Sum(Sales_Revenue)/Sum(Transactions). TRIGGERS: ATV, avg transaction value.\n\n--- HIERARCHY: Product ---\nPath: Product Category > Sub-Category > Product Name.\n\n=== CONSTRAINTS ===\nDefault metric: \"Sales\". Ranking: Top/Bottom 5. Aggregation: Sales=Sum, Shipping Rate=Avg.\n\n=== OUTPUT ===\nCategories -> Table. Trends -> Area. Geo -> Map.\n\n=== EXAMPLES ===\nQ: \"Revenue this quarter\" → Filter FQ Offset=0, Sum(Sales), Table\nQ: \"Top customers\" → Top 5 by Sales desc, Bar Chart";
+COPY_DATA['tmpl-healthcare'] = "=== ROLE ===\nYou are a Healthcare Analytics expert for [Hospital].\nHelp clinical leaders explore patient outcomes using the \"[Dataset]\" dataset.\n\n=== CONTEXT ===\n--- KPI: Readmission Rate ---\nReadmission Rate = Sum(Readmissions)/Sum(Discharges) * 100. TRIGGERS: readmission, readmit.\n--- KPI: ALOS ---\nALOS = Sum(Patient_Days)/Sum(Discharges). TRIGGERS: ALOS, length of stay.\n--- HIERARCHY: Department ---\nPath: Service Line > Department > Provider.\n\n=== CONSTRAINTS ===\nDefault metric: \"Discharges\". Never fabricate patient data. Only answer about healthcare.\n\n=== OUTPUT ===\nCategories -> Table. Trends -> Line.\n\n=== EXAMPLES ===\nQ: \"Readmission rate by department\" → Sum(Readmissions)/Sum(Discharges)*100, Bar";
+COPY_DATA['tmpl-supply'] = "=== ROLE ===\nYou are a Supply Chain analytics expert for [Company].\nHelp operations managers explore inventory and procurement.\n\n=== CONTEXT ===\n--- KPI: Fill Rate ---\nFill Rate = Sum(Units_Shipped)/Sum(Units_Ordered) * 100. TRIGGERS: fill rate, fulfillment.\n--- KPI: On-Time Delivery ---\nOTD = Sum(On_Time)/Sum(Total_Deliveries) * 100. TRIGGERS: OTD, on-time.\n--- HIERARCHY: Location ---\nPath: Region > Warehouse > Bin Location.\n\n=== CONSTRAINTS ===\nDefault metric: \"Units_Shipped\". Ranking: Top/Bottom 10.\n\n=== OUTPUT ===\nCategories -> Bar. Trends -> Line.\n\n=== EXAMPLES ===\nQ: \"Fill rate by warehouse\" → Sum(Shipped)/Sum(Ordered)*100 by Warehouse, Bar";
+COPY_DATA['tmpl-finance'] = "=== ROLE ===\nYou are a Finance & Banking analytics expert for [Company].\nHelp finance managers explore P&L performance and risk metrics.\n\n=== CONTEXT ===\n--- KPI: Gross Margin % ---\nGross Margin % = (Sum(Revenue) - Sum(COGS)) / Sum(Revenue) * 100. TRIGGERS: margin, GM%.\n--- KPI: ROE ---\nROE = Sum(Net_Income) / Avg(Shareholders_Equity) * 100. TRIGGERS: ROE, return on equity.\n--- HIERARCHY: Cost Center ---\nPath: Division > Department > Cost Center.\n\n=== CONSTRAINTS ===\nDefault metric: \"Revenue\". Never provide investment advice. Currency with 2 decimals.\n\n=== OUTPUT ===\nP&L -> Waterfall. Trends -> Line. Categories -> Table.\n\n=== EXAMPLES ===\nQ: \"P&L this quarter\" → Filter FQ Offset=0, Income vs Expense, Waterfall\nQ: \"Gross margin trend\" → (Rev-COGS)/Rev*100, Line";
+COPY_DATA['tmpl-hr'] = "=== ROLE ===\nYou are an HR & People Analytics expert for [Company].\nHelp HR leaders explore workforce metrics and talent trends.\n\n=== CONTEXT ===\n--- KPI: Attrition Rate ---\nAttrition = Sum(Separations) / Avg(Headcount) * 100. TRIGGERS: attrition, turnover.\n--- KPI: Time-to-Fill ---\nTTF = Avg(Date_Filled - Date_Opened) in days. TRIGGERS: TTF, hiring speed.\n--- HIERARCHY: Organization ---\nPath: Business Unit > Department > Team > Manager.\n\n=== CONSTRAINTS ===\nDefault metric: \"Headcount\". Never expose individual employee data. Min aggregate: 5 employees.\n\n=== OUTPUT ===\nDemographics -> Stacked Bar. Trends -> Line.\n\n=== EXAMPLES ===\nQ: \"Attrition by department\" → Sum(Separations)/Avg(Headcount)*100, Bar";
+COPY_DATA['tmpl-marketing'] = "=== ROLE ===\nYou are a Marketing & CRM analytics expert for [Company].\nHelp marketing teams explore campaign performance and customer acquisition.\n\n=== CONTEXT ===\n--- KPI: CAC ---\nCAC = Sum(Marketing_Spend) / Sum(New_Customers). TRIGGERS: CAC, acquisition cost.\n--- KPI: Campaign ROI ---\nROI = (Sum(Revenue) - Sum(Cost)) / Sum(Cost) * 100. TRIGGERS: ROI, ROAS.\n--- HIERARCHY: Channel ---\nPath: Channel Group > Channel > Campaign > Ad Set.\n\n=== CONSTRAINTS ===\nDefault metric: \"Leads\". Never expose individual customer PII.\n\n=== OUTPUT ===\nFunnel -> Stacked Bar. Trends -> Line.\n\n=== EXAMPLES ===\nQ: \"Campaign ROI by channel\" → (Revenue-Cost)/Cost*100, Bar";
+COPY_DATA['tmpl-itops'] = "=== ROLE ===\nYou are an IT Operations analytics expert for [Company].\nHelp IT managers explore incident trends and SLA performance.\n\n=== CONTEXT ===\n--- KPI: MTTR ---\nMTTR = Avg(Resolved_Date - Created_Date) in hours. TRIGGERS: MTTR, resolution time.\n--- KPI: SLA Compliance ---\nSLA % = Sum(Resolved_Within_SLA) / Sum(Total_Tickets) * 100. TRIGGERS: SLA, compliance.\n--- HIERARCHY: Service ---\nPath: Service Category > Service > CI.\n\n=== CONSTRAINTS ===\nDefault metric: \"Ticket_Count\". Ranking: Top/Bottom 10.\n\n=== EXAMPLES ===\nQ: \"MTTR by service category\" → Avg(Resolved-Created) hours, Bar";
+COPY_DATA['tmpl-education'] = "=== ROLE ===\nYou are an Education Analytics expert for [Institution].\nHelp academic leaders explore enrollment and student success.\n\n=== CONTEXT ===\n--- KPI: Retention Rate ---\nRetention = Sum(Returned) / Sum(Enrolled) * 100. TRIGGERS: retention, persistence.\n--- KPI: Avg GPA ---\nAvg GPA weighted by Credit_Hours. TRIGGERS: GPA, grades.\n--- HIERARCHY: Academic ---\nPath: College > Department > Program > Course.\n\n=== CONSTRAINTS ===\nDefault metric: \"Enrollment\". Never expose individual student data. Min aggregate: 10 (FERPA).\n\n=== EXAMPLES ===\nQ: \"Retention by college\" → Sum(Returned)/Sum(Enrolled)*100, Bar";
+COPY_DATA['tmpl-realestate'] = "=== ROLE ===\nYou are a Real Estate Analytics expert for [Company].\nHelp property managers explore occupancy and lease performance.\n\n=== CONTEXT ===\n--- KPI: Occupancy Rate ---\nOccupancy = Sum(Occupied) / Sum(Total_Units) * 100. TRIGGERS: occupancy, vacancy.\n--- KPI: NOI ---\nNOI = Sum(Rental_Income) - Sum(Operating_Expenses). TRIGGERS: NOI, net income.\n--- HIERARCHY: Property ---\nPath: Portfolio > Property > Building > Unit.\n\n=== CONSTRAINTS ===\nDefault metric: \"Gross_Rental_Income\". Currency with 2 decimals.\n\n=== EXAMPLES ===\nQ: \"Occupancy by property\" → Occupied/Total*100, Bar";
+COPY_DATA['tmpl-retail'] = "=== ROLE ===\nYou are a Retail Analytics expert for [Company].\nHelp merchandising teams explore sales and customer behavior.\n\n=== CONTEXT ===\n--- KPI: Basket Size ---\nABS = Sum(Revenue) / Sum(Transactions). TRIGGERS: basket size, AOV.\n--- KPI: Conversion Rate ---\nCVR = Sum(Transactions) / Sum(Visits) * 100. TRIGGERS: conversion, CVR.\n--- HIERARCHY: Product ---\nPath: Department > Category > Sub-Category > SKU.\n\n=== CONSTRAINTS ===\nDefault metric: \"Revenue\". Ranking: Top/Bottom 10.\n\n=== EXAMPLES ===\nQ: \"Basket size by channel\" → Sum(Revenue)/Sum(Transactions), Bar";
+COPY_DATA['tmpl-blank'] = "=== ROLE ===\nYou are a [Domain] analytics expert for [Company].\nYou help [audience] explore [topic] using the \"[Dataset]\" dataset.\nWhen uncertain, say so rather than guess.\n\n=== TASK ===\nAnswer questions with accurate charts, tables, and insights.\nDo not invent data values or column names.\n\n=== CONTEXT ===\n--- FISCAL CALENDAR ---\nFY = [Start] to [End]. Columns: \"[FY Col]\", \"[FQ Col]\".\n\"this quarter\" -> \"FQ Offset\"=0; \"last quarter\" -> -1\n\n--- KPI: [Name] ---\nFormula: [formula]. TRIGGERS: [keywords].\n\n--- HIERARCHY: [Name] ---\nPath: [Level 1] > [Level 2] > [Level 3].\n\n=== CONSTRAINTS ===\nDefault metric: \"[metric]\". Ranking: Top/Bottom [N].\nMatch exact column names.\n\n=== OUTPUT ===\nCategories -> [Chart]. Trends -> [Chart]. Geo -> Map.\n\n=== EXAMPLES ===\nQ: \"[sample query]\" → [expected response]";
+
+// ═══ Navigation ═══
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  const sec = document.getElementById('sec-' + id);
+  if (sec) sec.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ═══ Detail panels ═══
+function showDetail(type, id) {
+  // Update sidebar active state
+  const list = document.getElementById(type === 'tech' ? 'tech-list' : 'uc-list');
+  list.querySelectorAll('.list-item').forEach(b => b.classList.remove('active'));
+  list.querySelector('[data-target="' + type + '-' + id + '"]')?.classList.add('active');
+  // Render detail
+  const tmpl = document.getElementById('tmpl-' + type + '-' + id);
+  const target = document.getElementById(type === 'tech' ? 'tech-detail' : 'uc-detail');
+  if (tmpl && target) {
+    target.innerHTML = '';
+    target.appendChild(tmpl.content.cloneNode(true));
+  }
+}
+
+// ═══ Templates toggle ═══
+let activeTemplate = null;
+function toggleTemplate(id) {
+  if (activeTemplate && activeTemplate !== id) {
+    document.getElementById('tmpl-' + activeTemplate)?.classList.remove('active');
+  }
+  const el = document.getElementById('tmpl-' + id);
+  if (el) {
+    el.classList.toggle('active');
+    activeTemplate = el.classList.contains('active') ? id : null;
+  }
+}
+
+// ═══ Copy ═══
+function copyText(btn, id) {
+  let text = COPY_DATA[id];
+  if (id === 'builder-si') {
+    text = document.getElementById('builder-preview').textContent;
+  }
+  if (!text) return;
+  if (navigator.clipboard) navigator.clipboard.writeText(text);
+  else {
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.cssText = 'position:fixed;left:-9999px';
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy');
+    document.body.removeChild(ta);
+  }
+  const orig = btn.textContent;
+  btn.textContent = '✓ Copied!';
+  btn.classList.add('copied');
+  setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1500);
+}
+
+// ═══ Builder preview ═══
+const LABELS = ['ROLE','TASK','CONTEXT','CONSTRAINTS','OUTPUT','EXAMPLES'];
+function updatePreview() {
+  let s = '';
+  for (let i = 0; i < 6; i++) {
+    const v = document.getElementById('bf-' + i).value.trim();
+    if (v) s += '=== ' + LABELS[i] + ' ===\n' + v + '\n\n';
+  }
+  document.getElementById('builder-preview').textContent = s || 'Fill in the fields above to generate your Supplementary Instructions...';
+}
+</script>
 </body>
 </html>
