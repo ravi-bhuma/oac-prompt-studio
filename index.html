@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OAC AI Agent — Prompt Engineering Resources</title>
+    <meta name="description" content="Oracle Analytics Cloud AI Agent — Prompt engineering guides, templates, and tools for Supplementary Instructions.">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=Fraunces:opsz,wght@9..144,700;9..144,800;9..144,900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #080c16;
+            --surface: #111827;
+            --surface-2: #1a2235;
+            --border: #1e293b;
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --text-dim: #64748b;
+            --accent: #6366f1;
+            --green: #10b981;
+            --amber: #f59e0b;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'DM Sans', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            -webkit-font-smoothing: antialiased;
+        }
+        .page {
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+        .oracle-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 16px;
+            border-radius: 100px;
+            background: rgba(99,102,241,0.1);
+            border: 1px solid rgba(99,102,241,0.2);
+            color: #a5b4fc;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+        h1 {
+            font-family: 'Fraunces', serif;
+            font-size: clamp(28px, 5vw, 38px);
+            font-weight: 900;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #fff 20%, #a5b4fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .subtitle {
+            margin-top: 12px;
+            font-size: 15px;
+            color: var(--text-muted);
+            line-height: 1.7;
+            max-width: 460px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .cards {
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .card {
+            display: block;
+            padding: 28px 28px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            text-decoration: none;
+            color: inherit;
+            text-align: left;
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+        .card:hover {
+            border-color: #334155;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+        }
+        .card-quick::before { background: linear-gradient(90deg, var(--green), #34d399); }
+        .card-studio::before { background: linear-gradient(90deg, var(--accent), #8b5cf6); }
+
+        .card-icon {
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+        .card h2 {
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+        .card p {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.65;
+        }
+        .card-meta {
+            margin-top: 14px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .chip {
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 10px;
+            font-weight: 700;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            color: var(--text-dim);
+        }
+        .card-arrow {
+            position: absolute;
+            top: 50%; right: 24px;
+            transform: translateY(-50%);
+            font-size: 18px;
+            color: var(--text-dim);
+            transition: all 0.2s;
+        }
+        .card:hover .card-arrow { color: var(--text); transform: translateY(-50%) translateX(3px); }
+
+        footer {
+            margin-top: 48px;
+            font-size: 11px;
+            color: var(--text-dim);
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-up { animation: fadeUp 0.5s ease-out both; }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="fade-up">
+            <div class="oracle-badge">Oracle Analytics Cloud · CEAL</div>
+            <h1>AI Agent Prompt<br>Engineering Resources</h1>
+            <p class="subtitle">
+                Everything you need to write effective Supplementary Instructions
+                for the OAC AI Agent.
+            </p>
+        </div>
+
+        <div class="cards">
+            <a href="guides/quick-start.html" class="card card-quick fade-up delay-1">
+                <div class="card-icon">⚡</div>
+                <h2>Quick Start Guide</h2>
+                <p>Get productive in 10 minutes. 5 high-impact patterns with copy-paste templates. Start here if you're new.</p>
+                <div class="card-meta">
+                    <span class="chip">10 min read</span>
+                    <span class="chip">5 patterns</span>
+                    <span class="chip">Copy-paste ready</span>
+                </div>
+                <span class="card-arrow">→</span>
+            </a>
+
+            <a href="guides/prompt-engineering-studio.html" class="card card-studio fade-up delay-2">
+                <div class="card-icon">🏗️</div>
+                <h2>Prompt Engineering Studio</h2>
+                <p>The complete reference. 40 techniques, 6 frameworks, 16 use cases, 11 industry templates, and an interactive SI builder.</p>
+                <div class="card-meta">
+                    <span class="chip">40 techniques</span>
+                    <span class="chip">6 frameworks</span>
+                    <span class="chip">16 use cases</span>
+                    <span class="chip">11 templates</span>
+                    <span class="chip">Interactive builder</span>
+                </div>
+                <span class="card-arrow">→</span>
+            </a>
+        </div>
+
+        <footer class="fade-up delay-3">
+            Oracle Analytics Cloud — AI Agent Prompt Engineering Resources · CEAL Team
+        </footer>
+    </div>
+</body>
+</html>
