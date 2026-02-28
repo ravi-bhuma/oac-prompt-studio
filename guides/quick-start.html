@@ -17,6 +17,33 @@
   --green: #34D399; --green-bg: rgba(16,185,129,.15);
   --shadow: 0 1px 3px rgba(0,0,0,.3);
 }
+
+.dark .hint-box { background: rgba(255,255,255,0.06) !important; color: var(--fg); }
+.dark .hint-box strong { color: var(--fg); }
+.dark .code-block { background: #0F172A; color: #E2E8F0; }
+.dark .example-card { background: rgba(255,255,255,0.05); }
+.dark .example-card .q { color: var(--fg); }
+.dark .section-title { color: var(--fg); }
+.dark .section-desc { color: var(--fg2); }
+.dark .detail-body { color: var(--fg); }
+.dark .section-label { color: var(--fg2); }
+.dark .rtccoe-step { background: rgba(255,255,255,0.06); }
+.dark .rtccoe-step .letter { color: #F87171; }
+.dark .rtccoe-step .desc { color: var(--fg2); }
+.dark .info-box { color: var(--fg); }
+.dark .rule { color: var(--fg); }
+.dark .placeholder { color: var(--fg2); }
+.dark .placeholder .sub { color: var(--fg3); }
+.dark .template-card { color: var(--fg); }
+.dark .template-card .chars { color: var(--fg3); }
+.dark .template-body { background: var(--bg2); }
+.dark .template-body .code-block { background: #0B1120; }
+.dark .template-body .next-step { color: var(--fg2); }
+.dark .builder-field label { color: var(--fg); }
+.dark .builder-field textarea { background: var(--bg); color: var(--fg); border-color: var(--border); }
+.dark .builder-preview { background: #0B1120; color: #94A3B8; }
+.dark .copy-btn { color: var(--primary) !important; border-color: rgba(129,140,248,0.3) !important; background: rgba(129,140,248,0.1) !important; }
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--fg); line-height: 1.6; }
 .container { max-width: 960px; margin: 0 auto; padding: 16px; }
@@ -37,7 +64,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 .hero p { font-size: 15px; color: #94A3B8; max-width: 480px; margin: 8px auto 0; }
 .section { display: none; }
 .section.active { display: block; }
-.section-title { font-size: 20px; font-weight: 900; margin-bottom: 4px; }
+.section-title { font-size: 22px; font-weight: 900; margin-bottom: 4px; color: var(--fg); }
 .section-desc { font-size: 15px; color: var(--fg2); margin-bottom: 16px; }
 .back-btn { font-size: 15px; font-weight: 700; color: var(--primary); cursor: pointer; border: none; background: none; margin-bottom: 16px; padding: 0; }
 .back-btn:hover { text-decoration: underline; }
@@ -124,6 +151,14 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 .footer-link:hover { opacity: .9; }
 .footer-sub { font-size: 14px; color: var(--fg3); margin-top: 16px; }
 .section-label { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: .5px; color: var(--fg2); margin-bottom: 6px; }
+
+/* Brighten accent colors in dark mode */
+.dark .info-cell .label { filter: brightness(1.3); }
+.dark .badge { filter: brightness(1.4); }
+.dark .flow-step { filter: brightness(1.2); }
+/* Ensure all text is visible in dark mode */
+.dark .detail-body p, .dark .detail-body li, .dark .detail-body span { color: var(--fg); }
+.dark .oac-box { background: rgba(199,70,52,0.12); border-color: rgba(199,70,52,0.3); color: var(--fg); }
 </style>
 </head>
 <body>
