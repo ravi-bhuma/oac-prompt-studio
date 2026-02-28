@@ -30,9 +30,10 @@
             justify-content: center;
             padding: 40px 20px;
             -webkit-font-smoothing: antialiased;
+            font-size: 16px;
         }
         .page {
-            max-width: 600px;
+            max-width: 640px;
             width: 100%;
             text-align: center;
         }
@@ -40,12 +41,12 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            padding: 6px 16px;
+            padding: 8px 20px;
             border-radius: 100px;
             background: rgba(99,102,241,0.1);
             border: 1px solid rgba(99,102,241,0.2);
             color: #a5b4fc;
-            font-size: 11px;
+            font-size: 14px;
             font-weight: 700;
             letter-spacing: 0.05em;
             text-transform: uppercase;
@@ -53,7 +54,7 @@
         }
         h1 {
             font-family: 'Fraunces', serif;
-            font-size: clamp(28px, 5vw, 38px);
+            font-size: clamp(32px, 5vw, 44px);
             font-weight: 900;
             line-height: 1.2;
             letter-spacing: -0.02em;
@@ -63,11 +64,11 @@
             background-clip: text;
         }
         .subtitle {
-            margin-top: 12px;
-            font-size: 15px;
+            margin-top: 16px;
+            font-size: 17px;
             color: var(--text-muted);
             line-height: 1.7;
-            max-width: 460px;
+            max-width: 480px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -75,11 +76,11 @@
             margin-top: 40px;
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 18px;
         }
         .card {
             display: block;
-            padding: 28px 28px;
+            padding: 32px;
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 14px;
@@ -103,31 +104,14 @@
         }
         .card-quick::before { background: linear-gradient(90deg, var(--green), #34d399); }
         .card-studio::before { background: linear-gradient(90deg, var(--accent), #8b5cf6); }
-
-        .card-icon {
-            font-size: 28px;
-            margin-bottom: 12px;
-        }
-        .card h2 {
-            font-size: 18px;
-            font-weight: 800;
-            margin-bottom: 6px;
-        }
-        .card p {
-            font-size: 13px;
-            color: var(--text-muted);
-            line-height: 1.65;
-        }
-        .card-meta {
-            margin-top: 14px;
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
+        .card-icon { font-size: 32px; margin-bottom: 14px; }
+        .card h2 { font-size: 22px; font-weight: 800; margin-bottom: 8px; }
+        .card p { font-size: 16px; color: var(--text-muted); line-height: 1.65; }
+        .card-meta { margin-top: 16px; display: flex; gap: 8px; flex-wrap: wrap; }
         .chip {
-            padding: 4px 10px;
+            padding: 6px 12px;
             border-radius: 6px;
-            font-size: 10px;
+            font-size: 13px;
             font-weight: 700;
             background: var(--surface-2);
             border: 1px solid var(--border);
@@ -135,19 +119,14 @@
         }
         .card-arrow {
             position: absolute;
-            top: 50%; right: 24px;
+            top: 50%; right: 28px;
             transform: translateY(-50%);
-            font-size: 18px;
+            font-size: 22px;
             color: var(--text-dim);
             transition: all 0.2s;
         }
         .card:hover .card-arrow { color: var(--text); transform: translateY(-50%) translateX(3px); }
-
-        footer {
-            margin-top: 48px;
-            font-size: 11px;
-            color: var(--text-dim);
-        }
+        footer { margin-top: 48px; font-size: 14px; color: var(--text-dim); }
 
         @keyframes fadeUp {
             from { opacity: 0; transform: translateY(20px); }
