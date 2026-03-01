@@ -81,7 +81,8 @@ body { font-family: 'Oracle Sans', 'Segoe UI', -apple-system, BlinkMacSystemFont
 .grid-2 { grid-template-columns: repeat(2, 1fr); }
 .grid-4 { grid-template-columns: repeat(4, 1fr); }
 @media (max-width: 768px) { .grid-2, .grid-4 { grid-template-columns: 1fr; } }
-.card { background: var(--bg2); border-radius: var(--radius); border: 1px solid var(--border); padding: 24px; cursor: pointer; text-align: left; transition: border-color .2s, box-shadow .2s; }
+.card { background: var(--bg2); border-radius: var(--radius); border: 1px solid var(--border); padding: 24px; cursor: pointer; text-align: left; transition: all .25s ease; }
+.card:hover { border-color: var(--primary); transform: translateX(3px); box-shadow: 0 4px 20px rgba(199,70,52,.12); }
 .card:hover { border-color: color-mix(in srgb, var(--primary) 40%, transparent); }
 .card-icon { font-size: 28px; margin-bottom: 12px; }
 .card h3 { font-size: 17px; font-weight: 600; margin-bottom: 6px; }
