@@ -11,55 +11,49 @@
 body { font-family:'Oracle Sans','Segoe UI',-apple-system,BlinkMacSystemFont,system-ui,sans-serif; background:var(--bg); color:var(--fg); line-height:1.7; font-size:15px; -webkit-font-smoothing:antialiased; }
 .container { max-width:1000px; margin:0 auto; padding:16px 40px; }
 .nav { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; flex-wrap:wrap; gap:8px; }
-.nav-title { font-size:15px; font-weight:700; color:var(--fg); }
+.nav-title { font-size:15px; font-weight:700; }
 .nav-links { display:flex; gap:4px; flex-wrap:wrap; }
 .nav-link { padding:6px 14px; border-radius:8px; font-size:14px; font-weight:600; border:1px solid var(--border); background:transparent; color:var(--fg2); cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; }
 .nav-link:hover { background:var(--muted); color:var(--fg); }
 .nav-link.active { background:rgba(245,158,11,.15); color:#F59E0B; border-color:rgba(245,158,11,.3); }
-
-.hero { background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%); border-radius:14px; padding:32px 36px; margin-bottom:24px; text-align:center; }
+.hero { background:linear-gradient(135deg,#0f172a,#1e293b); border-radius:14px; padding:32px 36px; margin-bottom:24px; text-align:center; }
 .hero h1 { font-size:26px; font-weight:700; color:#fff; letter-spacing:-0.3px; margin-bottom:12px; }
 .hero p { font-size:14px; color:#94A3B8; max-width:700px; margin:0 auto; line-height:1.7; }
-.hero p strong { color:#FCD34D; }
-
+.hero strong { color:#FCD34D; }
 .section { display:none; }
 .section.active { display:block; }
-
 .info-box { background:var(--bg2); border-radius:var(--radius); border:1px solid var(--border); padding:24px; margin-bottom:20px; }
 .info-box h3 { font-size:18px; font-weight:700; margin-bottom:12px; }
 .info-box p { font-size:14px; color:var(--fg2); line-height:1.7; }
-
 .exercise { background:var(--bg2); border-radius:var(--radius); border:1px solid var(--border); padding:24px; margin-bottom:16px; transition:border-color .2s; }
 .exercise:hover { border-color:var(--primary); }
-.exercise-header { display:flex; align-items:center; gap:12px; margin-bottom:12px; cursor:pointer; }
+.exercise-header { display:flex; align-items:center; gap:12px; cursor:pointer; }
 .exercise-num { width:36px; height:36px; border-radius:50%; background:var(--primary); color:#fff; font-size:14px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
 .exercise-title { font-size:16px; font-weight:700; }
-.exercise-tag { padding:3px 10px; border-radius:6px; font-size:11px; font-weight:600; background:rgba(16,185,129,.15); color:#10B981; border:1px solid rgba(16,185,129,.3); margin-left:auto; }
-.exercise-body { display:none; margin-top:12px; }
+.exercise-tag { padding:3px 10px; border-radius:6px; font-size:11px; font-weight:600; margin-left:auto; }
+.tag-sol { background:rgba(99,102,241,.15); color:#A5B4FC; border:1px solid rgba(99,102,241,.3); }
+.tag-retail { background:rgba(16,185,129,.15); color:#6EE7B7; border:1px solid rgba(16,185,129,.3); }
+.tag-superstore { background:rgba(245,158,11,.15); color:#FCD34D; border:1px solid rgba(245,158,11,.3); }
+.tag-geo { background:rgba(236,72,153,.15); color:#F9A8D4; border:1px solid rgba(236,72,153,.3); }
+.exercise-body { display:none; margin-top:16px; }
 .exercise-body.active { display:block; }
-
 .step { padding:14px 16px; border-radius:8px; background:var(--muted); border:1px solid var(--border); margin-bottom:10px; }
 .step-label { font-size:12px; font-weight:700; color:var(--primary); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:4px; }
 .step p { font-size:14px; color:var(--fg2); line-height:1.6; }
-
 code { background:var(--muted); padding:2px 6px; border-radius:4px; font-size:13px; }
 .code-block { background:#0d1117; color:#c9d1d9; padding:16px; border-radius:8px; font-family:'SF Mono',Consolas,monospace; font-size:13px; line-height:1.6; white-space:pre-wrap; word-break:break-word; margin:12px 0; position:relative; }
 .copy-btn { position:absolute; top:8px; right:8px; padding:4px 10px; border-radius:6px; font-size:11px; font-weight:600; background:rgba(255,255,255,.1); color:#94a3b8; border:1px solid rgba(255,255,255,.1); cursor:pointer; }
 .copy-btn:hover { background:rgba(255,255,255,.2); }
-
 .try-it { padding:12px 16px; border-radius:8px; background:rgba(16,185,129,.08); border:1px solid rgba(16,185,129,.2); margin:12px 0; }
 .try-it-label { font-size:12px; font-weight:700; color:#10B981; margin-bottom:6px; }
 .try-it p { font-size:13px; color:var(--fg2); line-height:1.5; }
-
+.dataset-chip { display:inline-flex; padding:3px 10px; border-radius:6px; font-size:11px; font-weight:600; }
+.back-btn { padding:6px 14px; border-radius:8px; font-size:13px; font-weight:600; border:1px solid var(--border); background:transparent; color:var(--fg2); cursor:pointer; margin-bottom:16px; }
+.back-btn:hover { background:var(--muted); }
 .dataset-table { width:100%; border-collapse:collapse; margin:12px 0; font-size:13px; }
 .dataset-table th { background:var(--muted); padding:8px 12px; text-align:left; font-weight:600; border:1px solid var(--border); }
 .dataset-table td { padding:8px 12px; border:1px solid var(--border); color:var(--fg2); }
-
-.back-btn { padding:6px 14px; border-radius:8px; font-size:13px; font-weight:600; border:1px solid var(--border); background:transparent; color:var(--fg2); cursor:pointer; margin-bottom:16px; }
-.back-btn:hover { background:var(--muted); }
-
 .footer { text-align:center; padding:24px 0; font-size:12px; color:var(--fg3); border-top:1px solid var(--border); margin-top:32px; }
-
 @media (max-width:768px) { .container { padding:12px 16px; } }
 </style>
 </head>
@@ -76,515 +70,367 @@ code { background:var(--muted); padding:2px 6px; border-radius:4px; font-size:13
   </div>
 
   <div class="hero">
-    <h1>🧪 Hands-On Exercise: Build Your First AI Agent</h1>
-    <p>Work through these exercises using a sample retail dataset. Each exercise maps to a specific use case from the Quick Start Guide — <strong>practice building Supplemental Instructions that tell the Agent how your business thinks.</strong></p>
+    <h1>🧪 Hands-On Lab: Build Your First AI Agent</h1>
+    <p>Work through 12 exercises using 4 real datasets. Each exercise uses the exact instructions and sample utterances from the OAC Agents Technical Guidance — <strong>practice building Supplemental Instructions that tell the Agent how your business thinks.</strong></p>
   </div>
 
-  <!-- Landing -->
+  <!-- ═══ LANDING ═══ -->
   <div class="section active" id="sec-landing">
     <div class="info-box">
       <h3>📋 Prerequisites</h3>
-      <p style="margin-bottom:12px">Before starting, ensure you have:</p>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-        <div class="step"><div class="step-label">Access</div><p>Oracle Analytics Cloud instance with BI Content Creator or BI Service Administrator role</p></div>
-        <div class="step"><div class="step-label">Dataset</div><p>Sample Sales Orders dataset (provided below) — or use any dataset with Revenue, Product, Geography, and Time columns</p></div>
-        <div class="step"><div class="step-label">Indexing</div><p>Dataset must be indexed for OAC AI Assistant use (Settings → Inspect → Index for AI)</p></div>
-        <div class="step"><div class="step-label">Agent</div><p>Create a new AI Agent in OAC and attach your indexed dataset before starting exercises</p></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
+        <div class="step"><div class="step-label">Access</div><p>OAC instance with BI Content Creator role + "Create and Edit AI Agents" permission enabled via Console → Roles and Permissions</p></div>
+        <div class="step"><div class="step-label">Gen AI Enabled</div><p>Console → Extensions and Enrichments → Generative AI. Select a Gen AI Service under AI Assistant Features.</p></div>
+        <div class="step"><div class="step-label">Datasets Uploaded</div><p>Upload all 4 datasets below into OAC. Right-click → Inspect → Search → Index for Assistants → Run Now.</p></div>
+        <div class="step"><div class="step-label">Agent Created</div><p>Home Page → Create → AI Agent. Attach the dataset indicated for each exercise. Add SI in the Supplemental Instructions box.</p></div>
       </div>
     </div>
 
     <div class="info-box">
-      <h3>🗃️ Sample Dataset Structure</h3>
-      <p style="margin-bottom:12px">These exercises use a retail Sales Orders dataset with the following columns. You can use Oracle's built-in sample data or your own dataset — just replace column names accordingly.</p>
+      <h3>🗃️ Four Datasets — Four Agents</h3>
+      <p style="margin-bottom:12px">Each exercise specifies which dataset to use. You'll create up to 4 agents, one per dataset. Download and upload these into your OAC instance.</p>
       <table class="dataset-table">
-        <tr><th>Column</th><th>Type</th><th>Sample Values</th><th>Used In</th></tr>
-        <tr><td>Order_ID</td><td>Attribute</td><td>CA-2024-001, US-2025-042</td><td>Formulas, Aggregation</td></tr>
-        <tr><td>Revenue / Sales</td><td>Measure</td><td>245.50, 1,200.00</td><td>Most exercises</td></tr>
-        <tr><td>Profit</td><td>Measure</td><td>65.20, -12.40</td><td>Formulas, Multi-Step</td></tr>
-        <tr><td>Quantity</td><td>Measure</td><td>3, 12</td><td>Aggregation</td></tr>
-        <tr><td>Discount</td><td>Measure</td><td>0.1, 0.25</td><td>Aggregation</td></tr>
-        <tr><td>Product Category</td><td>Attribute</td><td>Technology, Furniture, Office Supplies</td><td>Hierarchy, Charts</td></tr>
-        <tr><td>Product Sub-Category</td><td>Attribute</td><td>Phones, Chairs, Binders</td><td>Hierarchy, Drill-Down</td></tr>
-        <tr><td>Product Name</td><td>Attribute</td><td>iPhone 15, Herman Miller Chair</td><td>Hierarchy</td></tr>
-        <tr><td>Region</td><td>Attribute</td><td>East, West, Central, South</td><td>Grouping, Filters</td></tr>
-        <tr><td>City</td><td>Attribute</td><td>Toronto, New York, Chicago</td><td>Geo, Filters</td></tr>
-        <tr><td>Order Priority</td><td>Attribute</td><td>Low, Medium, High, Critical</td><td>Grouping</td></tr>
-        <tr><td>Customer Segment</td><td>Attribute</td><td>Consumer, Corporate, Home Office</td><td>Grouping</td></tr>
-        <tr><td>Fiscal Year</td><td>Attribute</td><td>FY 2025, FY 2026</td><td>Fiscal Calendar</td></tr>
-        <tr><td>Fiscal Quarter</td><td>Attribute</td><td>FY2026 Q1, FY2026 Q2</td><td>Fiscal Calendar</td></tr>
-        <tr><td>Latitude / Longitude</td><td>Measure</td><td>43.6532 / -79.3832</td><td>Geo Distance</td></tr>
+        <tr><th>Dataset</th><th>Key Columns</th><th>Used In Exercises</th></tr>
+        <tr><td><span class="dataset-chip tag-sol">SOL.xlsx</span></td><td>Order Priority, Product Category, Product Sub Category, Product Name, Sales, Profit, Shipping Cost, City, Customer Name, Ship Mode, Order Date</td><td>1–6, 9</td></tr>
+        <tr><td><span class="dataset-chip tag-retail">Retail_Sales.xlsx</span></td><td>category, sales_revenue, transactions, selling_area_sqft, store_name, region</td><td>7</td></tr>
+        <tr><td><span class="dataset-chip tag-superstore">Sample_Superstore_-_Rate.xlsx</span></td><td>Sales, Shipping Rate, Segment, Category, Region, Profit, Quantity</td><td>8</td></tr>
+        <tr><td><span class="dataset-chip tag-geo">GP_Sales_Locations.csv</span></td><td>LATITUDE, LONGITUDE, Sales, Cat</td><td>10–12</td></tr>
       </table>
     </div>
 
     <div style="font-size:13px;font-weight:700;color:var(--fg3);text-transform:uppercase;letter-spacing:0.5px;margin:20px 0 12px">Choose an Exercise Track</div>
-
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px">
       <div class="exercise" style="cursor:pointer" onclick="showTrack('beginner')">
         <div style="font-size:24px;margin-bottom:8px">🟢</div>
         <div style="font-size:15px;font-weight:700;margin-bottom:4px">Beginner Track</div>
-        <div style="font-size:13px;color:var(--fg2)">Exercises 1–5: Core behaviors — grouping, defaults, filters, charts, ranking</div>
-        <div style="font-size:12px;color:var(--fg3);margin-top:8px">⏱ ~30 minutes</div>
+        <div style="font-size:13px;color:var(--fg2)">Exercises 1–6: Grouping, Hierarchy, Defaults, Filters, Charts, Shortcuts</div>
+        <div style="font-size:12px;color:var(--fg3);margin-top:8px">Dataset: <span class="dataset-chip tag-sol">SOL.xlsx</span> · ⏱ ~30 min</div>
       </div>
       <div class="exercise" style="cursor:pointer" onclick="showTrack('intermediate')">
         <div style="font-size:24px;margin-bottom:8px">🟡</div>
         <div style="font-size:15px;font-weight:700;margin-bottom:4px">Intermediate Track</div>
-        <div style="font-size:13px;color:var(--fg2)">Exercises 6–10: Calculations, fiscal calendar, formulas, segmentation</div>
-        <div style="font-size:12px;color:var(--fg3);margin-top:8px">⏱ ~45 minutes</div>
+        <div style="font-size:13px;color:var(--fg2)">Exercises 7–9: KPI Formulas, Aggregation Rules, Fiscal Calendar</div>
+        <div style="font-size:12px;color:var(--fg3);margin-top:8px">Datasets: <span class="dataset-chip tag-retail">Retail Sales</span> <span class="dataset-chip tag-superstore">Superstore</span> <span class="dataset-chip tag-sol">SOL</span> · ⏱ ~30 min</div>
       </div>
       <div class="exercise" style="cursor:pointer" onclick="showTrack('advanced')">
         <div style="font-size:24px;margin-bottom:8px">🔴</div>
         <div style="font-size:15px;font-weight:700;margin-bottom:4px">Advanced Track</div>
-        <div style="font-size:13px;color:var(--fg2)">Exercises 11–16: Multi-step, ReAct, geo-distance, period comparison, shortcuts</div>
-        <div style="font-size:12px;color:var(--fg3);margin-top:8px">⏱ ~60 minutes</div>
+        <div style="font-size:13px;color:var(--fg2)">Exercises 10–12: Geo Distance, Shop Locations via RAG, Full Agent Build</div>
+        <div style="font-size:12px;color:var(--fg3);margin-top:8px">Dataset: <span class="dataset-chip tag-geo">GP_Sales_Locations.csv</span> · ⏱ ~45 min</div>
       </div>
     </div>
   </div>
 
-  <!-- Beginner Track -->
+  <!-- ═══ BEGINNER ═══ -->
   <div class="section" id="sec-beginner">
     <button class="back-btn" onclick="showTrack('landing')">← Back to Exercise Tracks</button>
-    <div style="font-size:20px;font-weight:700;margin-bottom:16px">🟢 Beginner Track — Core Agent Behaviors</div>
+    <div style="font-size:20px;font-weight:700;margin-bottom:4px">🟢 Beginner Track — Core Agent Behaviors</div>
+    <div style="font-size:13px;color:var(--fg3);margin-bottom:16px">All exercises use <span class="dataset-chip tag-sol">SOL.xlsx</span> · Create one Agent, add instructions incrementally</div>
 
+    <!-- Ex 1: Grouping -->
     <div class="exercise" id="ex-1">
       <div class="exercise-header" onclick="toggleEx(1)">
         <div class="exercise-num">1</div>
-        <div><div class="exercise-title">Attribute Grouping</div><div style="font-size:12px;color:var(--fg3)">Use Case #1 · Technique: Context Injection</div></div>
-        <div class="exercise-tag">Behavior</div>
+        <div><div class="exercise-title">Grouping of Attributes</div><div style="font-size:12px;color:var(--fg3)">Technical Guidance §7.1</div></div>
+        <div class="exercise-tag tag-sol">SOL.xlsx</div>
       </div>
       <div class="exercise-body" id="ex-body-1">
-        <div class="step"><div class="step-label">Objective</div><p>Teach the agent to group raw Order Priority values into business-friendly categories: "Regular" and "Important".</p></div>
-        <div class="step"><div class="step-label">Why this matters</div><p>Your dataset has values like Low, Medium, High, Critical — but your team says "Regular Orders" and "Important Orders". Without this instruction, the agent shows all raw values.</p></div>
-        <div style="font-size:13px;font-weight:700;margin:12px 0 8px;color:var(--fg)">Add this to your Supplemental Instructions:</div>
-        <div class="code-block" id="ex-code-1"><button class="copy-btn" onclick="copyCode(1)">📋 Copy</button>When user asks about Important Orders or Regular Orders:
+        <div class="step"><div class="step-label">Objective</div><p>Classify 'Order Priority' into 2 groups. The column has values: Low, Medium, High, Critical, Not Specified. Map them to "Regular" and "Important".</p></div>
+        <div class="code-block" id="ex-code-1"><button class="copy-btn" onclick="copyCode(1)">📋 Copy</button>When user asks about Important Orders or Regular Orders,
 
-- "Low", "Medium", "Not Specified" → mapped to "Regular" Orders
-- "High", "Critical" → mapped to "Important" Orders
+Use the following exact mapping, "Low, Medium, Not Specified" are mapped to "Regular" Orders and "High, Critical" are mapped to "Important".
 
-TRIGGERS: "important", "regular", "important vs regular", "order priority"
-Always use the group name in chart labels, not raw values.</div>
+When key words such as, 'important', 'regular', 'important vs regular', use the above mapping of the 'Order Priority'</div>
         <div class="try-it"><div class="try-it-label">🧪 Test It — Ask Your Agent:</div>
-          <p>1. "Compare Revenue for Regular and Important Orders" → Should group and show 2 bars</p>
-          <p>2. "Show Average Profit for Important Orders" → Should filter to High + Critical only</p>
-          <p>3. "Revenue by Order Priority" → Should show grouped categories, not raw values</p>
+          <p>1. "Compare Average Profit for Regular and Important Orders"</p>
+          <p>2. "Revenue for Important Orders"</p>
+          <p>3. "Important vs Regular by Shipping Cost"</p>
         </div>
-        <div class="step"><div class="step-label">✅ Success Criteria</div><p>Agent consistently groups Low+Medium+Not Specified as "Regular" and High+Critical as "Important" in all responses.</p></div>
+        <div class="step"><div class="step-label">✅ Expected</div><p>Agent groups Low+Medium+Not Specified as "Regular" and High+Critical as "Important" and shows comparison.</p></div>
       </div>
     </div>
 
+    <!-- Ex 2: Hierarchy -->
     <div class="exercise" id="ex-2">
       <div class="exercise-header" onclick="toggleEx(2)">
         <div class="exercise-num">2</div>
-        <div><div class="exercise-title">Set a Default Metric</div><div style="font-size:12px;color:var(--fg3)">Use Case #3 · Technique: Constraints</div></div>
-        <div class="exercise-tag">Behavior</div>
+        <div><div class="exercise-title">Hierarchies and Drill-Downs</div><div style="font-size:12px;color:var(--fg3)">Technical Guidance §7.2</div></div>
+        <div class="exercise-tag tag-sol">SOL.xlsx</div>
       </div>
       <div class="exercise-body" id="ex-body-2">
-        <div class="step"><div class="step-label">Objective</div><p>When users ask vague questions without naming a metric, the agent should default to Revenue.</p></div>
-        <div class="code-block" id="ex-code-2"><button class="copy-btn" onclick="copyCode(2)">📋 Copy</button>When the user does not specify a metric, default to "Revenue" as the primary measure.
+        <div class="step"><div class="step-label">Objective</div><p>Create a product hierarchy drill-down: Product Category → Product Sub Category → Product Name.</p></div>
+        <div class="code-block" id="ex-code-2"><button class="copy-btn" onclick="copyCode(2)">📋 Copy</button>If the user has used the term "Drill Down" or similar, enable intelligent chart drill-downs following the product hierarchy: Product Category → Product Sub-Category → Product Name. Drill Down is applied only When the Chart has "Product Category" or "Product Sub Category".
 
-Apply this default when the user says:
-- "Show performance across [dimension]"
-- "Compare [A] vs [B]"
-- "How are we doing?"
+Drill-Down Logic:
+If the current chart is Product Category, then on user request "Drill Down", then Display the Product Sub-Category chart.
+If the current chart is Product Sub-Category, then on user request "Drill Down", Display the Product Name chart. If the current chart is Product Name, there is no further level to drill down. Politely indicate that the user has reached the most detailed level.
 
-Only override when the user explicitly names a different metric.</div>
+Perform drill-down only when the user's request matches the hierarchy level of the currently displayed column.
+If the request refers to a column not present or unrelated to the current chart, ignore the request gracefully and maintain the current view.
+When "Drill Down" is mentioned without specifying a column, infer it based on the last displayed chart.</div>
         <div class="try-it"><div class="try-it-label">🧪 Test It — Ask Your Agent:</div>
-          <p>1. "Compare East vs West" → Should use Revenue (not Profit or Quantity)</p>
-          <p>2. "How are we doing this quarter?" → Should show Revenue</p>
-          <p>3. "Show profit by region" → Should use Profit (user specified it)</p>
+          <p>1. "Profit by Product Category" → then say "Drill Down" → then "Drill Down" again</p>
+          <p>2. Should navigate: Category → Sub Category → Product Name</p>
+          <p>3. At Product Name level, drill down should say "most detailed level"</p>
         </div>
       </div>
     </div>
 
+    <!-- Ex 3: Default Metric -->
     <div class="exercise" id="ex-3">
       <div class="exercise-header" onclick="toggleEx(3)">
         <div class="exercise-num">3</div>
-        <div><div class="exercise-title">Persistent Default Filter</div><div style="font-size:12px;color:var(--fg3)">Use Case #4 · Technique: Constraints</div></div>
-        <div class="exercise-tag">Behavior</div>
+        <div><div class="exercise-title">Setting Default Metric</div><div style="font-size:12px;color:var(--fg3)">Technical Guidance §7.3</div></div>
+        <div class="exercise-tag tag-sol">SOL.xlsx</div>
       </div>
       <div class="exercise-body" id="ex-body-3">
-        <div class="step"><div class="step-label">Objective</div><p>Lock in a mandatory City filter so every query is scoped to one location.</p></div>
-        <div class="code-block" id="ex-code-3"><button class="copy-btn" onclick="copyCode(3)">📋 Copy</button>Always apply the following filter on every query:
-
-City = "Toronto"
-
-This filter is mandatory. Do not remove unless user explicitly says
-"remove the city filter" or "show all cities".
-
-Include in every response: "Filtered to: Toronto"</div>
+        <div class="step"><div class="step-label">Objective</div><p>When users ask generic questions without specifying a metric, default to "Sales" (Revenue).</p></div>
+        <div class="code-block" id="ex-code-3"><button class="copy-btn" onclick="copyCode(3)">📋 Copy</button>If the user does not specify any metric, and ask generic questions use "Revenue" as the default metric for all aggregations and charts.
+For example if user asks "compare performance across Product Categories" provide visual related to Product Category by Sales.</div>
         <div class="try-it"><div class="try-it-label">🧪 Test It — Ask Your Agent:</div>
-          <p>1. "Revenue by Product Category" → Should auto-filter to Toronto</p>
-          <p>2. "What about Vancouver?" → Should temporarily switch to Vancouver</p>
-          <p>3. "Show all cities" → Should remove filter and show everything</p>
+          <p>1. "Compare Cities for furniture product category" → Sales should be picked up automatically</p>
+          <p>2. "Show performance by region" → Should default to Sales</p>
+          <p>3. "Profit by Product Category" → Should use Profit (user specified it)</p>
         </div>
       </div>
     </div>
 
+    <!-- Ex 4: Default Filter -->
     <div class="exercise" id="ex-4">
       <div class="exercise-header" onclick="toggleEx(4)">
         <div class="exercise-num">4</div>
-        <div><div class="exercise-title">Default Visualization Types</div><div style="font-size:12px;color:var(--fg3)">Use Case #5 · Technique: Format Control</div></div>
-        <div class="exercise-tag">Behavior</div>
+        <div><div class="exercise-title">Include a Filter by Default (City = "Toronto")</div><div style="font-size:12px;color:var(--fg3)">Technical Guidance §7.4</div></div>
+        <div class="exercise-tag tag-sol">SOL.xlsx</div>
       </div>
       <div class="exercise-body" id="ex-body-4">
-        <div class="step"><div class="step-label">Objective</div><p>Define automatic chart selection rules based on query type.</p></div>
-        <div class="code-block" id="ex-code-4"><button class="copy-btn" onclick="copyCode(4)">📋 Copy</button>Apply the following default chart rules:
-
-- Comparison ("compare", "vs", "across") → Horizontal Bar Chart
-- Time-based dimension (Date, Month, Quarter, Year) → Line Chart
-- Geographic attributes (City, State, Country) → Map
-- Ranking (Top N / Bottom N) → Table with sorted values
-- Distribution or segmentation → Stacked Bar or Pie Chart
-
-Only override if user explicitly requests a different chart type.</div>
+        <div class="step"><div class="step-label">Objective</div><p>Auto-apply City = "Toronto" filter on every query, even when the user doesn't ask for it.</p></div>
+        <div class="code-block" id="ex-code-4"><button class="copy-btn" onclick="copyCode(4)">📋 Copy</button>Always include the filter City = "Toronto", even if the user does not explicitly ask for them.</div>
         <div class="try-it"><div class="try-it-label">🧪 Test It — Ask Your Agent:</div>
-          <p>1. "Compare Revenue across Product Categories" → Should show Horizontal Bar</p>
-          <p>2. "Monthly sales for 2025" → Should show Line Chart</p>
-          <p>3. "Revenue by City" → Should show Map</p>
+          <p>1. "Revenue by Shipping Mode" → Should auto-filter to Toronto</p>
+          <p>2. "Sales by Product Category" → Check that City: Toronto appears</p>
         </div>
       </div>
     </div>
 
+    <!-- Ex 5: Chart Types -->
     <div class="exercise" id="ex-5">
       <div class="exercise-header" onclick="toggleEx(5)">
         <div class="exercise-num">5</div>
-        <div><div class="exercise-title">Top N / Bottom N Ranking</div><div style="font-size:12px;color:var(--fg3)">Use Case #6 · Technique: Few-Shot + Constraints</div></div>
-        <div class="exercise-tag">Behavior</div>
+        <div><div class="exercise-title">Default Chart Types</div><div style="font-size:12px;color:var(--fg3)">Technical Guidance §7.5</div></div>
+        <div class="exercise-tag tag-sol">SOL.xlsx</div>
       </div>
       <div class="exercise-body" id="ex-body-5">
-        <div class="step"><div class="step-label">Objective</div><p>Standardize ranking behavior with default count, metric, and keyword mapping.</p></div>
-        <div class="code-block" id="ex-code-5"><button class="copy-btn" onclick="copyCode(5)">📋 Copy</button>When user asks for "Best", "Highest", "Top performing":
-  → Rank by Revenue descending
-
-When user asks for "Bottom", "Least", "Worst":
-  → Rank by Revenue ascending
-
-Default metric: Revenue. Default count: 5.
-Keyword mapping:
-- TOP: best, highest, most, leading, top, largest
-- BOTTOM: worst, least, lowest, bottom, smallest</div>
+        <div class="step"><div class="step-label">Objective</div><p>Specify default visualization types: Table for categories, Area Chart for time trends.</p></div>
+        <div class="code-block" id="ex-code-5"><button class="copy-btn" onclick="copyCode(5)">📋 Copy</button>Even if user does not specify the chart, when comparing between categories → use Table and for time-based trends → use Area Chart as default.</div>
         <div class="try-it"><div class="try-it-label">🧪 Test It — Ask Your Agent:</div>
-          <p>1. "Show me the best products" → Top 5 by Revenue descending</p>
-          <p>2. "Bottom 3 cities by profit" → 3 cities, lowest Profit ascending</p>
-          <p>3. "Which customers are our largest?" → Top 5 by Revenue</p>
+          <p>1. "Sales by Product Categories" → Without instruction: Bar chart. With instruction: Table</p>
+          <p>2. "Sales trend by month" → Should show Area Chart</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ex 6: Report Shortcuts -->
+    <div class="exercise" id="ex-6">
+      <div class="exercise-header" onclick="toggleEx(6)">
+        <div class="exercise-num">6</div>
+        <div><div class="exercise-title">Default Report / Shortcuts</div><div style="font-size:12px;color:var(--fg3)">Technical Guidance §7.6</div></div>
+        <div class="exercise-tag tag-sol">SOL.xlsx</div>
+      </div>
+      <div class="exercise-body" id="ex-body-6">
+        <div class="step"><div class="step-label">Objective</div><p>Create a shortcut for "Monthly Summary" / "Monthly Report" that auto-generates a specific table.</p></div>
+        <div class="code-block" id="ex-code-6"><button class="copy-btn" onclick="copyCode(6)">📋 Copy</button>When user asks "Monthly Summary," "Monthly Report," or "Performance this month," automatically apply filter where Order Date (Month) = October 2025. The Generate a Table with the following Metrics.
+- Revenue (Sum)
+- Orders (Count of Distinct Order ID)
+- Shipping Cost (Sum)</div>
+        <div class="step"><div class="step-label">⚠️ Note</div><p>Month is hardcoded in this example. In production, you'd update this value when the period changes.</p></div>
+        <div class="try-it"><div class="try-it-label">🧪 Test It — Ask Your Agent:</div>
+          <p>1. "Monthly Report" → Should produce Table with Sales, COUNT(DISTINCT Order ID), Shipping Cost filtered to Oct 2025</p>
+          <p>2. "Performance this month" → Same output</p>
         </div>
       </div>
     </div>
 
     <div style="padding:16px;border-radius:8px;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);margin-top:12px">
       <div style="font-size:14px;font-weight:700;color:#10B981;margin-bottom:4px">🎉 Beginner Track Complete!</div>
-      <div style="font-size:13px;color:var(--fg2)">You've set up core agent behaviors. Your agent now has default metrics, filters, chart rules, ranking, and grouping. Ready for the next level? <button style="background:none;border:none;color:#F59E0B;font-weight:700;cursor:pointer;font-size:13px" onclick="showTrack('intermediate')">→ Intermediate Track</button></div>
+      <div style="font-size:13px;color:var(--fg2)">You've built core agent behaviors using SOL.xlsx. <button style="background:none;border:none;color:#F59E0B;font-weight:700;cursor:pointer;font-size:13px" onclick="showTrack('intermediate')">→ Intermediate Track</button></div>
     </div>
   </div>
 
-  <!-- Intermediate Track -->
+  <!-- ═══ INTERMEDIATE ═══ -->
   <div class="section" id="sec-intermediate">
     <button class="back-btn" onclick="showTrack('landing')">← Back to Exercise Tracks</button>
-    <div style="font-size:20px;font-weight:700;margin-bottom:16px">🟡 Intermediate Track — Calculations & Time Logic</div>
+    <div style="font-size:20px;font-weight:700;margin-bottom:4px">🟡 Intermediate Track — Calculations, Aggregation & Time</div>
+    <div style="font-size:13px;color:var(--fg3);margin-bottom:16px">These exercises use different datasets — create a separate Agent for each</div>
 
-    <div class="exercise" id="ex-6">
-      <div class="exercise-header" onclick="toggleEx(6)">
-        <div class="exercise-num">6</div>
-        <div><div class="exercise-title">Aggregation Rules</div><div style="font-size:12px;color:var(--fg3)">Use Case #7 · Technique: Constraints</div></div>
-        <div class="exercise-tag">Calculations</div>
-      </div>
-      <div class="exercise-body" id="ex-body-6">
-        <div class="step"><div class="step-label">Objective</div><p>Define correct aggregation for each measure — wrong aggregation = silently wrong numbers.</p></div>
-        <div class="code-block" id="ex-code-6"><button class="copy-btn" onclick="copyCode(6)">📋 Copy</button>Default aggregation rules:
-
-- Revenue: Sum(Revenue)
-- Profit: Sum(Profit)
-- Quantity: Sum(Quantity)
-- Discount: Average(Discount)
-- Order Count: Count Distinct(Order_ID)
-
-For unlisted numeric fields, default to Sum.
-User keywords ("average", "count", "sum") override defaults.</div>
-        <div class="try-it"><div class="try-it-label">🧪 Test It — Ask Your Agent:</div>
-          <p>1. "Discount by Product Category" → Should use Average, NOT Sum</p>
-          <p>2. "How many orders per region?" → Should use Count Distinct</p>
-          <p>3. "Average revenue by segment" → User said "average" — should override Sum default</p>
-        </div>
-      </div>
-    </div>
-
+    <!-- Ex 7: Formulas (Retail Sales) -->
     <div class="exercise" id="ex-7">
       <div class="exercise-header" onclick="toggleEx(7)">
         <div class="exercise-num">7</div>
-        <div><div class="exercise-title">Custom Formulas & KPIs</div><div style="font-size:12px;color:var(--fg3)">Use Case #8 · Technique: Context Injection</div></div>
-        <div class="exercise-tag">Calculations</div>
+        <div><div class="exercise-title">Formulas and KPI Calculations</div><div style="font-size:12px;color:var(--fg3)">Technical Guidance §7.7</div></div>
+        <div class="exercise-tag tag-retail">Retail_Sales.xlsx</div>
       </div>
       <div class="exercise-body" id="ex-body-7">
-        <div class="step"><div class="step-label">Objective</div><p>Give the agent exact formulas for custom KPIs that aren't in the dataset.</p></div>
-        <div class="code-block" id="ex-code-7"><button class="copy-btn" onclick="copyCode(7)">📋 Copy</button>Custom KPI formulas:
+        <div class="step"><div class="step-label">Objective</div><p>Create custom KPI calculations: Average Transaction Value (ATV) and Sales per Sq. Ft using columns from the Retail Sales dataset.</p></div>
+        <div class="step"><div class="step-label">⚠️ New Agent Required</div><p>Create a new AI Agent and attach <strong>Retail_Sales.xlsx</strong> as the dataset. Index it first.</p></div>
+        <div class="code-block" id="ex-code-7"><button class="copy-btn" onclick="copyCode(7)">📋 Copy</button>KPI : Average Transaction Value (ATV)
+When users asks about ATV (Average Transaction Value),use the following formula to compute : Sum(Sales_Revenue) / Sum(# of Transactions). Use the same formula to aggregate at a group level
 
-KPI: Average Transaction Value (ATV)
-  Formula: Sum(Sales_Revenue) / Count Distinct(Order_ID)
-  TRIGGERS: ATV, average transaction value
-
-KPI: Profit Margin %
-  Formula: (Sum(Profit) / Sum(Revenue)) * 100
-  TRIGGERS: margin, profit margin
-
-KPI: Sales per Sq. Ft
-  Formula: Sum(Sales_Revenue) / Sum(Selling_Area_sqft)
-  TRIGGERS: Sales per Sq. ft, Sales per Square feet
-
-For all KPIs:
-- If denominator is zero, return "N/A"
-- Round to 2 decimal places</div>
+KPI : Sales per Sq. Ft
+When users asks about Sales per Sq. ft (Sales per Square feet or any such variants), use the following formula to compute : Sum(Sales_Revenue) / Sum(Selling_Area_sqft). Use the same formula to aggregate at a group level</div>
         <div class="try-it"><div class="try-it-label">🧪 Test It — Ask Your Agent:</div>
-          <p>1. "What is our profit margin by region?" → Should compute formula, show % values</p>
-          <p>2. "ATV per Product Category" → Should divide Revenue by distinct orders</p>
-          <p>3. "Margin for a category with zero revenue" → Should return N/A</p>
+          <p>1. "ATV Per Category" → Should compute Sum(sales_revenue) / Sum(transactions)</p>
+          <p>2. "Sales per Square Feet by Region" → Should compute Sum(sales_revenue) / Sum(selling_area_sqft)</p>
         </div>
       </div>
     </div>
 
+    <!-- Ex 8: Aggregation (Sample Superstore) -->
     <div class="exercise" id="ex-8">
       <div class="exercise-header" onclick="toggleEx(8)">
         <div class="exercise-num">8</div>
-        <div><div class="exercise-title">Hierarchies & Drill-Down</div><div style="font-size:12px;color:var(--fg3)">Use Case #2 · Technique: Context Injection</div></div>
-        <div class="exercise-tag">Behavior</div>
+        <div><div class="exercise-title">Set Aggregation Rules</div><div style="font-size:12px;color:var(--fg3)">Technical Guidance §7.12</div></div>
+        <div class="exercise-tag tag-superstore">Sample_Superstore_-_Rate.xlsx</div>
       </div>
       <div class="exercise-body" id="ex-body-8">
-        <div class="step"><div class="step-label">Objective</div><p>Define parent→child drill paths for smooth hierarchical navigation.</p></div>
-        <div class="code-block" id="ex-code-8"><button class="copy-btn" onclick="copyCode(8)">📋 Copy</button>Enable hierarchical drill-down navigation:
-
-Product: Product Category > Product Sub-Category > Product Name
-Geography: Region > Country > State > City
-
-Drill-Down Logic:
-- Drill only when current chart contains a column from this hierarchy.
-- If showing Product Category, on "Drill Down" → show Sub-Category within selected.
-- If at Product Name level, inform: "This is the most detailed product level."
-- If column is not in any hierarchy: "Drill-down is not available for this attribute."</div>
+        <div class="step"><div class="step-label">Objective</div><p>Define default aggregation rules per metric. Without this, the agent might Sum a Shipping Rate instead of Averaging it — silently producing wrong numbers.</p></div>
+        <div class="step"><div class="step-label">⚠️ New Agent Required</div><p>Create a new AI Agent and attach <strong>Sample_Superstore_-_Rate.xlsx</strong> as the dataset.</p></div>
+        <div class="code-block" id="ex-code-8"><button class="copy-btn" onclick="copyCode(8)">📋 Copy</button>When aggregating metrics, apply the following default rules unless the user specifies otherwise: Revenue, Sales = Sum(Sales), Shipping Rate = Average (Avg)
+If the dataset contains other numeric fields without explicit instruction, apply Sum as the fallback aggregation method.
+When the user includes a keyword like "average," "count," or "sum," override the default aggregation accordingly.</div>
         <div class="try-it"><div class="try-it-label">🧪 Test It — Ask Your Agent:</div>
-          <p>1. "Revenue by Product Category" → then "Drill Down on Technology" → Should show Sub-Categories</p>
-          <p>2. "Drill down on Discount column" → Should say "not available for this attribute"</p>
+          <p>1. "Shipping Rate by Segment" → Should automatically use AVG (not Sum)</p>
+          <p>2. "Sales by Category" → Should use Sum</p>
+          <p>3. "Average Sales by Region" → User said "average" — should override Sum default</p>
         </div>
       </div>
     </div>
 
+    <!-- Ex 9: Top N / Bottom N (SOL) -->
     <div class="exercise" id="ex-9">
       <div class="exercise-header" onclick="toggleEx(9)">
         <div class="exercise-num">9</div>
-        <div><div class="exercise-title">Fiscal Calendar Mapping</div><div style="font-size:12px;color:var(--fg3)">Use Case #11 · Technique: Context Injection</div></div>
-        <div class="exercise-tag">Time</div>
+        <div><div class="exercise-title">Top N and Bottom N</div><div style="font-size:12px;color:var(--fg3)">Technical Guidance §7.8</div></div>
+        <div class="exercise-tag tag-sol">SOL.xlsx</div>
       </div>
       <div class="exercise-body" id="ex-body-9">
-        <div class="step"><div class="step-label">Objective</div><p>Map your non-standard fiscal year so time queries return correct results. Note: Update these hardcoded values when your fiscal periods change.</p></div>
-        <div class="code-block" id="ex-code-9"><button class="copy-btn" onclick="copyCode(9)">📋 Copy</button>Use the Fiscal Calendar (FY = Jun 1 – May 31).
-Quarters: Q1 Jun–Aug, Q2 Sep–Nov, Q3 Dec–Feb, Q4 Mar–May.
+        <div class="step"><div class="step-label">Objective</div><p>Standardize ranking behavior: default to Top/Bottom 5, default metric Sales, map keywords like "Best" and "Worst".</p></div>
+        <div class="code-block" id="ex-code-9"><button class="copy-btn" onclick="copyCode(9)">📋 Copy</button>When the user asks for "Best," "Highest," "Most profitable," "Most Sales", "Leading" or Top items, rank by Top 5 records by default. When the user asks for "Bottom N," "Least," "Lowest," or "Slowest," rank by Revenue ascending and return the Bottom 5 records by default.
 
-Columns (exact, with spaces): "Fiscal Year", "Fiscal Quarter".
-Year values: 'FY 2026' (space after FY)
-Quarter values: 'FY2026 Q2' (no space after FY, one space before Qn)
-
-Mappings:
-- "current/this quarter" → "Fiscal Quarter" = 'FY2026 Q2'
-- "current/this year" → "Fiscal Year" = 'FY 2026'
-- "previous/last quarter" → "Fiscal Quarter" = 'FY2026 Q1'
-- "previous/last year" → "Fiscal Year" = 'FY 2025'
-
-If ambiguous, ASK the user.</div>
+If the user does not specify metric use 'Sales' by default. If user specifies use the metric specified by user. If User specifies number of categories to be apply Top N accordingly. For example "Best 5 Products by Profit" is Top 5. "Bottom 3 Cities by Sales" Bottom 3 Cities.</div>
         <div class="try-it"><div class="try-it-label">🧪 Test It — Ask Your Agent:</div>
-          <p>1. "Revenue for this quarter" → Should filter to FY2026 Q2 (Sep–Nov)</p>
-          <p>2. "How did we do last year?" → Should filter to FY 2025 (Jun 2024–May 2025)</p>
-          <p>3. "Revenue for October" → Should map to Q2 and ask about year if ambiguous</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="exercise" id="ex-10">
-      <div class="exercise-header" onclick="toggleEx(10)">
-        <div class="exercise-num">10</div>
-        <div><div class="exercise-title">CASE / Bucket Segmentation</div><div style="font-size:12px;color:var(--fg3)">Use Case #9 · Technique: Context Injection</div></div>
-        <div class="exercise-tag">Calculations</div>
-      </div>
-      <div class="exercise-body" id="ex-body-10">
-        <div class="step"><div class="step-label">Objective</div><p>Convert raw numeric values into meaningful business tiers.</p></div>
-        <div class="code-block" id="ex-code-10"><button class="copy-btn" onclick="copyCode(10)">📋 Copy</button>Segmentation tiers when user says "classify", "categorize", or "segment":
-
-SALES TIERS:
-  Sales < 100: "Low"
-  Sales >= 100 AND < 500: "Medium"
-  Sales >= 500 AND < 1000: "Good"
-  Sales >= 1000 AND < 5000: "Very Good"
-  Sales >= 5000: "Best"
-
-Always use non-overlapping ranges.
-If a value matches no range, label it "Unclassified".</div>
-        <div class="try-it"><div class="try-it-label">🧪 Test It — Ask Your Agent:</div>
-          <p>1. "Classify our products by sales performance" → Should apply tiers</p>
-          <p>2. "What tier is $999 in sales?" → Should answer "Good"</p>
+          <p>1. "Show Top Customers" → Top 5 customers by Sales</p>
+          <p>2. "5 Worst Profitable Product Sub categories" → Bottom 5 by Profit ascending</p>
+          <p>3. "Best 3 cities" → Top 3 by Sales</p>
         </div>
       </div>
     </div>
 
     <div style="padding:16px;border-radius:8px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);margin-top:12px">
       <div style="font-size:14px;font-weight:700;color:#F59E0B;margin-bottom:4px">🎉 Intermediate Track Complete!</div>
-      <div style="font-size:13px;color:var(--fg2)">Your agent now handles calculations, fiscal calendars, hierarchies, and segmentation. <button style="background:none;border:none;color:#EF4444;font-weight:700;cursor:pointer;font-size:13px" onclick="showTrack('advanced')">→ Advanced Track</button></div>
+      <div style="font-size:13px;color:var(--fg2)">Your agents now handle KPIs, aggregation rules, and ranking. <button style="background:none;border:none;color:#EF4444;font-weight:700;cursor:pointer;font-size:13px" onclick="showTrack('advanced')">→ Advanced Track</button></div>
     </div>
   </div>
 
-  <!-- Advanced Track -->
+  <!-- ═══ ADVANCED ═══ -->
   <div class="section" id="sec-advanced">
     <button class="back-btn" onclick="showTrack('landing')">← Back to Exercise Tracks</button>
-    <div style="font-size:20px;font-weight:700;margin-bottom:16px">🔴 Advanced Track — Multi-Step, ReAct & Geo Intelligence</div>
+    <div style="font-size:20px;font-weight:700;margin-bottom:4px">🔴 Advanced Track — Fiscal Calendar, Geo Intelligence & Full Build</div>
+    <div style="font-size:13px;color:var(--fg3);margin-bottom:16px">Exercises 10–11 use <span class="dataset-chip tag-geo">GP_Sales_Locations.csv</span> · Exercise 12 uses <span class="dataset-chip tag-sol">SOL.xlsx</span></div>
 
+    <!-- Ex 10: Fiscal Calendar -->
+    <div class="exercise" id="ex-10">
+      <div class="exercise-header" onclick="toggleEx(10)">
+        <div class="exercise-num">10</div>
+        <div><div class="exercise-title">Time Handling and Fiscal Calendars</div><div style="font-size:12px;color:var(--fg3)">Technical Guidance §7.9</div></div>
+        <div class="exercise-tag tag-sol">SOL.xlsx</div>
+      </div>
+      <div class="exercise-body" id="ex-body-10">
+        <div class="step"><div class="step-label">Objective</div><p>Map a non-standard fiscal calendar (FY = Jun 1 – May 31) so "current quarter" uses fiscal logic, not Gregorian. Note: Update hardcoded values when your fiscal periods change.</p></div>
+        <div class="code-block" id="ex-code-10"><button class="copy-btn" onclick="copyCode(10)">📋 Copy</button>Use the Fiscal Calendar (FY = Jun 1–May 31). Quarters: Q1 Jun–Aug, Q2 Sep–Nov, Q3 Dec–Feb, Q4 Mar–May.
+Columns (exact, with spaces): "Fiscal Year", "Fiscal Quarter". Always quote identifiers.
+Year values: 'FY 2026' (space after FY)
+Quarter values: 'FY2026 Q2' (no space after FY, one space before Qn)
+
+Never auto-add/remove spaces—match dataset exactly. Trim and case-fold user text, but filters must use canonical spacing. Quote string values.
+
+Mappings → Filters
+- "current/this quarter", "current fiscal quarter" → "Fiscal Quarter" = 'FY2026 Q2'
+- "current/this year", "current fiscal year" → "Fiscal Year" = 'FY 2026'
+- "previous/last/prior quarter" → "Fiscal Quarter" = 'FY2026 Q1'
+- "previous/last/prior year" → "Fiscal Year" = 'FY 2025'
+- "next/upcoming/following quarter" → "Fiscal Quarter" = 'FY2026 Q3'
+- "next/upcoming/following year" → "Fiscal Year" = 'FY 2027'
+
+Specific month/date (e.g., "Feb 2023") → map to its fiscal quarter (Dec–Feb → FY2024 Q3) and filter "Fiscal Quarter" accordingly.</div>
+        <div class="try-it"><div class="try-it-label">🧪 Test It — Ask Your Agent:</div>
+          <p>1. "Show Revenue for Current Quarter" → Should filter to FY2026 Q2</p>
+          <p>2. "Compare Previous and Current Fiscal Years Profits" → FY 2025 vs FY 2026</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ex 11: Geo Distance -->
     <div class="exercise" id="ex-11">
       <div class="exercise-header" onclick="toggleEx(11)">
         <div class="exercise-num">11</div>
-        <div><div class="exercise-title">Report Shortcuts</div><div style="font-size:12px;color:var(--fg3)">Use Case #13 · Technique: Few-Shot</div></div>
-        <div class="exercise-tag">Shortcuts</div>
+        <div><div class="exercise-title">Geographic Distance Calculations</div><div style="font-size:12px;color:var(--fg3)">Technical Guidance §7.10</div></div>
+        <div class="exercise-tag tag-geo">GP_Sales_Locations.csv</div>
       </div>
       <div class="exercise-body" id="ex-body-11">
-        <div class="step"><div class="step-label">Objective</div><p>Pre-define exactly what common reports contain so the same report comes out consistently.</p></div>
-        <div class="code-block" id="ex-code-11"><button class="copy-btn" onclick="copyCode(11)">📋 Copy</button>When user says "Monthly Summary" or "Performance Overview":
+        <div class="step"><div class="step-label">Objective</div><p>Enable location-aware queries using LATITUDE and LONGITUDE columns for distance-based filtering.</p></div>
+        <div class="step"><div class="step-label">⚠️ New Agent Required</div><p>Create a new AI Agent and attach <strong>GP_Sales_Locations.csv</strong>.</p></div>
+        <div class="code-block" id="ex-code-11"><button class="copy-btn" onclick="copyCode(11)">📋 Copy</button>When asked for distance, use latitude and longitude as geo coordinates to calculate the distance.
+Use positive and negative longitude and latitude.
+When asked for a map, use latitude and longitude to plot the data.
 
-Generate Table with:
-- Filter: Current Quarter (FQ Offset = 0)
-- Metrics: Revenue (Sum), Orders (Count Distinct), Shipping Cost (Sum), Margin %
-- Group by: Product Category
-- Sort: Revenue desc
-
-When user says "Trend Report":
-- Revenue + Profit dual-axis Line Chart
-- Last 4 quarters</div>
+When the user says "within X miles of <location>", interpret this as a distance filter: Compute distance from each record's (LATITUDE, LONGITUDE) to the specified location. Keep only records where Distance <= X miles. If the X miles are not specified and terms like near or at the localtion used, the default is 50 Miles. Default Chart type for all such questions is 'Map'</div>
         <div class="try-it"><div class="try-it-label">🧪 Test It — Ask Your Agent:</div>
-          <p>1. "Monthly Summary" → Should produce exact table with specified metrics</p>
-          <p>2. "Trend Report" → Should show dual-axis line chart</p>
-          <p>3. "Performance Overview for Furniture" → Should add category filter</p>
+          <p>1. "Map the Sales" → Should show Map using LATITUDE, LONGITUDE</p>
+          <p>2. "Show Sales in Tennessee" → then "Change Chart Type to Map"</p>
+          <p>3. "Show me sales near Nashville" → Should use 50-mile default radius on Map</p>
         </div>
       </div>
     </div>
 
+    <!-- Ex 12: Shop Locations via RAG -->
     <div class="exercise" id="ex-12">
       <div class="exercise-header" onclick="toggleEx(12)">
         <div class="exercise-num">12</div>
-        <div><div class="exercise-title">Multi-Step Analysis with Flagging</div><div style="font-size:12px;color:var(--fg3)">Use Case #10 · Technique: Prompt Chaining</div></div>
-        <div class="exercise-tag">Calculations</div>
+        <div><div class="exercise-title">Mark Business Locations via Knowledge Documents</div><div style="font-size:12px;color:var(--fg3)">Technical Guidance §7.11</div></div>
+        <div class="exercise-tag tag-geo">GP_Sales_Locations.csv</div>
       </div>
       <div class="exercise-body" id="ex-body-12">
-        <div class="step"><div class="step-label">Objective</div><p>Teach the agent to perform sequential analysis steps and flag outliers.</p></div>
-        <div class="code-block" id="ex-code-12"><button class="copy-btn" onclick="copyCode(12)">📋 Copy</button>For comparative analysis, follow these steps:
-  1. Identify the comparison dimension
-  2. Calculate metric for EACH group
-  3. Compute derived metric (growth rate, variance)
-  4. Apply threshold/flag if specified
-  5. Sort to highlight best/worst
-  6. Present with chart + threshold line
+        <div class="step"><div class="step-label">Objective</div><p>Add named shop coordinates via Supplemental Instructions so users can say "near Shop-ABC" and the agent resolves coordinates. In production, shop locations could also be added as a Knowledge Document (RAG).</p></div>
+        <div class="code-block" id="ex-code-12"><button class="copy-btn" onclick="copyCode(12)">📋 Copy</button>Adding Shop Coordinates.
+When asked for distance, use latitude and longitude as geo coordinates to calculate the distance.
+Use positive and negative longitude and latitude.
+When asked for a map, use latitude and longitude to plot the data.
+When the user says "within X miles of <location>", interpret this as a distance filter: Compute distance from each record's (LATITUDE, LONGITUDE) to the specified location. Keep only records where Distance <= X miles. If the X miles are not specified and terms like near or at the localtion used, the default is 50 Miles. Default Chart type for all such questions is 'Map'
 
-"flag", "highlight", "alert" triggers threshold comparison.
-Show ⚠️ for below target, ✅ for on/above.</div>
+All the Shop locations are as follows:
+Shop-ABC is located at 41.8781° N, 87.6298° W
+Shop-MNO is located at 44.9778° N, 93.2650° W
+Shop-PQR is located at 39.9526° N, 75.1652° W
+Shop-HIJ is located at 33.4484° N, 112.0740° W
+Shop-ATT is located at 33.7490° N, 84.3880° W
+Shop-XYZ is located at 40.7128° N, 74.0060° W
+
+Treat the above locations as the source of truth for named business locations such as "Shop-ABC", "Shop-ATT (ATL)", etc.
+When a user refers to a shop or shorthand, "Shop ABC", "ABC shop", "store ABC" → map to the coordinates given above.</div>
         <div class="try-it"><div class="try-it-label">🧪 Test It — Ask Your Agent:</div>
-          <p>1. "Compare revenue growth across regions, flag below 5%" → Should flag underperformers</p>
-          <p>2. "Which categories had profit decline?" → Should compute change and flag negatives</p>
+          <p>1. "Show Sales near Shop ABC" → Should resolve to Chicago (41.8781°N, 87.6298°W), 50-mile radius, Map</p>
+          <p>2. "Show Sales within 300 miles of Shop XYZ" → Should resolve to NYC coordinates, 300-mile radius</p>
         </div>
-      </div>
-    </div>
-
-    <div class="exercise" id="ex-13">
-      <div class="exercise-header" onclick="toggleEx(13)">
-        <div class="exercise-num">13</div>
-        <div><div class="exercise-title">Drill-Down with ReAct</div><div style="font-size:12px;color:var(--fg3)">Use Case #14 · Technique: Prompt Chaining</div></div>
-        <div class="exercise-tag">Advanced</div>
-      </div>
-      <div class="exercise-body" id="ex-body-13">
-        <div class="step"><div class="step-label">Objective</div><p>When a user reports an anomaly, the agent investigates step-by-step using the ReAct reasoning pattern.</p></div>
-        <div class="code-block" id="ex-code-13"><button class="copy-btn" onclick="copyCode(13)">📋 Copy</button>When user reports an anomaly or asks "why":
-
-Apply ReAct drill-down:
-  REASON: What anomaly needs investigation?
-  ACT: Query at current hierarchy level.
-  OBSERVE: Which dimension is the outlier?
-  REASON: Should we drill deeper?
-  ACT: Drill one level into the outlier.
-  REPEAT until root cause found.
-  PRESENT: Summary + supporting chart.</div>
-        <div class="try-it"><div class="try-it-label">🧪 Test It — Ask Your Agent:</div>
-          <p>1. "Revenue dropped in West — why?" → Should drill Region→State→City to find root cause</p>
-          <p>2. "Profit is declining — investigate" → Should drill Category→Sub-Category</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="exercise" id="ex-14">
-      <div class="exercise-header" onclick="toggleEx(14)">
-        <div class="exercise-num">14</div>
-        <div><div class="exercise-title">Period-over-Period Comparison</div><div style="font-size:12px;color:var(--fg3)">Use Case #12 · Technique: Context Injection</div></div>
-        <div class="exercise-tag">Time</div>
-      </div>
-      <div class="exercise-body" id="ex-body-14">
-        <div class="step"><div class="step-label">Objective</div><p>Map time expressions to offset values and define comparison formulas.</p></div>
-        <div class="code-block" id="ex-code-14"><button class="copy-btn" onclick="copyCode(14)">📋 Copy</button>TIME EXPRESSION MAPPINGS:
-  "this quarter" → FQ Offset = 0
-  "last quarter" → FQ Offset = -1
-  "last 4 quarters" → FQ Offset IN (-3, -2, -1, 0)
-  "YTD" → All quarters in current FY up to current FQ
-
-Comparison formulas:
-  QoQ % = (Current - Previous) / Previous × 100
-  YoY % = (Current Year - Previous Year) / Previous Year × 100
-
-Sort time results chronologically.</div>
-        <div class="try-it"><div class="try-it-label">🧪 Test It — Ask Your Agent:</div>
-          <p>1. "Revenue trending last 4 quarters?" → Line chart, chronological, with QoQ %</p>
-          <p>2. "QoQ profit change" → Should compute percentage change</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="exercise" id="ex-15">
-      <div class="exercise-header" onclick="toggleEx(15)">
-        <div class="exercise-num">15</div>
-        <div><div class="exercise-title">Geo Distance & Map Intelligence</div><div style="font-size:12px;color:var(--fg3)">Use Case #15 · Technique: Context Injection</div></div>
-        <div class="exercise-tag">Geographic</div>
-      </div>
-      <div class="exercise-body" id="ex-body-15">
-        <div class="step"><div class="step-label">Objective</div><p>Enable location-aware queries using latitude and longitude columns.</p></div>
-        <div class="code-block" id="ex-code-15"><button class="copy-btn" onclick="copyCode(15)">📋 Copy</button>Use LATITUDE and LONGITUDE columns for distance calculations.
-
-When asked "within X miles of <location>":
-1. Calculate the real-world distance from each record to the specified location.
-2. Keep records where Distance <= X miles.
-3. Default radius for "near" or "close to": 50 miles.
-4. Sort by distance ascending.
-5. Default chart: Map.</div>
-        <div class="try-it"><div class="try-it-label">🧪 Test It — Ask Your Agent:</div>
-          <p>1. "Stores within 10 miles of downtown Chicago" → Should compute distances, filter, show Map</p>
-          <p>2. "Customers near Los Angeles" → Should default to 50 miles</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="exercise" id="ex-16">
-      <div class="exercise-header" onclick="toggleEx(16)">
-        <div class="exercise-num">16</div>
-        <div><div class="exercise-title">Combine Everything — Full Agent</div><div style="font-size:12px;color:var(--fg3)">All Use Cases · Full R.T.C.C.O.E</div></div>
-        <div class="exercise-tag">🏆 Final</div>
-      </div>
-      <div class="exercise-body" id="ex-body-16">
-        <div class="step"><div class="step-label">Objective</div><p>Combine exercises 1–15 into a single, production-ready Supplemental Instruction using the R.T.C.C.O.E framework. Remember: 6,000 character limit.</p></div>
-        <div class="step"><div class="step-label">Challenge</div><p>Select the 5–8 most important rules from your exercises. Structure them with <code>=== ROLE ===</code>, <code>=== CONTEXT ===</code>, <code>=== CONSTRAINTS ===</code>, <code>=== OUTPUT ===</code>, and <code>=== EXAMPLES ===</code>. Test with 10 different questions and refine.</p></div>
-        <div class="try-it"><div class="try-it-label">🧪 Test It — Ask Your Agent:</div>
-          <p>1. "Monthly Summary" → Does it produce the pre-defined report?</p>
-          <p>2. "Revenue for Important Orders this quarter" → Does it group AND apply fiscal filter?</p>
-          <p>3. "Compare ATV across regions, flag below $50" → Does it compute formula AND flag?</p>
-          <p>4. "Revenue dropped in West — why?" → Does it drill down with ReAct?</p>
-          <p>5. "Stores near Chicago" → Does it use geo-distance with default 50 miles?</p>
-        </div>
-        <div class="step"><div class="step-label">✅ Success Criteria</div><p>Agent handles all 5 test queries correctly with consistent formatting, proper groupings, correct fiscal logic, and appropriate chart types. You now have a production-ready AI Agent.</p></div>
       </div>
     </div>
 
     <div style="padding:16px;border-radius:8px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);margin-top:12px">
       <div style="font-size:14px;font-weight:700;color:#EF4444;margin-bottom:4px">🏆 All Exercises Complete!</div>
-      <div style="font-size:13px;color:var(--fg2)">You've built a full-featured AI Agent with all 16 use cases. Return to the <a href="quick-start.html" style="color:#10B981;font-weight:600">Quick Start Guide</a> to explore industry templates, or visit the <a href="prompt-engineering-studio.html" target="_blank" style="color:#6366F1;font-weight:600">Deep Dive Studio</a> for advanced frameworks.</div>
+      <div style="font-size:13px;color:var(--fg2)">You've worked through all 12 use cases from the OAC Agents Technical Guidance using 4 real datasets. Return to the <a href="quick-start.html" style="color:#10B981;font-weight:600">Quick Start Guide</a> for industry templates, or visit the <a href="prompt-engineering-studio.html" target="_blank" style="color:#6366F1;font-weight:600">Deep Dive Studio</a> for advanced frameworks and techniques.</div>
     </div>
   </div>
 
-  <div class="footer">Oracle Analytics Cloud — Supplemental Instructions Hands-On Exercise · CEAL Team</div>
+  <div class="footer">Oracle Analytics Cloud — Hands-On Lab · Based on OAC Agents Technical Guidance V25-11-1 · CEAL Team</div>
 </div>
 
 <script>
@@ -594,28 +440,20 @@ function showTrack(id) {
   if (el) el.classList.add('active');
   window.scrollTo(0, 0);
 }
-
 function toggleEx(n) {
   var body = document.getElementById('ex-body-' + n);
   if (body) body.classList.toggle('active');
 }
-
 function copyCode(n) {
   var el = document.getElementById('ex-code-' + n);
   if (!el) return;
-  var text = el.textContent.replace('📋 Copy', '').trim();
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(text);
-  }
+  var text = el.textContent.replace(/📋 Copy/g, '').trim();
+  if (navigator.clipboard) navigator.clipboard.writeText(text);
   var btn = el.querySelector('.copy-btn');
   if (btn) { btn.textContent = '✅ Copied!'; setTimeout(function(){ btn.textContent = '📋 Copy'; }, 2000); }
 }
-
-// Default dark mode
 (function(){
-  if (!document.documentElement.classList.contains('dark')) {
-    document.documentElement.classList.add('dark');
-  }
+  if (!document.documentElement.classList.contains('dark')) document.documentElement.classList.add('dark');
   var btn = document.querySelector('.nav-link[onclick*="toggle"]');
   if (btn && document.documentElement.classList.contains('dark')) btn.textContent = '☀️ Light';
 })();
