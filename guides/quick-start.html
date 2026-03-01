@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -55,7 +55,7 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: 'Oracle Sans', 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif; background: var(--bg); color: var(--fg); line-height: 1.7; font-size: 15px; -webkit-font-smoothing: antialiased; }
-.container { max-width: 1200px; margin: 0 auto; padding: 16px 32px; }
+.container { max-width: 1200px; margin: 0 auto; padding: 16px 40px; }
 .nav { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; border-radius: var(--radius); background: var(--bg2); border: 1px solid var(--border); margin-bottom: 20px; flex-wrap: wrap; gap: 8px; }
 .nav-left { display: flex; align-items: center; gap: 16px; }
 .nav-brand { font-size: 16px; font-weight: 600; }
@@ -183,7 +183,7 @@ body { font-family: 'Oracle Sans', 'Segoe UI', -apple-system, BlinkMacSystemFont
       </div>
     </div>
     <div class="nav-links">
-      <button class="nav-link" onclick="document.documentElement.classList.toggle('dark');this.textContent=document.documentElement.classList.contains('dark')?'☀️ Light':'🌙 Dark'">🌙 Dark</button>
+      <button class="nav-link" onclick="document.documentElement.classList.toggle('dark');this.textContent=document.documentElement.classList.contains('dark')?'☀️ Light':'🌙 Dark'">☀️ Light</button>
     </div>
   </div>
 
@@ -1592,6 +1592,17 @@ function updatePreview() {
   }
   document.getElementById('builder-preview').textContent = s || 'Fill in the fields above to generate your Supplemental Instructions...';
 }
+// ═══ Auto-navigate from index.html quick links ═══
+(function() {
+  var nav = sessionStorage.getItem('nav');
+  if (nav) { sessionStorage.removeItem('nav'); showSection(nav); }
+  // Default to dark mode
+  if (!document.documentElement.classList.contains('dark')) {
+    document.documentElement.classList.add('dark');
+  }
+  var btn = document.querySelector('.nav-link[onclick*="toggle"]');
+  if (btn && document.documentElement.classList.contains('dark')) btn.textContent = '☀️ Light';
+})();
 </script>
 </body>
 </html>

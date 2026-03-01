@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,8 +26,8 @@
   --code-bg: #0A0F1A; --code-text: #94A3B8;
 }
 * { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif; background:var(--bg); color:var(--fg); line-height:1.6; font-size:15px; }
-.container { max-width:1200px; margin:0 auto; padding:16px 32px; }
+body { font-family:'Oracle Sans','Segoe UI',-apple-system,BlinkMacSystemFont,system-ui,sans-serif; background:var(--bg); color:var(--fg); line-height:1.7; font-size:15px; -webkit-font-smoothing:antialiased; }
+.container { max-width:1200px; margin:0 auto; padding:16px 40px; }
 .hidden { display:none!important; }
 /* Nav */
 .nav { display:flex; align-items:center; justify-content:space-between; padding:12px 20px; border-radius:var(--radius); background:var(--bg2); border:1px solid var(--border); margin-bottom:16px; flex-wrap:wrap; gap:8px; }
@@ -146,7 +146,7 @@ select.cmp-select { width:100%; padding:10px; border-radius:8px; border:2px soli
       <span class="btn active" style="font-size:11px">🔬 Deep Dive Studio</span>
     </div>
     <div style="display:flex;gap:8px">
-      <button class="btn" id="theme-btn" onclick="toggleTheme()">🌙 Dark</button>
+      <button class="btn" id="theme-btn" onclick="toggleTheme()">☀️ Light</button>
     </div>
   </div>
 
@@ -161,7 +161,7 @@ select.cmp-select { width:100%; padding:10px; border-radius:8px; border:2px soli
       <span class="hero-badge" style="background:rgba(14,165,233,.2);color:#7DD3FC;border-color:rgba(14,165,233,.3)">11 Industry Templates</span>
       <span class="hero-badge" style="background:rgba(245,158,11,.2);color:#FCD34D;border-color:rgba(245,158,11,.3)">Interactive SI Builder</span>
     </div>
-    <div class="hero-sub">Your AI Agent already understands your indexed dataset from the semantic model. This studio helps you write the Supplemental Instructions that go further — defining business groupings, KPI formulas, fiscal calendars, and custom calculations that the agent can't access from workbook-level formulas alone.</div>
+    <div class="hero-sub">Oracle Analytics AI Agents combine four components — Dataset, Supplemental Instructions, Knowledge Documents, and a Welcome Message — to create domain-specific experts. Your semantic model tells the agent what your data looks like. This studio helps you write the Supplemental Instructions that tell it how your business thinks.</div>
     <div style="margin-top:16px;padding-top:12px;border-top:1px solid rgba(255,255,255,.1)">
       <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#64748B;margin-bottom:10px">⚡ Quick Start — Skip to Building</div>
       <div style="display:flex;gap:10px;justify-content:flex-start;flex-wrap:wrap">
@@ -321,7 +321,7 @@ function renderStart() {
     {step:5,title:'Build Your Own SI',desc:'Use the 8-step SI Builder or start from a template.',tab:'builder',icon:'🏗️',color:'#C74634'}
   ];
   return '<div class="fade-in">'+
-    '<div class="callout"><span style="font-size:20px">👋</span><div><span class="callout-title">Welcome to the Deep Dive Studio!</span> <span class="callout-body">Your AI Agent reads your semantic model and understands your columns. This studio helps you write the Supplemental Instructions that add your business logic — custom KPI formulas, attribute groupings, fiscal calendars, and calculations that exist in your workbooks but aren't part of the semantic model.</span></div></div>'+
+    '<div class="callout"><span style="font-size:20px">👋</span><div><span class="callout-title">Welcome to the Deep Dive Studio!</span> <span class="callout-body">An OAC AI Agent is built from four components: a Dataset, Supplemental Instructions, Knowledge Documents (RAG), and a Welcome Message. Your semantic model tells the agent what your data looks like. Supplemental Instructions tell it how your business thinks — your KPI formulas, fiscal calendar, attribute groupings, default filters, chart preferences, and custom calculations built in your workbooks that the agent cannot access on its own. Instructions support up to 6,000 characters per agent.</span></div></div>'+
     '<div class="grid grid-3" style="margin-bottom:20px">'+
     [{icon:'📖',title:'What is this?',desc:'A comprehensive guide to prompt engineering for OAC AI Agents. 40 techniques, 6 frameworks, production-ready SI.',color:'#6366F1'},{icon:'🎯',title:'Who is it for?',desc:'Anyone building OAC AI Agents — from first-time users to experienced developers.',color:'#10B981'},{icon:'⚡',title:'How to use it?',desc:'Follow the learning path below, or jump to the SI Builder. Everything is copy-ready.',color:'#F59E0B'}].map(function(c){
       return '<div class="card" style="cursor:default"><div style="font-size:28px;margin-bottom:8px">'+c.icon+'</div><h3 style="color:'+c.color+'">'+c.title+'</h3><p>'+c.desc+'</p></div>';
