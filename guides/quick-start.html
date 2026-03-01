@@ -190,7 +190,7 @@ body { font-family: 'Oracle Sans', 'Segoe UI', -apple-system, BlinkMacSystemFont
   <!-- Hero -->
   <div class="hero" style="text-align:center">
     <h1 style="font-size:28px;font-weight:700;letter-spacing:-0.3px;margin-bottom:16px">Supplemental Instructions for OAC AI Agents</h1>
-    <p style="font-size:14px;color:#94A3B8;max-width:700px;margin:0 auto 20px;line-height:1.7">An OAC AI Agent is built from four components: a Dataset, Supplemental Instructions, Knowledge Documents, and a Welcome Message. Your semantic model tells the agent what your data looks like. Supplemental Instructions tell it how your business thinks.</p>
+    <p style="font-size:14px;color:#94A3B8;max-width:700px;margin:0 auto 20px;line-height:1.7">An OAC AI Agent is built from four components: a Dataset, Supplemental Instructions, Knowledge Documents, and a Welcome Message. Your semantic model tells the agent what your data looks like — <span style="color:#FCD34D;font-weight:600">Supplemental Instructions tell the Agent how your business thinks.</span></p>
     <div style="font-size:11px;font-weight:600;letter-spacing:1px;color:#64748B;text-transform:uppercase;margin-bottom:12px">⚡ Quick Start — Pick a Path</div>
     <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center">
       <button onclick="showSection('templates')" style="padding:8px 20px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.15);color:#FCD34D">📋 Start from Template</button>
@@ -373,7 +373,7 @@ body { font-family: 'Oracle Sans', 'Segoe UI', -apple-system, BlinkMacSystemFont
             <div class="info-cell"><div class="label" style="color:#6366F1">⚙️ How</div><div class="text">Direct question with no examples. AI uses training data.</div></div>
             <div class="info-cell"><div class="label" style="color:#6366F1">🎯 Best For</div><div class="text">Quick help, exploring, simple tasks</div></div>
           </div>
-          <div class="oac-box">☁️ <strong>OAC Application:</strong> For straightforward OAC queries where default behavior works.</div>
+          <div class="oac-box">☁️ <strong>OAC Example:</strong> When a user asks "Show me revenue by region" — the agent uses its indexed dataset directly. No Supplemental Instruction needed for basic queries. But ask "Show me revenue for Strategic accounts" and without a <strong>Grouping instruction</strong> (Use Case #1), the agent won't know what "Strategic" means.</div>
           <div class="code-block">Explain machine learning in 3 simple sentences
 for a non-technical manager.</div>
           <button class="copy-btn" style="color:#6366F1;border-color:#6366F130;background:#6366F110" onclick="copyText(this,'zero-shot')">📋 Copy Prompt Example</button>
@@ -393,7 +393,7 @@ for a non-technical manager.</div>
             <div class="info-cell"><div class="label" style="color:#10B981">⚙️ How</div><div class="text">2-5 examples covering different scenarios. AI learns deep pattern.</div></div>
             <div class="info-cell"><div class="label" style="color:#10B981">🎯 Best For</div><div class="text">Production classifiers, extractors, report generators</div></div>
           </div>
-          <div class="oac-box">☁️ <strong>OAC Application:</strong> Provide 2-3 query→response pairs teaching the agent YOUR specific patterns — KPI formats, chart preferences, insight style.</div>
+          <div class="oac-box">☁️ <strong>OAC Example:</strong> The <strong>Report Shortcuts</strong> use case (#13) is pure few-shot: "When user says 'Monthly Summary' → generate Table with Revenue, Orders, Margin% by Product Category for current quarter." Each example teaches a specific query→response pattern the agent will reproduce consistently.</div>
           <div class="code-block">Classify sentiment:
 &quot;I love this phone!&quot; → Positive
 &quot;Terrible customer service&quot; → Negative
@@ -417,7 +417,7 @@ Now classify: &quot;The movie was absolutely stunning!&quot;</div>
             <div class="info-cell"><div class="label" style="color:#F59E0B">⚙️ How</div><div class="text">Assign AI a role, behavior, and tone. AI responds in-character.</div></div>
             <div class="info-cell"><div class="label" style="color:#F59E0B">🎯 Best For</div><div class="text">Assistants, chatbots, domain experts</div></div>
           </div>
-          <div class="oac-box">☁️ <strong>OAC Application:</strong> Define agent identity: 'You are a [Domain] Analytics Expert for [Team].'</div>
+          <div class="oac-box">☁️ <strong>OAC Example:</strong> The R in <strong>R.T.C.C.O.E</strong> is Persona in action: "You are a Senior Sales Analytics Expert for North America." This shapes how the agent communicates — a Finance persona speaks in margins and variances, while an HR persona speaks in headcount and attrition rates.</div>
           <div class="code-block">You are a Senior Finance Analytics Expert.
 Tone: professional but approachable.
 
@@ -439,7 +439,7 @@ Explain why Q3 revenue dropped 12%.</div>
             <div class="info-cell"><div class="label" style="color:#0891B2">⚙️ How</div><div class="text">Provide background info, constraints, domain knowledge AI needs.</div></div>
             <div class="info-cell"><div class="label" style="color:#0891B2">🎯 Best For</div><div class="text">Domain-specific tasks, company data, personalized responses</div></div>
           </div>
-          <div class="oac-box">☁️ <strong>OAC Application:</strong> The === CONTEXT === section injects fiscal calendar, KPI definitions, column mappings, hierarchy paths.</div>
+          <div class="oac-box">☁️ <strong>OAC Example:</strong> The <strong>Fiscal Calendar</strong> use case (#11) is context injection: "FY runs Jun 1–May 31. Q1=Jun-Aug, Q2=Sep-Nov…" Without this injected context, the agent assumes January–December. The <strong>Custom Formulas</strong> use case (#8) injects KPI definitions: "ATV = Sum(Revenue) / Count Distinct(Order_ID)."</div>
           <div class="code-block">Context: B2B SaaS company.
 Q3 Revenue: $4.2M (down 12% from Q2).
 Main issue: Enterprise deal slippage.
@@ -462,7 +462,7 @@ Generate 3-point analysis.</div>
             <div class="info-cell"><div class="label" style="color:#64748B">⚙️ How</div><div class="text">Use ===, ###, XML tags to separate prompt sections.</div></div>
             <div class="info-cell"><div class="label" style="color:#64748B">🎯 Best For</div><div class="text">Complex prompts, multi-section instructions</div></div>
           </div>
-          <div class="oac-box">☁️ <strong>OAC Application:</strong> SI uses === ROLE ===, === CONTEXT ===, === CONSTRAINTS === as delimiters.</div>
+          <div class="oac-box">☁️ <strong>OAC Example:</strong> Every template uses delimiters to separate concerns: <code>=== ROLE ===</code>, <code>=== CONTEXT ===</code>, <code>=== CONSTRAINTS ===</code>. This prevents the agent from confusing your fiscal calendar rules with your KPI formulas. Within each section, use <code>---</code> to separate individual instructions like <code>--- HIERARCHY: Product ---</code>.</div>
           <div class="code-block">### INSTRUCTIONS ###
 Summarize the article.
 Max 100 words.
@@ -486,7 +486,7 @@ Max 100 words.
             <div class="info-cell"><div class="label" style="color:#DC2626">⚙️ How</div><div class="text">Set hard limits: max length, no topics, required elements.</div></div>
             <div class="info-cell"><div class="label" style="color:#DC2626">🎯 Best For</div><div class="text">Brand compliance, legal, content policies</div></div>
           </div>
-          <div class="oac-box">☁️ <strong>OAC Application:</strong> === CONSTRAINTS === section defines aggregation defaults, mandatory filters, column matching, scope boundaries.</div>
+          <div class="oac-box">☁️ <strong>OAC Example:</strong> The <strong>Persistent Default Filter</strong> use case (#4) is a constraint: "Always apply City = 'Toronto'. Do not remove unless user explicitly says 'show all cities.'" The <strong>Aggregation Rules</strong> use case (#7) constrains math: "Discount = Average, Revenue = Sum." Without these, wrong aggregation = silently wrong numbers.</div>
           <div class="code-block">Write a product description.
 Max 50 words.
 Must include price and warranty.
@@ -509,7 +509,7 @@ Tone: professional.</div>
             <div class="info-cell"><div class="label" style="color:#8B5CF6">⚙️ How</div><div class="text">Tell AI exactly what format: bullets, table, steps, JSON, checklist.</div></div>
             <div class="info-cell"><div class="label" style="color:#8B5CF6">🎯 Best For</div><div class="text">Reports, presentations, APIs, docs</div></div>
           </div>
-          <div class="oac-box">☁️ <strong>OAC Application:</strong> === OUTPUT === section: 'Include chart title. Show applied: metric + aggregation + filters.'</div>
+          <div class="oac-box">☁️ <strong>OAC Example:</strong> The <strong>Default Visualization Types</strong> use case (#5) is format control: "Comparison → Bar Chart. Time-based → Line Chart. Geographic → Map." The <strong>Top N / Bottom N</strong> use case (#6) controls ranking format: "Top 5, sorted descending, as Bar Chart with metric labels."</div>
           <div class="code-block">Format as TABLE:
 | Metric | Q2 | Q3 | Change |
 
@@ -531,7 +531,7 @@ Compare revenue, cost, and margin.</div>
             <div class="info-cell"><div class="label" style="color:#059669">⚙️ How</div><div class="text">Break complex tasks into a chain. Output of step N feeds into step N+1.</div></div>
             <div class="info-cell"><div class="label" style="color:#059669">🎯 Best For</div><div class="text">Multi-stage pipelines, complex workflows</div></div>
           </div>
-          <div class="oac-box">☁️ <strong>OAC Application:</strong> Chain SI sections: ROLE defines who → CONTEXT provides data → CONSTRAINTS set rules → OUTPUT formats response.</div>
+          <div class="oac-box">☁️ <strong>OAC Example:</strong> The <strong>Drill-Down with ReAct</strong> use case (#14) is prompt chaining in action: "Revenue dropped in West — why?" triggers a chain: REASON what anomaly → ACT query by region → OBSERVE outlier → ACT drill deeper → PRESENT root cause. The <strong>Multi-Step Analysis</strong> use case (#10) chains: identify dimension → calculate metric → compute variance → flag thresholds → sort → present.</div>
           <div class="code-block">Step 1: Extract all metrics from this report.
 Step 2: For each metric, classify as leading or lagging.
 Step 3: Create a dashboard layout recommendation.</div>
@@ -1564,6 +1564,9 @@ function toggleTemplate(id) {
   if (el) {
     el.classList.toggle('active');
     activeTemplate = el.classList.contains('active') ? id : null;
+    if (el.classList.contains('active')) {
+      setTimeout(function(){ el.scrollIntoView({behavior:'smooth',block:'nearest'}); }, 100);
+    }
   }
 }
 
