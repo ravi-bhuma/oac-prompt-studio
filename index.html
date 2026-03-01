@@ -52,7 +52,7 @@
         .comp-icon { font-size: 24px; margin-bottom: 6px; }
         .comp-name { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
         .comp-desc { font-size: 12px; color: var(--text-dim); line-height: 1.4; }
-        .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+        .cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 32px; }
         .card {
             display: block; padding: 28px; background: var(--surface);
             border: 1px solid var(--border); border-radius: 12px;
@@ -63,6 +63,7 @@
         .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
         .card-quick::before { background: linear-gradient(90deg, var(--green), #34d399); }
         .card-studio::before { background: linear-gradient(90deg, var(--accent), #8b5cf6); }
+        .card-exercise::before { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
         .card-icon { font-size: 28px; margin-bottom: 12px; }
         .card h2 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
         .card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
@@ -137,6 +138,17 @@
                     <span class="chip">40 techniques</span>
                     <span class="chip">6 frameworks</span>
                     <span class="chip">Deep dive</span>
+                </div>
+                <span class="card-arrow">→</span>
+            </a>
+            <a href="guides/hands-on-exercise.html" class="card card-exercise">
+                <div class="card-icon">🧪</div>
+                <h2>Hands-On Exercise</h2>
+                <p>Practice with a real dataset. Step-by-step instructions to build and test each use case yourself.</p>
+                <div class="card-meta">
+                    <span class="chip">Practice</span>
+                    <span class="chip">Dataset included</span>
+                    <span class="chip">Step-by-step</span>
                 </div>
                 <span class="card-arrow">→</span>
             </a>
