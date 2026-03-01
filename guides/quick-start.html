@@ -191,7 +191,7 @@ body { font-family: 'Oracle Sans', 'Segoe UI', -apple-system, BlinkMacSystemFont
   <div class="hero" style="text-align:left">
     <div class="hero-badge">⚡ Quick Start Guide</div>
     <h1>Supplemental Instructions for OAC AI Agents</h1>
-    <p style="font-size:15px;color:#B0BEC5;max-width:720px;margin:16px 0 0;line-height:1.7">Your AI Agent already understands your indexed dataset structure from the semantic model. Supplemental Instructions take it further — defining your business groupings, KPI formulas, fiscal calendars, custom calculations, and reporting preferences so the agent delivers answers exactly the way your organization expects.</p>
+    <p style="font-size:15px;color:#B0BEC5;max-width:720px;margin:16px 0 0;line-height:1.7">Oracle Analytics AI Agents combine your indexed dataset, Supplemental Instructions, Knowledge Documents, and a Welcome Message to create domain-specific experts. Your semantic model tells the agent what your data looks like. Supplemental Instructions tell it how your business thinks.</p>
   </div>
 
   <!-- ═══ HOME ═══ -->
@@ -199,7 +199,7 @@ body { font-family: 'Oracle Sans', 'Segoe UI', -apple-system, BlinkMacSystemFont
     <div style="text-align:left;margin-bottom:24px">
       <div style="display:inline-flex;padding:5px 14px;border-radius:999px;font-size:12px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;background:rgba(16,185,129,.15);color:#10B981;border:1px solid rgba(16,185,129,.3);margin-bottom:16px">⚡ Get Started in Minutes</div>
       <h2 style="font-size:24px;font-weight:700;margin-bottom:10px;letter-spacing:-0.3px">Why Supplemental Instructions Matter</h2>
-      <p style="font-size:15px;color:var(--fg2);max-width:800px;margin:0;line-height:1.7">Your AI Agent reads your semantic model and understands your columns and synonyms. But business logic goes beyond the dataset — how you group attributes, which KPI formulas to apply, what your fiscal calendar looks like, and how to handle custom calculations that exist in your workbooks but aren't part of the semantic model. Supplemental Instructions bridge that gap, giving the agent the business context it needs for more accurate, consistent responses. Pick a path below to get started.</p>
+      <p style="font-size:15px;color:var(--fg2);max-width:800px;margin:0;line-height:1.7">Your AI Agent reads your semantic model and knows your columns, synonyms, and data types. But it doesn't know that your fiscal year runs June to May, that "Strategic accounts" means Enterprise + Mid-Market, or how to compute your custom KPIs built in workbooks. Supplemental Instructions bridge that gap — they define the business rules, custom calculations, and reporting preferences that turn the agent from a generic assistant into a domain expert. Pick a path below to get started.</p>
     </div>
     <div class="grid grid-4">
       <div class="card" onclick="showSection('templates')">
@@ -231,34 +231,16 @@ body { font-family: 'Oracle Sans', 'Segoe UI', -apple-system, BlinkMacSystemFont
     <!-- What is SI -->
     <div class="info-box" style="margin-top:24px">
       <h3>💡 What are Supplemental Instructions?</h3>
-      <p style="margin-bottom:12px">Supplemental Instructions play a crucial role in shaping how an AI Agent interprets user questions and behaves within a specific business context. While datasets and knowledge documents provide factual information, Supplemental Instructions define the logic, expectations, and interpretation rules that guide the AI's reasoning. They act as the Agent's operating manual — reducing ambiguity, minimizing hallucinations, and ensuring responses align with your organization's terminology, standards, and domain logic. This is especially important for custom calculations built in your workbooks — the agent cannot access workbook-level formulas on its own, so providing them in Supplemental Instructions ensures the agent can answer questions about those metrics accurately.</p>
+      <p style="margin-bottom:10px">An OAC AI Agent is built from four components: a <strong>Dataset</strong> (your indexed data), <strong>Supplemental Instructions</strong> (custom rules that shape reasoning), <strong>Knowledge Documents</strong> (enterprise content for factual grounding via RAG), and a <strong>Welcome Message</strong>. Together they transform the AI Assistant from a generic tool into a domain expert.</p>
+      <p style="margin-bottom:12px">Supplemental Instructions are the most impactful component. They define the logic, expectations, and interpretation rules that guide the AI's reasoning — acting as the Agent's operating manual. While your semantic model tells the agent what your data looks like, Supplemental Instructions tell it <strong>how your business thinks</strong>: your KPI formulas, fiscal calendar, attribute groupings, default filters, chart preferences, and custom calculations that exist in your workbooks but the agent cannot access on its own.</p>
 
       <div style="margin:16px 0;padding:14px 16px;border-radius:8px;background:rgba(199,70,52,0.08);border:1px solid rgba(199,70,52,0.2)">
         <span style="font-size:13px;font-weight:600;color:#C74634">⚠️ Limit:</span>
-        <span style="font-size:13px;color:var(--fg2)"> Supplemental Instructions currently support up to <strong>6,000 characters</strong> per Agent. Keep instructions focused and concise.</span>
+        <span style="font-size:13px;color:var(--fg2)"> Supplemental Instructions support up to <strong>6,000 characters</strong> per Agent. Everything you include is passed directly to the AI without preprocessing — keep instructions focused and concise.</span>
       </div>
 
-      <div style="margin:16px 0">
-        <div style="font-size:15px;font-weight:600;margin-bottom:10px;color:var(--fg)">Recommended Structure for Each Instruction</div>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
-          <div style="padding:14px;border-radius:8px;background:var(--muted);border:1px solid var(--border)">
-            <div style="font-size:13px;font-weight:700;color:#4F46E5;margin-bottom:4px">1. Intent / Objective</div>
-            <div style="font-size:13px;color:var(--fg2);line-height:1.5">Describe when the rule applies or what it is intended to achieve.</div>
-          </div>
-          <div style="padding:14px;border-radius:8px;background:var(--muted);border:1px solid var(--border)">
-            <div style="font-size:13px;font-weight:700;color:#4F46E5;margin-bottom:4px">2. Definition / Mapping</div>
-            <div style="font-size:13px;color:var(--fg2);line-height:1.5">Specify how the Agent should interpret or classify the concept.</div>
-          </div>
-          <div style="padding:14px;border-radius:8px;background:var(--muted);border:1px solid var(--border)">
-            <div style="font-size:13px;font-weight:700;color:#4F46E5;margin-bottom:4px">3. Triggers / Conditions</div>
-            <div style="font-size:13px;color:var(--fg2);line-height:1.5">List the keywords or conditions that determine when the rule should be executed.</div>
-          </div>
-        </div>
-      </div>
-
-      <div style="font-size:15px;font-weight:600;margin:16px 0 10px;color:var(--fg)">R.T.C.C.O.E Framework for Complete Agent Setup</div>
       <div class="rtccoe-grid">
-        <div class="rtccoe-step"><div class="letter">R</div><div class="label">Role</div><div class="desc">Define the agent's identity, expertise, …</div></div><div class="rtccoe-step"><div class="letter">T</div><div class="label">Task</div><div class="desc">What the agent should do when a query ar…</div></div><div class="rtccoe-step"><div class="letter">C</div><div class="label">Context</div><div class="desc">Domain knowledge: fiscal calendar, KPIs,…</div></div><div class="rtccoe-step"><div class="letter">C</div><div class="label">Constraints</div><div class="desc">Hard rules: defaults, mandatory filters,…</div></div><div class="rtccoe-step"><div class="letter">O</div><div class="label">Output</div><div class="desc">Chart selection rules, formatting, respo…</div></div><div class="rtccoe-step"><div class="letter">E</div><div class="label">Examples</div><div class="desc">2-3 query→response pairs showing expecte…</div></div>
+        <div class="rtccoe-step"><div class="letter">R</div><div class="label">Role</div><div class="desc">Agent identity — "You are a Senior Sales Analytics Expert for North America."</div></div><div class="rtccoe-step"><div class="letter">T</div><div class="label">Task</div><div class="desc">What to do — "Provide metric → insight → recommendation analysis."</div></div><div class="rtccoe-step"><div class="letter">C</div><div class="label">Context</div><div class="desc">Business knowledge — fiscal calendar, KPI formulas, region hierarchies, time logic.</div></div><div class="rtccoe-step"><div class="letter">C</div><div class="label">Constraints</div><div class="desc">Hard rules — default time filter, never fabricate data, always show applied filters.</div></div><div class="rtccoe-step"><div class="letter">O</div><div class="label">Output</div><div class="desc">Response format — headline insight, KPI table, trend explanation, recommendation.</div></div><div class="rtccoe-step"><div class="letter">E</div><div class="label">Examples</div><div class="desc">2–3 query→response pairs — biggest single quality improvement for consistency.</div></div>
       </div>
       <p style="margin-top:12px;font-size:11px;color:var(--fg3);font-style:italic">This is the <strong>R.T.C.C.O.E</strong> framework — built specifically for OAC by Oracle's CEAL team.</p>
     </div>
