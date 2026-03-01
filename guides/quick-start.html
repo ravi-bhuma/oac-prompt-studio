@@ -231,7 +231,32 @@ body { font-family: 'Oracle Sans', 'Segoe UI', -apple-system, BlinkMacSystemFont
     <!-- What is SI -->
     <div class="info-box" style="margin-top:24px">
       <h3>💡 What are Supplemental Instructions?</h3>
-      <p style="margin-bottom:12px">Think of Supplemental Instructions as a detailed briefing for your AI Agent. You tell it: here's how we define our KPIs, here are our fiscal quarters, here's how to group our data, and here's what format to present results in. This is especially important for custom calculations built in your workbooks — the agent cannot access workbook-level formulas on its own, so providing them in Supplemental Instructions ensures the agent can answer questions about those metrics accurately. The agent applies these rules to every question it receives.</p>
+      <p style="margin-bottom:12px">Supplemental Instructions play a crucial role in shaping how an AI Agent interprets user questions and behaves within a specific business context. While datasets and knowledge documents provide factual information, Supplemental Instructions define the logic, expectations, and interpretation rules that guide the AI's reasoning. They act as the Agent's operating manual — reducing ambiguity, minimizing hallucinations, and ensuring responses align with your organization's terminology, standards, and domain logic. This is especially important for custom calculations built in your workbooks — the agent cannot access workbook-level formulas on its own, so providing them in Supplemental Instructions ensures the agent can answer questions about those metrics accurately.</p>
+
+      <div style="margin:16px 0;padding:14px 16px;border-radius:8px;background:rgba(199,70,52,0.08);border:1px solid rgba(199,70,52,0.2)">
+        <span style="font-size:13px;font-weight:600;color:#C74634">⚠️ Limit:</span>
+        <span style="font-size:13px;color:var(--fg2)"> Supplemental Instructions currently support up to <strong>6,000 characters</strong> per Agent. Keep instructions focused and concise.</span>
+      </div>
+
+      <div style="margin:16px 0">
+        <div style="font-size:15px;font-weight:600;margin-bottom:10px;color:var(--fg)">Recommended Structure for Each Instruction</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+          <div style="padding:14px;border-radius:8px;background:var(--muted);border:1px solid var(--border)">
+            <div style="font-size:13px;font-weight:700;color:#4F46E5;margin-bottom:4px">1. Intent / Objective</div>
+            <div style="font-size:13px;color:var(--fg2);line-height:1.5">Describe when the rule applies or what it is intended to achieve.</div>
+          </div>
+          <div style="padding:14px;border-radius:8px;background:var(--muted);border:1px solid var(--border)">
+            <div style="font-size:13px;font-weight:700;color:#4F46E5;margin-bottom:4px">2. Definition / Mapping</div>
+            <div style="font-size:13px;color:var(--fg2);line-height:1.5">Specify how the Agent should interpret or classify the concept.</div>
+          </div>
+          <div style="padding:14px;border-radius:8px;background:var(--muted);border:1px solid var(--border)">
+            <div style="font-size:13px;font-weight:700;color:#4F46E5;margin-bottom:4px">3. Triggers / Conditions</div>
+            <div style="font-size:13px;color:var(--fg2);line-height:1.5">List the keywords or conditions that determine when the rule should be executed.</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="font-size:15px;font-weight:600;margin:16px 0 10px;color:var(--fg)">R.T.C.C.O.E Framework for Complete Agent Setup</div>
       <div class="rtccoe-grid">
         <div class="rtccoe-step"><div class="letter">R</div><div class="label">Role</div><div class="desc">Define the agent's identity, expertise, …</div></div><div class="rtccoe-step"><div class="letter">T</div><div class="label">Task</div><div class="desc">What the agent should do when a query ar…</div></div><div class="rtccoe-step"><div class="letter">C</div><div class="label">Context</div><div class="desc">Domain knowledge: fiscal calendar, KPIs,…</div></div><div class="rtccoe-step"><div class="letter">C</div><div class="label">Constraints</div><div class="desc">Hard rules: defaults, mandatory filters,…</div></div><div class="rtccoe-step"><div class="letter">O</div><div class="label">Output</div><div class="desc">Chart selection rules, formatting, respo…</div></div><div class="rtccoe-step"><div class="letter">E</div><div class="label">Examples</div><div class="desc">2-3 query→response pairs showing expecte…</div></div>
       </div>
@@ -244,10 +269,27 @@ body { font-family: 'Oracle Sans', 'Segoe UI', -apple-system, BlinkMacSystemFont
       <div class="rule-row"><div class="rule-num">1</div><div class="rule-text"><strong>Be specific</strong> <span>— Don't say 'help with data.' Say 'help sales managers explore revenue.'</span></div></div><div class="rule-row"><div class="rule-num">2</div><div class="rule-text"><strong>Define your KPIs</strong> <span>— Write exact formulas: ATV = Sum(Revenue)/Count(Orders).</span></div></div><div class="rule-row"><div class="rule-num">3</div><div class="rule-text"><strong>Give 2-3 examples</strong> <span>— Show what a good answer looks like. Biggest quality improvement.</span></div></div><div class="rule-row"><div class="rule-num">4</div><div class="rule-text"><strong>Set boundaries</strong> <span>— Tell it what NOT to do: 'Never fabricate data.'</span></div></div><div class="rule-row"><div class="rule-num">5</div><div class="rule-text"><strong>Start simple, iterate</strong> <span>— Begin basic. Test it. Add rules as you find gaps.</span></div></div>
     </div>
 
+    <!-- Preparing Your Dataset -->
+    <div class="info-box">
+      <h3>🗃️ Preparing Your Dataset</h3>
+      <p style="margin-bottom:12px">Before writing Supplemental Instructions, your dataset needs to be properly configured:</p>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:12px">
+        <div style="padding:14px;border-radius:8px;background:var(--muted);border:1px solid var(--border)">
+          <div style="font-size:13px;font-weight:700;color:var(--fg);margin-bottom:4px">Dataset Requirements</div>
+          <div style="font-size:13px;color:var(--fg2);line-height:1.6">One indexed dataset per agent (file-based, table-based, Subject Area, or LSA). Multi-table datasets are allowed if properly joined. Dataset must be indexed for Assistant use before adding to an agent.</div>
+        </div>
+        <div style="padding:14px;border-radius:8px;background:var(--muted);border:1px solid var(--border)">
+          <div style="font-size:13px;font-weight:700;color:var(--fg);margin-bottom:4px">Column Subsetting & Filters</div>
+          <div style="font-size:13px;color:var(--fg2);line-height:1.6">You can activate or deactivate indexed columns to control what the agent can reference. Agent-level filters are automatically applied to all queries and cannot be overridden by end users.</div>
+        </div>
+      </div>
+      <p style="margin-top:12px;font-size:13px;color:var(--fg2)"><strong>Checklist:</strong> Add synonyms for key columns → Set index types (Name, Name & Values) → Run indexing → Validate KPIs exist as measures → Confirm time and region hierarchies.</p>
+    </div>
+
     <!-- Agent Architecture Best Practice -->
     <div class="info-box">
       <h3>🏗️ Agent Architecture: One Agent Per Domain</h3>
-      <p style="margin-bottom:12px">Do not build one mega-agent. Oracle Analytics AI Agents work best when each agent is focused on a single business domain with a targeted dataset and specific Supplemental Instructions.</p>
+      <p style="margin-bottom:12px">An AI Agent should be designed as a subject-matter expert in a specific business domain. The more focused its scope, the more precise and meaningful its responses. Agents are built by <strong>Authors</strong> and consumed by <strong>end users</strong> — consumers interact with agents to get quick clarifications, follow-up answers, and drill-down insights. Agents can be used <strong>within a workbook</strong> or <strong>independently in standalone mode</strong>.</p>
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:12px">
         <div style="text-align:center;padding:16px 12px;border-radius:8px;background:var(--muted);border:1px solid var(--border)"><div style="font-size:20px;margin-bottom:4px">💰</div><div style="font-size:14px;font-weight:600">Sales Agent</div><div style="font-size:12px;color:var(--fg3)">Revenue, pipeline, quota</div></div>
         <div style="text-align:center;padding:16px 12px;border-radius:8px;background:var(--muted);border:1px solid var(--border)"><div style="font-size:20px;margin-bottom:4px">📊</div><div style="font-size:14px;font-weight:600">Finance Agent</div><div style="font-size:12px;color:var(--fg3)">Margin, variance, budget</div></div>
@@ -260,16 +302,20 @@ body { font-family: 'Oracle Sans', 'Segoe UI', -apple-system, BlinkMacSystemFont
     <!-- What Are Knowledge Documents (RAG) -->
     <div class="info-box">
       <h3>📄 What Are Knowledge Documents (RAG)?</h3>
-      <p style="margin-bottom:12px">Knowledge Documents are enterprise files you upload to your agent — KPI definitions, SLA policies, financial guidelines, operating procedures. The agent uses Retrieval-Augmented Generation (RAG) to inject only the relevant excerpts when answering a question.</p>
+      <p style="margin-bottom:12px">Knowledge Documents allow you to provide internal information such as process documentation, enterprise policies, competitive insights, market data, budgets, or any other domain-specific knowledge. After upload, documents are parsed and vectorized. During a query, only the most relevant portions are retrieved and added to the prompt — ensuring responses remain accurate and contextually aligned.</p>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px">
         <div style="padding:16px;border-radius:8px;border:1px solid var(--border);background:var(--muted)">
           <div style="font-size:14px;font-weight:600;margin-bottom:6px;color:var(--fg)">Supplemental Instructions</div>
-          <div style="font-size:13px;color:var(--fg2);line-height:1.6">Define behavior and logic. Always fully passed to the AI. Controls how the agent reasons — KPI formulas, fiscal calendars, groupings, chart rules.</div>
+          <div style="font-size:13px;color:var(--fg2);line-height:1.6">Define behavior and logic. Always fully passed to the AI without preprocessing. Controls how the agent reasons — KPI formulas, fiscal calendars, groupings, chart rules.</div>
         </div>
         <div style="padding:16px;border-radius:8px;border:1px solid var(--border);background:var(--muted)">
           <div style="font-size:14px;font-weight:600;margin-bottom:6px;color:var(--fg)">Knowledge Documents (RAG)</div>
           <div style="font-size:13px;color:var(--fg2);line-height:1.6">Provide enterprise facts. Only relevant excerpts injected per query. Grounds responses in real policy, definitions, and reference material.</div>
         </div>
+      </div>
+      <div style="margin-top:14px;padding:12px 16px;border-radius:8px;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2)">
+        <div style="font-size:13px;font-weight:600;color:#059669;margin-bottom:6px">📋 Knowledge Document Specs</div>
+        <div style="font-size:13px;color:var(--fg2);line-height:1.7">Supported formats: <strong>PDF</strong> and <strong>TXT</strong> only (DOCX not supported). Up to <strong>10 documents</strong> per agent, each up to <strong>5 MB</strong>. Images inside documents are ignored. Prefer text-heavy documents with clear punctuation. Avoid conflicting information across documents — the RAG process may favor whichever excerpt it retrieves first. Save the agent once before uploading documents.</div>
       </div>
       <p style="margin-top:12px;font-size:13px;color:var(--fg2)"><strong>Together</strong>, SI + RAG prevent hallucinations and improve reliability. SI defines how Gross Margin is calculated. RAG supplies the official SLA definition for "On-Time Delivery."</p>
     </div>
@@ -1182,7 +1228,7 @@ KPI: Profit Margin %
 
 For all KPIs:
 - If denominator is zero, return &quot;N/A&quot;
-- Round to 2 decimal places</div>
+- Round to 2 decimal places\n\nKPI: Sales per Sq. Ft\n  Formula: Sum(Sales_Revenue) / Sum(Selling_Area_sqft)\n  TRIGGERS: Sales per Sq. ft, Sales per Square feet\n  Use the same formula to aggregate at a group level</div>
           <button class="copy-btn" style="color:#C74634;border-color:#C7463430;background:#C7463410" onclick="copyText(this,'uc-formulas')">📋 Copy Instructions</button>
           <div class="section-label">💬 Sample Utterances</div>
           <div class="example-card"><div class="q">Q: "What is our profit margin by region?"</div><div class="a">→ (Sum(Profit) / Sum(Revenue)) × 100 per region. Bar Chart with % labels.</div></div><div class="example-card"><div class="q">Q: "Show ATV per Customer Segment"</div><div class="a">→ Sum(Sales_Revenue) / Count Distinct(Order_ID) per segment.</div></div><div class="example-card"><div class="q">Q: "ROI for Technology — zero cost warning"</div><div class="a">→ Finds zero denominator → returns &quot;N/A&quot; for those rows.</div></div>
@@ -1480,7 +1526,7 @@ COPY_DATA['uc-aggregation'] = "Default aggregation rules:\n\n- Revenue: Sum(Reve
 COPY_DATA['uc-formulas'] = "Custom KPI formulas:\n\nKPI: Average Transaction Value (ATV)\n  Formula: Sum(Sales_Revenue) / Count Distinct(Order_ID)\n  TRIGGERS: ATV, average transaction value\n\nKPI: Profit Margin %\n  Formula: (Sum(Profit) / Sum(Revenue)) * 100\n  TRIGGERS: margin, profit margin\n\nFor all KPIs:\n- If denominator is zero, return \"N/A\"\n- Round to 2 decimal places";
 COPY_DATA['uc-bucket'] = "Segmentation tiers when user says \"classify\", \"categorize\", \"tier\", or \"segment\":\n\nSALES TIERS:\n  Sales < 100: \"Low\"\n  Sales >= 100 AND < 500: \"Medium\"\n  Sales >= 500 AND < 1000: \"Good\"\n  Sales >= 1000 AND < 5000: \"Very Good\"\n  Sales >= 5000: \"Best\"\n\nAlways use non-overlapping ranges.\nIf a value matches no range, label it \"Unclassified\".";
 COPY_DATA['uc-multistep'] = "For comparative analysis, follow these steps:\n  1. Identify the comparison dimension\n  2. Calculate metric for EACH group\n  3. Compute derived metric (growth rate, variance)\n  4. Apply threshold/flag if specified\n  5. Sort to highlight best/worst\n  6. Present with chart + threshold line\n\nFlagging: \"flag\", \"highlight\", \"alert\" triggers threshold comparison.\nShow ⚠️ for below target, ✅ for on/above.";
-COPY_DATA['uc-fiscal'] = "Fiscal Calendar: FY runs from Jun 1 to May 31.\n\nQuarters: Q1=Jun-Aug, Q2=Sep-Nov, Q3=Dec-Feb, Q4=Mar-May.\n\nColumn names: \"Fiscal Year\", \"Fiscal Quarter\".\nFormat: \"FY 2026\", \"FY2026 Q2\".\n\nTime Mappings:\n- \"current/this quarter\" → current FQ value\n- \"previous/last quarter\" → one quarter back\n- \"this year\" → current FY value\n\nIf ambiguous, ASK the user.";
+COPY_DATA['uc-fiscal'] = "Use the Fiscal Calendar (FY = Jun 1–May 31). Quarters: Q1 Jun–Aug, Q2 Sep–Nov, Q3 Dec–Feb, Q4 Mar–May.\n\nColumns (exact, with spaces): \"Fiscal Year\", \"Fiscal Quarter\". Always quote identifiers.\nYear values: 'FY 2026' (space after FY)\nQuarter values: 'FY2026 Q2' (no space after FY, one space before Qn)\nNever auto-add/remove spaces—match dataset exactly.\n\nMappings:\n- \"current/this quarter\" → \"Fiscal Quarter\" = 'FY2026 Q2'\n- \"current/this year\" → \"Fiscal Year\" = 'FY 2026'\n- \"previous/last quarter\" → \"Fiscal Quarter\" = 'FY2026 Q1'\n- \"previous/last year\" → \"Fiscal Year\" = 'FY 2025'\n- \"next/upcoming quarter\" → \"Fiscal Quarter\" = 'FY2026 Q3'\n\nSpecific month/date (e.g., \"Feb 2023\") → map to its fiscal quarter and filter accordingly.\n\nNote: Fiscal year and quarter values are fixed — update them as your fiscal periods change.";
 COPY_DATA['uc-periodcomp'] = "TIME EXPRESSION MAPPINGS:\n  \"this quarter\" → FQ Offset = 0\n  \"last quarter\" → FQ Offset = -1\n  \"last 4 quarters\" → FQ Offset IN (-3, -2, -1, 0)\n  \"YTD\" → All quarters in current FY up to current FQ\n\nComparison formulas:\n  QoQ % = (Current - Previous) / Previous × 100\n  YoY % = (Current Year - Previous Year) / Previous Year × 100\n\nSort time results chronologically.";
 COPY_DATA['uc-shortcuts'] = "When user says \"Monthly Summary\" or \"Performance Overview\":\n\nGenerate Table with:\n- Filter: Current Quarter (FQ Offset = 0)\n- Metrics: Revenue (Sum), Orders (Count Distinct), Shipping Cost (Sum), Margin %\n- Group by: Product Category\n- Sort: Revenue desc\n\nWhen user says \"Trend Report\":\n- Revenue + Profit dual-axis Line Chart\n- Last 4 quarters (FQ Offset IN -3,-2,-1,0)";
 COPY_DATA['uc-drillreact'] = "When user reports an anomaly or asks \"why\":\n\nApply ReAct drill-down:\n  REASON: What anomaly needs investigation?\n  ACT: Query at current hierarchy level.\n  OBSERVE: Which dimension is the outlier?\n  REASON: Should we drill deeper?\n  ACT: Drill one level into the outlier.\n  REPEAT until root cause found.\n  PRESENT: Summary + supporting chart.";
