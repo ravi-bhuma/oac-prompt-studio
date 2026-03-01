@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>OAC AI Agent — Knowledge Quiz</title>
+<style>
+:root { --bg:#080c16; --surface:#111827; --surface2:#1a2235; --border:#1e293b; --text:#e2e8f0; --muted:#94a3b8; --dim:#64748b; --red:#C74634; }
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Oracle Sans','Segoe UI',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;font-size:15px;line-height:1.7;overflow-x:hidden}
+.orb1{position:fixed;top:-20%;right:-10%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(199,70,52,.06) 0%,transparent 70%);pointer-events:none}
+.orb2{position:fixed;bottom:-15%;left:-10%;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(99,102,241,.05) 0%,transparent 70%);pointer-events:none}
+.wrap{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:24px}
+/* Nav */
+.nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:8px}
+.nav-title{font-size:15px;font-weight:700}
+.nav-links{display:flex;gap:4px;flex-wrap:wrap}
+.nav-link{padding:6px 14px;border-radius:8px;font-size:13px;font-weight:600;border:1px solid var(--border);background:transparent;color:var(--dim);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
+.nav-link:hover{background:var(--surface2);color:var(--text)}
+.nav-link.active{background:rgba(199,70,52,.15);color:#f0a090;border-color:rgba(199,70,52,.3)}
+/* Sections */
+.section{display:none}.section.active{display:block}
+/* Landing */
+.landing-badge{display:inline-flex;padding:5px 14px;border-radius:100px;background:rgba(199,70,52,.12);border:1px solid rgba(199,70,52,.25);color:#f0a090;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:16px}
+.landing h1{font-size:34px;font-weight:700;letter-spacing:-.5px;line-height:1.2;margin-bottom:12px;background:linear-gradient(135deg,#f1f5f9,#94a3b8);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.landing .sub{font-size:15px;color:var(--dim);max-width:520px;margin:0 auto 28px;line-height:1.7}
+.mode-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px}
+.mode-btn{padding:24px 16px;border-radius:14px;border:1px solid transparent;background:var(--surface);cursor:pointer;text-align:center;transition:all .2s}
+.mode-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,.3)}
+.mode-label{font-size:20px;font-weight:700;margin-bottom:4px}
+.mode-desc{font-size:13px;color:var(--muted)}
+.mode-time{font-size:11px;color:var(--dim);margin-top:4px}
+.cat-chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:20px}
+.cat-chip{padding:3px 10px;border-radius:6px;font-size:11px;font-weight:600}
+/* Quiz */
+.progress-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;font-size:12px;color:var(--dim);font-weight:600}
+.progress-track{height:4px;border-radius:2px;background:var(--border);margin-bottom:24px;overflow:hidden}
+.progress-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,#c74634,#f59e0b);transition:width .4s ease}
+.q-cat{display:inline-flex;padding:4px 12px;border-radius:6px;font-size:11px;font-weight:600;margin-bottom:12px}
+.q-text{font-size:20px;font-weight:600;line-height:1.5;margin-bottom:20px;letter-spacing:-.2px}
+.options{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+.opt{padding:14px 18px;border-radius:10px;border:1px solid var(--border);background:rgba(30,41,59,.5);cursor:pointer;text-align:left;font-size:14px;color:#cbd5e1;line-height:1.5;transition:all .15s;display:flex;align-items:flex-start;gap:12px}
+.opt:hover:not(.revealed){border-color:#475569;background:rgba(51,65,85,.4)}
+.opt.selected:not(.revealed){border-color:#6366f1;background:rgba(99,102,241,.15);color:#e2e8f0}
+.opt.correct{border-color:#10b981!important;background:rgba(16,185,129,.12)!important;color:#6ee7b7!important}
+.opt.wrong{border-color:#ef4444!important;background:rgba(239,68,68,.12)!important;color:#fca5a5!important}
+.opt-letter{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0;color:var(--dim)}
+.explanation{padding:16px 18px;border-radius:10px;background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.15);margin-bottom:20px}
+.expl-label{font-size:12px;font-weight:700;color:#10b981;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.expl-text{font-size:13px;color:var(--muted);line-height:1.7}
+.action-btn{width:100%;padding:14px;border-radius:10px;border:none;font-size:15px;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-submit{background:linear-gradient(135deg,#c74634,#dc2626);color:#fff}
+.btn-submit:disabled{background:var(--border);color:var(--dim);cursor:default}
+.btn-next{background:linear-gradient(135deg,#6366f1,#4f46e5);color:#fff}
+/* Results */
+.results{text-align:center;padding-top:24px}
+.score-ring{position:relative;width:160px;height:160px;margin:0 auto 24px}
+.score-num{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
+.score-pct{font-size:36px;font-weight:700;color:#f1f5f9}
+.score-frac{font-size:13px;color:var(--dim)}
+.results h2{font-size:24px;font-weight:700;margin-bottom:8px}
+.review-item{padding:12px 14px;border-radius:8px;margin-bottom:8px;text-align:left}
+.review-q{font-size:13px;font-weight:600;margin-bottom:4px}
+.review-a{font-size:12px;color:var(--muted)}
+.result-btns{display:flex;gap:10px;margin-top:20px}
+.result-btns button{flex:1;padding:12px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer}
+.btn-retry{border:1px solid rgba(99,102,241,.3);background:rgba(99,102,241,.1);color:#a5b4fc}
+.btn-back{border:1px solid var(--border);background:rgba(30,41,59,.5);color:var(--muted)}
+.footer{text-align:center;padding:24px 0;font-size:12px;color:var(--dim);border-top:1px solid var(--border);margin-top:32px}
+@media(max-width:600px){.mode-grid{grid-template-columns:1fr}.wrap{padding:16px}}
+</style>
+</head>
+<body>
+<div class="orb1"></div><div class="orb2"></div>
+<div class="wrap">
+  <div class="nav">
+    <div class="nav-title">OAC AI Agent</div>
+    <div class="nav-links">
+      <a class="nav-link" href="../index.html">🏠 Home</a>
+      <a class="nav-link" href="quick-start.html">⚡ Quick Start</a>
+      <a class="nav-link" href="prompt-engineering-studio.html" target="_blank">🔬 Studio</a>
+      <a class="nav-link" href="hands-on-exercise.html">🧪 Lab</a>
+      <span class="nav-link active">🧠 Quiz</span>
+    </div>
+  </div>
+
+  <!-- ═══ LANDING ═══ -->
+  <div class="section active" id="sec-landing">
+    <div class="landing" style="text-align:center;padding-top:24px">
+      <div class="landing-badge">Oracle Analytics Cloud</div>
+      <h1>AI Agent Knowledge Quiz</h1>
+      <p class="sub">Test your understanding of OAC AI Agents — architecture, Supplemental Instructions, RTCCOE framework, use cases, and best practices from the Technical Guidance.</p>
+
+      <div class="mode-grid">
+        <div class="mode-btn" style="border-color:rgba(16,185,129,.25)" onclick="startQuiz(5)" onmouseenter="this.style.borderColor='#10b981'" onmouseleave="this.style.borderColor='rgba(16,185,129,.25)'">
+          <div class="mode-label" style="color:#10b981">Quick</div>
+          <div class="mode-desc">5 questions</div>
+          <div class="mode-time">~3 min</div>
+        </div>
+        <div class="mode-btn" style="border-color:rgba(245,158,11,.25)" onclick="startQuiz(10)" onmouseenter="this.style.borderColor='#f59e0b'" onmouseleave="this.style.borderColor='rgba(245,158,11,.25)'">
+          <div class="mode-label" style="color:#f59e0b">Standard</div>
+          <div class="mode-desc">10 questions</div>
+          <div class="mode-time">~7 min</div>
+        </div>
+        <div class="mode-btn" style="border-color:rgba(199,70,52,.25)" onclick="startQuiz(20)" onmouseenter="this.style.borderColor='#c74634'" onmouseleave="this.style.borderColor='rgba(199,70,52,.25)'">
+          <div class="mode-label" style="color:#c74634">Full Exam</div>
+          <div class="mode-desc">All 20 questions</div>
+          <div class="mode-time">~15 min</div>
+        </div>
+      </div>
+
+      <div class="cat-chips">
+        <span class="cat-chip" style="background:rgba(99,102,241,.12);color:#818cf8;border:1px solid rgba(99,102,241,.3)">Architecture</span>
+        <span class="cat-chip" style="background:rgba(16,185,129,.12);color:#6ee7b7;border:1px solid rgba(16,185,129,.3)">Core Concepts</span>
+        <span class="cat-chip" style="background:rgba(236,72,153,.12);color:#f9a8d4;border:1px solid rgba(236,72,153,.3)">Knowledge Docs</span>
+        <span class="cat-chip" style="background:rgba(14,165,233,.12);color:#7dd3fc;border:1px solid rgba(14,165,233,.3)">Dataset</span>
+        <span class="cat-chip" style="background:rgba(245,158,11,.12);color:#fcd34d;border:1px solid rgba(245,158,11,.3)">RTCCOE</span>
+        <span class="cat-chip" style="background:rgba(199,70,52,.12);color:#f0a090;border:1px solid rgba(199,70,52,.3)">Use Cases</span>
+        <span class="cat-chip" style="background:rgba(139,92,246,.12);color:#c4b5fd;border:1px solid rgba(139,92,246,.3)">Fiscal Calendar</span>
+      </div>
+      <div style="font-size:12px;color:var(--dim)">Questions randomized each attempt · Based on OAC Agents Technical Guidance V25-11-1</div>
+    </div>
+  </div>
+
+  <!-- ═══ QUIZ ═══ -->
+  <div class="section" id="sec-quiz">
+    <div class="progress-bar">
+      <span id="q-counter">Question 1 of 5</span>
+      <span><span id="q-timer">0:00</span> &nbsp; <span id="q-score" style="color:#10b981">0 correct</span></span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="q-progress" style="width:0%"></div></div>
+    <div class="q-cat" id="q-category"></div>
+    <div class="q-text" id="q-text"></div>
+    <div class="options" id="q-options"></div>
+    <div class="explanation" id="q-explanation" style="display:none">
+      <div class="expl-label">Explanation</div>
+      <div class="expl-text" id="q-expl-text"></div>
+    </div>
+    <button class="action-btn btn-submit" id="btn-action" onclick="handleAction()" disabled>Submit Answer</button>
+  </div>
+
+  <!-- ═══ RESULTS ═══ -->
+  <div class="section" id="sec-results">
+    <div class="results">
+      <div style="font-size:11px;font-weight:700;letter-spacing:2px;color:#c74634;text-transform:uppercase;margin-bottom:16px">Quiz Complete</div>
+      <div class="score-ring">
+        <svg width="160" height="160" viewBox="0 0 160 160">
+          <circle cx="80" cy="80" r="70" fill="none" stroke="#1e293b" stroke-width="8"/>
+          <circle id="score-arc" cx="80" cy="80" r="70" fill="none" stroke="#10b981" stroke-width="8" stroke-dasharray="0 440" stroke-linecap="round" transform="rotate(-90 80 80)" style="transition:stroke-dasharray 1s ease"/>
+        </svg>
+        <div class="score-num">
+          <div class="score-pct" id="res-pct">0%</div>
+          <div class="score-frac" id="res-frac">0/0</div>
+        </div>
+      </div>
+      <h2 id="res-title"></h2>
+      <p id="res-time" style="font-size:14px;color:var(--dim);margin-bottom:8px"></p>
+      <p id="res-msg" style="font-size:13px;color:var(--dim);margin-bottom:24px"></p>
+      <div style="text-align:left">
+        <div style="font-size:13px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px">Answer Review</div>
+        <div id="res-review"></div>
+      </div>
+      <div class="result-btns">
+        <button class="btn-retry" onclick="startQuiz(lastCount)">🔄 Retry</button>
+        <button class="btn-back" onclick="showSection('landing')">← Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">Oracle Analytics Cloud — AI Agent Knowledge Quiz · Based on Technical Guidance V25-11-1 · CEAL Team</div>
+</div>
+
+<script>
+var QUESTIONS = [
+  {id:1,cat:"Architecture",q:"What are the four primary components of an OAC AI Agent?",opts:["Dataset, Supplemental Instructions, Knowledge Documents, Welcome Message","Database, Custom Prompts, PDF Library, Chat Interface","Semantic Model, LLM, API Gateway, Dashboard","Data Flow, Sequence, Connection, Replication"],ans:0,expl:"An OAC AI Agent consists of four components: a Dataset (the business data), Supplemental Instructions (reasoning rules), Knowledge Documents (RAG-powered enterprise content), and a Welcome Message (introductory text for users)."},
+  {id:2,cat:"Core Concepts",q:"What is the character limit for Supplemental Instructions per Agent?",opts:["3,000 characters","6,000 characters","10,000 characters","Unlimited"],ans:1,expl:"Supplemental Instructions currently support up to 6,000 characters per Agent. This means every instruction must be concise and well-structured."},
+  {id:3,cat:"Core Concepts",q:"How do Supplemental Instructions differ from Knowledge Documents?",opts:["SI are for data, Knowledge Docs are for rules","SI define HOW the AI reasons (passed directly), Knowledge Docs define WHAT it knows (retrieved via RAG per query)","They are interchangeable and serve the same purpose","Knowledge Docs replace SI in newer versions"],ans:1,expl:"Supplemental Instructions define logic, expectations, and reasoning rules \u2014 passed directly to the AI without preprocessing. Knowledge Documents provide factual content retrieved only in relevant excerpts based on the user\u2019s specific query via RAG."},
+  {id:4,cat:"Knowledge Documents",q:"What file formats are supported for Knowledge Documents?",opts:["PDF, TXT, DOCX, and XLSX","PDF and TXT only","Any document format","PDF, TXT, and CSV"],ans:1,expl:"Only PDF and TXT formats are currently supported. DOCX and other formats are not supported. Images inside documents are ignored. Each agent can include up to 10 documents, each up to 5 MB."},
+  {id:5,cat:"Dataset",q:"Before a dataset can be used by an AI Agent, what must be done first?",opts:["Convert it to CSV format","Index it for AI Assistant use","Upload it to Object Storage","Create a semantic model"],ans:1,expl:"Datasets must be indexed for Assistant use before they can be utilized by an AI Agent. This is done via Inspect \u2192 Search \u2192 Index for Assistants \u2192 Run Now."},
+  {id:6,cat:"Architecture",q:"How many datasets can be associated with a single AI Agent?",opts:["Up to 3","Up to 5","Only 1","Unlimited"],ans:2,expl:"As of the November 2025 release, only one Dataset is allowed per Agent. To combine multiple sources, create a multi-table dataset joining different tables or use a Local Subject Area (LSA)."},
+  {id:7,cat:"Use Cases",q:"In the Attribute Grouping use case, how would you map Order Priority values \u2018High\u2019 and \u2018Critical\u2019?",opts:["Create a new database column","Write a Supplemental Instruction mapping them to \u2018Important\u2019 Orders","Use a Knowledge Document with priority definitions","Configure it in the semantic model"],ans:1,expl:"Attribute Grouping uses Supplemental Instructions to map raw values to business categories. For example: \u2018Low, Medium, Not Specified\u2019 \u2192 \u2018Regular\u2019 and \u2018High, Critical\u2019 \u2192 \u2018Important\u2019."},
+  {id:8,cat:"RTCCOE",q:"What does the \u2018C\u2019 in RTCCOE stand for, and what delimiter is used?",opts:["Charts \u2014 === CHARTS ===","Context \u2014 === CONTEXT ===","Configuration \u2014 === CONFIG ===","Columns \u2014 === COLUMNS ==="],ans:1,expl:"The first C stands for Context (=== CONTEXT ===), which contains business rules, KPI definitions, fiscal calendar mappings, and hierarchy paths. The second C stands for Constraints (=== CONSTRAINTS ===)."},
+  {id:9,cat:"Use Cases",q:"What is the default radius when a user says \u2018near\u2019 a location without specifying miles?",opts:["10 miles","25 miles","50 miles","100 miles"],ans:2,expl:"When the user says \u2018near\u2019 or \u2018close to\u2019 without specifying a distance, the default radius is 50 miles. The agent uses LATITUDE and LONGITUDE columns to calculate distances."},
+  {id:10,cat:"Fiscal Calendar",q:"If your fiscal year runs Jun 1 \u2013 May 31, which months belong to Fiscal Q2?",opts:["April \u2013 June","September \u2013 November","July \u2013 September","October \u2013 December"],ans:1,expl:"With FY = Jun 1\u2013May 31: Q1 = Jun\u2013Aug, Q2 = Sep\u2013Nov, Q3 = Dec\u2013Feb, Q4 = Mar\u2013May. The fiscal calendar instruction must include exact column names and value spacing rules."},
+  {id:11,cat:"Use Cases",q:"Why is it critical to define aggregation rules in Supplemental Instructions?",opts:["The AI always uses Count by default","Without rules, the AI may Sum a Shipping Rate instead of Averaging it \u2014 producing silently wrong numbers","Aggregation is not supported without instructions","It improves query performance"],ans:1,expl:"Without defined rules, the AI may choose incorrect aggregations \u2014 like summing a rate instead of averaging it. The instruction ensures Revenue = Sum, Shipping Rate = Average, Orders = Count Distinct."},
+  {id:12,cat:"Architecture",q:"What distinguishes an \u2018Author\u2019 from a \u2018Consumer\u2019 in the context of AI Agents?",opts:["Authors use the AI, Consumers build it","Authors build and configure agents, Consumers interact through natural-language queries","There is no distinction","Authors can only view dashboards"],ans:1,expl:"Authors are responsible for building AI Agents \u2014 configuring datasets, writing SI, and uploading Knowledge Docs. Consumers interact through the AI Assistant using natural-language questions."},
+  {id:13,cat:"Use Cases",q:"What does the \u2018Monthly Report\u2019 shortcut demonstrate?",opts:["Zero-shot prompting \u2014 the AI figures out what to show","Few-shot prompting \u2014 pre-defined query-to-response patterns that produce consistent output","Chain-of-thought reasoning across multiple steps","RAG retrieval from Knowledge Documents"],ans:1,expl:"Report Shortcuts use few-shot prompting: you define exact query-to-response patterns. When the user says \u2018Monthly Report,\u2019 the agent generates a specific table with pre-defined metrics, filters, and formatting."},
+  {id:14,cat:"Knowledge Documents",q:"What happens if two Knowledge Documents contain conflicting information?",opts:["The AI averages both answers","The RAG process may favor whichever piece it retrieves first, leading to inconsistent answers","The AI always uses the most recent document","The agent automatically flags the conflict"],ans:1,expl:"If documents contain contradictory facts, the RAG process may favor whichever piece it retrieves first. To ensure reliable answers, avoid or reconcile conflicting information across your documents."},
+  {id:15,cat:"RTCCOE",q:"Which prompt engineering technique is demonstrated by the === EXAMPLES === section in RTCCOE?",opts:["Zero-shot prompting","Chain-of-thought reasoning","Few-shot prompting \u2014 providing 2-3 query-to-response pairs","Persona assignment"],ans:2,expl:"The === EXAMPLES === section uses few-shot prompting \u2014 providing 2-3 concrete query-to-response examples. This teaches the agent your specific patterns for KPI formats, chart preferences, and insight style."},
+  {id:16,cat:"Use Cases",q:"In the Hierarchy Drill-Down use case, what should happen at the Product Name level when the user says \u2018Drill Down\u2019?",opts:["Show Order IDs","Repeat the current chart","Politely indicate the user has reached the most detailed level","Switch to a different hierarchy"],ans:2,expl:"The instruction specifies: \u2018If the current chart is Product Name, there is no further level to drill down. Politely indicate that the user has reached the most detailed level.\u2019"},
+  {id:17,cat:"Core Concepts",q:"What does RAG stand for, and what is its primary function?",opts:["Real-time Analytics Gateway \u2014 connects to live data","Retrieval-Augmented Generation \u2014 enriches AI prompts with relevant enterprise document excerpts","Rapid Agent Generation \u2014 creates agents automatically","Response Accuracy Guardrail \u2014 prevents hallucinations"],ans:1,expl:"RAG (Retrieval-Augmented Generation) scans selected enterprise documents, retrieves only the most relevant portions (\u2018chunks\u2019), and adds them to the prompt \u2014 enabling the AI to cite factual information from your private knowledge base."},
+  {id:18,cat:"Fiscal Calendar",q:"Why must fiscal calendar instructions include exact value spacing like \u2018FY 2026\u2019 vs \u2018FY2026 Q2\u2019?",opts:["For readability only","Because the AI auto-corrects spacing","Because filters must match dataset values exactly \u2014 wrong spacing = zero results","Spacing doesn't matter in OAC queries"],ans:2,expl:"Fiscal year values use \u2018FY 2026\u2019 (space after FY) while quarter values use \u2018FY2026 Q2\u2019 (no space after FY, space before Qn). Filters must match dataset values exactly, or queries return zero results."},
+  {id:19,cat:"Use Cases",q:"How does the Geographic Distance use case leverage Shop locations defined in Supplemental Instructions?",opts:["It creates new database records for each shop","Users must type exact coordinates in their query","The agent resolves shop names to coordinates and computes distance from each record's lat/long","It only works with Knowledge Documents, not SI"],ans:2,expl:"Shop coordinates are defined in SI (e.g., \u2018Shop-ABC is located at 41.8781\u00b0 N, 87.6298\u00b0 W\u2019). When users say \u2018near Shop-ABC,\u2019 the agent resolves the name to coordinates and computes distances from all records."},
+  {id:20,cat:"Architecture",q:"Where can consumers interact with AI Agents?",opts:["Only in standalone mode","Only within workbooks","Either in standalone mode or within the context of a workbook","Only through the API"],ans:2,expl:"Consumers can interact with AI Agents either directly in standalone mode or within the context of a workbook. Authors may associate an agent with a specific workbook so AI Assistant interactions automatically benefit from that agent\u2019s domain expertise."}
+];
+
+var CAT_COLORS = {
+  "Architecture":{bg:"rgba(99,102,241,.12)",border:"rgba(99,102,241,.3)",text:"#818cf8"},
+  "Core Concepts":{bg:"rgba(16,185,129,.12)",border:"rgba(16,185,129,.3)",text:"#6ee7b7"},
+  "Knowledge Documents":{bg:"rgba(236,72,153,.12)",border:"rgba(236,72,153,.3)",text:"#f9a8d4"},
+  "Dataset":{bg:"rgba(14,165,233,.12)",border:"rgba(14,165,233,.3)",text:"#7dd3fc"},
+  "RTCCOE":{bg:"rgba(245,158,11,.12)",border:"rgba(245,158,11,.3)",text:"#fcd34d"},
+  "Use Cases":{bg:"rgba(199,70,52,.12)",border:"rgba(199,70,52,.3)",text:"#f0a090"},
+  "Fiscal Calendar":{bg:"rgba(139,92,246,.12)",border:"rgba(139,92,246,.3)",text:"#c4b5fd"}
+};
+
+var questions=[], current=0, selected=-1, revealed=false, score=0, answers=[], timer=0, timerInterval=null, lastCount=10;
+
+function shuffle(a){var b=[].concat(a);for(var i=b.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=b[i];b[i]=b[j];b[j]=t}return b}
+function fmt(s){return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
+function showSection(id){document.querySelectorAll(".section").forEach(function(s){s.classList.remove("active")});var el=document.getElementById("sec-"+id);if(el)el.classList.add("active")}
+
+function startQuiz(count){
+  lastCount=count;
+  questions=shuffle(QUESTIONS).slice(0,count);
+  current=0;selected=-1;revealed=false;score=0;answers=[];timer=0;
+  clearInterval(timerInterval);
+  timerInterval=setInterval(function(){timer++;document.getElementById("q-timer").textContent=fmt(timer)},1000);
+  showSection("quiz");
+  renderQuestion();
+}
+
+function renderQuestion(){
+  var q=questions[current];
+  var cc=CAT_COLORS[q.cat]||CAT_COLORS["Core Concepts"];
+  document.getElementById("q-counter").textContent="Question "+(current+1)+" of "+questions.length;
+  document.getElementById("q-score").textContent=score+" correct";
+  document.getElementById("q-progress").style.width=((current+1)/questions.length*100)+"%";
+  var catEl=document.getElementById("q-category");
+  catEl.textContent=q.cat;catEl.style.background=cc.bg;catEl.style.color=cc.text;catEl.style.border="1px solid "+cc.border;
+  document.getElementById("q-text").textContent=q.q;
+  document.getElementById("q-explanation").style.display="none";
+  var optsEl=document.getElementById("q-options");optsEl.innerHTML="";
+  var letters=["A","B","C","D"];
+  for(var i=0;i<q.opts.length;i++){
+    var div=document.createElement("div");
+    div.className="opt";div.setAttribute("data-idx",i);
+    div.innerHTML='<span class="opt-letter">'+letters[i]+'</span><span>'+q.opts[i]+'</span>';
+    div.onclick=function(){if(!revealed)selectOpt(parseInt(this.getAttribute("data-idx")))};
+    optsEl.appendChild(div);
+  }
+  selected=-1;revealed=false;
+  var btn=document.getElementById("btn-action");
+  btn.textContent="Submit Answer";btn.className="action-btn btn-submit";btn.disabled=true;
+  btn.onclick=handleAction;
+}
+
+function selectOpt(idx){
+  if(revealed)return;
+  selected=idx;
+  var opts=document.querySelectorAll(".opt");
+  opts.forEach(function(o){o.classList.remove("selected")});
+  opts[idx].classList.add("selected");
+  document.getElementById("btn-action").disabled=false;
+}
+
+function handleAction(){
+  if(!revealed){
+    if(selected<0)return;
+    revealed=true;
+    var q=questions[current];
+    var isCorrect=selected===q.ans;
+    if(isCorrect)score++;
+    answers.push({qId:q.id,selected:selected,correct:q.ans,isCorrect:isCorrect});
+    var opts=document.querySelectorAll(".opt");
+    opts.forEach(function(o){o.classList.add("revealed")});
+    opts[q.ans].classList.add("correct");
+    if(!isCorrect)opts[selected].classList.add("wrong");
+    var letters=["A","B","C","D"];
+    opts[q.ans].querySelector(".opt-letter").textContent="\u2713";
+    opts[q.ans].querySelector(".opt-letter").style.color="#10b981";
+    if(!isCorrect){opts[selected].querySelector(".opt-letter").textContent="\u2717";opts[selected].querySelector(".opt-letter").style.color="#ef4444"}
+    document.getElementById("q-expl-text").textContent=q.expl;
+    document.getElementById("q-explanation").style.display="block";
+    document.getElementById("q-score").textContent=score+" correct";
+    var btn=document.getElementById("btn-action");
+    btn.textContent=current<questions.length-1?"Next Question \u2192":"View Results \u2192";
+    btn.className="action-btn btn-next";
+  } else {
+    if(current<questions.length-1){current++;renderQuestion()}
+    else{showResults()}
+  }
+}
+
+function showResults(){
+  clearInterval(timerInterval);
+  showSection("results");
+  var pct=Math.round(score/questions.length*100);
+  var col=pct>=80?"#10b981":pct>=50?"#f59e0b":"#ef4444";
+  document.getElementById("score-arc").setAttribute("stroke",col);
+  document.getElementById("score-arc").setAttribute("stroke-dasharray",(pct/100*440)+" 440");
+  document.getElementById("res-pct").textContent=pct+"%";
+  document.getElementById("res-frac").textContent=score+"/"+questions.length;
+  document.getElementById("res-time").textContent="Completed in "+fmt(timer);
+  document.getElementById("res-title").textContent=pct>=80?"\uD83C\uDFC6 Excellent!":pct>=50?"\uD83D\uDC4D Good effort!":"\uD83D\uDCDA Keep studying!";
+  document.getElementById("res-msg").textContent=pct>=80?"You have a strong understanding of OAC AI Agents.":pct>=50?"Review the areas you missed and try again.":"Revisit the Quick Start Guide and Technical Guidance for deeper understanding.";
+  var rev=document.getElementById("res-review");rev.innerHTML="";
+  answers.forEach(function(a,i){
+    var origQ=QUESTIONS.find(function(qq){return qq.id===a.qId});
+    var div=document.createElement("div");
+    div.className="review-item";
+    div.style.background=a.isCorrect?"rgba(16,185,129,.06)":"rgba(239,68,68,.06)";
+    div.style.border="1px solid "+(a.isCorrect?"rgba(16,185,129,.15)":"rgba(239,68,68,.15)");
+    var txt='<div class="review-q" style="color:'+(a.isCorrect?"#6ee7b7":"#fca5a5")+'">'+(a.isCorrect?"\u2713":"\u2717")+" Q"+(i+1)+": "+origQ.q.substring(0,85)+(origQ.q.length>85?"...":"")+"</div>";
+    if(!a.isCorrect)txt+='<div class="review-a">Correct: '+origQ.opts[origQ.ans]+"</div>";
+    div.innerHTML=txt;rev.appendChild(div);
+  });
+}
+</script>
+</body>
+</html>
